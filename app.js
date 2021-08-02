@@ -1,0 +1,76 @@
+const express = require("express");
+const port = 3000;
+
+const bodyParser = require("body-parser")
+const cors = require("cors")
+const morgan=require("morgan")
+
+
+
+const app = express();
+
+const db = require("./db");
+
+app.use(morgan('combine'))
+app.use(bodyParser.json())
+app.use(cors())
+
+app.use(express.json());
+
+const clock_in = require('./routes/in');
+const clock_out = require('./routes/out');
+const get_all=require('./routes/all_employees');
+
+// app.use("/in", clock_in);
+// app.use("/out", clock_out);
+// app.use("/all_employees",get_all);
+
+var em;
+var nm;
+
+class ad{
+    constructor()
+    {
+        var add;
+    }
+}
+z=new ad();
+app.get('/in/:name/:email',(req,res,next)=> {
+    db.func("fn_add_new_clock",[req.params.email,req.params.name])
+    // db.any("SELECT * FROM clock_in_out")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     }) 
+     .catch(error => {
+         console.log(error);
+     })
+})
+
+
+app.get("/out/:email",(req,res,next)=> {
+    db.func("fn_clock_out",req.params.email)
+   // db.any("SELECT * FROM clock_in_out")
+    .then(rows => {
+        console.log(rows);
+        res.json(rows);
+    }) 
+    .catch(error => {
+        console.log(error);
+    })
+  })
+app.get('/all',(req,res)=> {
+    db.func("getall_employees")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+// app.listen(process.env.PORT || 3000);
+module.exports=ad;
+app.listen(port, () =>
+ console.log(`server running at http://localhost:${port}`)
+);
