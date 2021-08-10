@@ -69,6 +69,49 @@ app.get('/all',(req,res)=> {
          console.log(error);
      })
 })
+app.get('/bydate/:date',(req,res)=> {
+    db.func("get_by_date",req.params.date)
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+app.get('/neweployee/:email/:name/:pass/:man',(req,res,next)=> {
+    db.func("fn_add_new_employee",[req.params.email,req.params.name,req.params.pass,req.params.man])
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
+app.get('/getall_workers',(req,res)=> {
+    db.func("getall_workers")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
+app.get('/get_by_email/:email',(req,res)=> {
+    db.func("get_by_email",req.params.email)
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 // app.listen(process.env.PORT || 3000);
 module.exports=ad;
 app.listen(port, () =>
