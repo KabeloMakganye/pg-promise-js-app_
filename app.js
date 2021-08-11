@@ -115,8 +115,8 @@ app.get('/get_by_email/:email',(req,res)=> {
      })
 })
 
-// app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5000)
 module.exports=ad;
-app.listen(port, () =>
+/* app.listen(port, () =>
  console.log(`server running at http://localhost:${port}`)
-);
+);*/
