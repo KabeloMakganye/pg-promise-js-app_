@@ -3,7 +3,7 @@
     <form>
     <h1>Clocking out</h1>
     <input type ='email' v-model="email" placeholder="@eafricatelecoms.co.za"><br><br>
-    <button @click= "clockin()" type="button">
+    <button @mouseenter= "clockout(0)" @click= "clockout(1)" type="button">
      Clocking out
      </button>
      <br><br>
@@ -22,10 +22,10 @@ export default {
     }
   },
   methods: {
-    clockin () {
+    clockout (i) {
       console.log('button clicked: ', this.email)
       fetch(`http://localhost:3000/out/${this.email}`)
-      // you can write it here
+      alert('clocked out, good Bye')
     }
   }
 }
