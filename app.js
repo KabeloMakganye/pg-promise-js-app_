@@ -9,7 +9,7 @@ const morgan=require("morgan")
 
 const app = express();
 
-process.env["node_tls_reject_unauthorized"]=0;
+/* process.env["node_tls_reject_unauthorized"]=0; */
 
 const db = require("./db");
 
