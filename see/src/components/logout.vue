@@ -3,11 +3,11 @@
     <form>
     <h1>Clocking out</h1>
     <input type ='email' v-model="email" placeholder="@eafricatelecoms.co.za"><br><br>
-    <button @mouseenter= "clockout(0)" @click= "clockout(1)" type="button">
+    <button @click= "clockout(1)" type="button">
      Clocking out
      </button>
      <br><br>
-     <button onClick="window.location.href='http://localhost:8080/#/';">
+     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
       Home
 </button>
      </form>
@@ -22,9 +22,9 @@ export default {
     }
   },
   methods: {
-    clockout (i) {
+    async clockout (i) {
       console.log('button clicked: ', this.email)
-      fetch(`http://localhost:3000/out/${this.email}`)
+      await fetch(`https://warm-springs-22910.herokuapp.com/out/${this.email}`)
       alert('clocked out, good Bye')
     }
   }

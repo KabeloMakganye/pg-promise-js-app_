@@ -12,7 +12,7 @@
      Clock in
      </button>
      <br><br>
-     <button onClick="window.location.href='http://localhost:8080/#/';">
+     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
       Home
 </button>
      </form>
@@ -32,21 +32,21 @@ export default {
     }
   },
   methods: {
-    clockin (i) {
+    async clockin (i) {
       this.x++
       // console.log('button clicked: ', this.username, this.email)
-      fetch(`http://localhost:3000/getall_workers`)
+      await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
         .then(response => response.json())
         .then(results => (this.resultsFetched_2 = results))
       for (this.i = 0; this.i < this.resultsFetched_2.length; this.i++) {
         if (this.username === this.resultsFetched_2[this.i].name_) {
           if (this.email === this.resultsFetched_2[this.i].email_ && i === 1) {
-            fetch(`http://localhost:3000/in/${this.username}/${this.email}`)
+            await fetch(`https://warm-springs-22910.herokuapp.com/in/${this.username}/${this.email}`)
             this.found = 'yes'
           }
         }
       }
-      if (this.found === 'no' && this.x >= 2 && i === 1) {
+      if (this.found === 'no') {
         alert('Invalid user name')
       }
       if (this.found === 'yes' && i === 1) {

@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button onClick="window.location.href='http://localhost:8080/#/login';">Clock in</button><br><br>
-    <button onClick="window.location.href='http://localhost:8080/#/logout';">Clock out</button><br><br>
-    <button onClick="window.location.href='http://localhost:8080/#/view';">view all in</button><br><br>
+    <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/login';">Clock in</button><br><br>
+    <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/logout';">Clock out</button><br><br>
+    <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/view';">view all in</button><br><br>
   </div>
 </template>
 

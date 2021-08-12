@@ -118,6 +118,30 @@ app.get('/get_by_email/:email',(req,res)=> {
      })
 })
 
+app.get("/get_tot_hours/:email",(req,res,next)=> {
+    db.func("get_tot_hours",req.params.email)
+   // db.any("SELECT * FROM clock_in_out")
+    .then(rows => {
+        console.log(rows);
+        res.json(rows);
+    }) 
+    .catch(error => {
+        console.log(error);
+    })
+  })
+
+  app.get("/fn_set_hours/:email/:hours",(req,res,next)=> {
+    db.func("get_tot_hours",[req.params.email,req.params.hours])
+   // db.any("SELECT * FROM clock_in_out")
+    .then(rows => {
+        console.log(rows);
+        res.json(rows);
+    }) 
+    .catch(error => {
+        console.log(error);
+    })
+  })
+
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
@@ -126,5 +150,5 @@ app.get('/get_by_email/:email',(req,res)=> {
 app.listen(process.env.PORT)
 module.exports=ad;
 app.listen(port, () =>
- console.log(`server running at http://localhost:${port}`)
+ console.log(`server running at::: http://localhost:${port}`)
 );

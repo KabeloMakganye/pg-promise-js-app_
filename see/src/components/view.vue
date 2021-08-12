@@ -48,7 +48,7 @@
         <td>{{all_email[n-1]}}</td>
         <td>{{all_in[n-1]}}</td>
         <td>{{all_out[n-1]}}</td>
-        <td border="1px" >{{all_date[n-1]}}</td>
+        <td>{{all_date[n-1]}}</td>
       </tr>
     </tbody>
 </table><br>
@@ -66,8 +66,11 @@
     <button v-if="newuser === 'true'" type= "button" @click = "addEmployee()">Add</button>
     <br><br>
 </label>
-    <button v-if="is_manager === 'true'" type = "button" @mouseenter= "viewemployees(0)" @click= "viewemployees(1)">
+    <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1)">
       View all employees
+    </button>
+    <button v-if="employeesTable ==='true'" type = "button" @click= "calc()">
+      Calculate hours
     </button>
     <button v-if="employeesTable ==='true'" type = "button" @click= "hide_emp_table()">
       hide table
@@ -92,7 +95,7 @@
     </tbody>
 </table><br>
 </label1>
-<button type = "button" onClick="window.location.href='http://localhost:8080/#/';">
+<button type = "button" onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
 Home
 </button>
      </form>
@@ -149,15 +152,25 @@ export default {
       em_hours: [],
       number_of_employees: 0,
       x: 0,
-      count: 0
+      count: 0,
+      c_2: 0
     }
   },
   methods: {
+    async calc () {
+      for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
+        await fetch(`https://warm-springs-22910.herokuapp.com/get_tot_hours/${this.em_email[this.c_2]}`)
+          .then(response => response.json())
+          .then(results => (this.resultsFetched_4 = results))
+        this.em_hours[this.c_2] = this.resultsFetched_4[0].hours_
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_set_hours/${this.em_email[this.c_2]}/${this.em_hours[this.c_2]}`)
+      }
+    },
     hide_emp_table () {
       this.employeesTable = 'false'
     },
     async viewemployees (i) {
-      await fetch(`http://localhost:3000/getall_workers`)
+      await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
         .then(response => response.json())
         .then(results => (this.resultsFetched_3 = results))
       if (i === 1) {
@@ -183,7 +196,7 @@ export default {
       } else if (this.newPass === '') {
         alert('Please enter new employee password')
       } else if (this.newPass === this.newPass_con) {
-        await fetch(`http://localhost:3000/neweployee/${this.newEmail}/${this.newEmployee}/${MD5(this.newPass).toString()}/${supercherckbox.checked}`)
+        await fetch(`https://warm-springs-22910.herokuapp.com/neweployee/${this.newEmail}/${this.newEmployee}/${MD5(this.newPass).toString()}/${supercherckbox.checked}`)
         alert('Registration for ' + this.newEmployee + ' was successful')
         this.newuser = 'false'
         this.newEmail = ''
@@ -207,7 +220,7 @@ export default {
     async load (i) {
       if (this.date_ !== 'n') {
         this.z++
-        await fetch(`http://localhost:3000/bydate/${this.date_}`)
+        await fetch(`https://warm-springs-22910.herokuapp.com/bydate/${this.date_}`)
           .then(response => response.json())
           .then(results => (this.resultsFetched = results))
         if (i === 1) {
@@ -236,7 +249,7 @@ export default {
     async checkpassword (i) {
       console.log('Password: ' + MD5('Tebogompete#3').toString())
       this.x++
-      await fetch(`http://localhost:3000/getall_workers`)
+      await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
         .then(response => response.json())
         .then(results => (this.resultsFetched_2 = results))
       this.cpass = MD5(this.pass).toString()
@@ -264,7 +277,7 @@ export default {
       this.z++
       this.all = ''
       if (this.is_manager === 'true') {
-        await fetch('http://localhost:3000/all')
+        await fetch('https://warm-springs-22910.herokuapp.com/all')
           .then(response => response.json())// This will convert it to a more readable way
           .then(results => (this.resultsFetched = results))
         console.log(this.resultsFetched)
@@ -294,7 +307,7 @@ export default {
           this.showtable = 'true'
         }
       } else {
-        await fetch(`http://localhost:3000/get_by_email/${this.email}`)
+        await fetch(`https://warm-springs-22910.herokuapp.com/get_by_email/${this.email}`)
           .then(response => response.json())// This will convert it to a more readable way
           .then(results => (this.resultsFetched = results))
         this.lim = this.resultsFetched.length
@@ -315,7 +328,7 @@ export default {
     async getbyemail (i) {
       if (this.searchemail !== '@eafricatelecoms.co.za' && this.searchemail !== '') {
         this.gtemail++
-        await fetch(`http://localhost:3000/get_by_email/${this.searchemail}`)
+        await fetch(`https://warm-springs-22910.herokuapp.com/get_by_email/${this.searchemail}`)
           .then(response => response.json())
           .then(results => (this.resultsFetched_em = results))
         console.log(this.resultsFetched_em)
