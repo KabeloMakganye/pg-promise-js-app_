@@ -11,7 +11,7 @@ const morgan=require("morgan")
 
 const app = express();
 
-/* process.env["node_tls_reject_unauthorized"]=0; */
+process.env["node_tls_reject_unauthorized"]=0;
 
 const db = require("./db");
 
@@ -132,7 +132,7 @@ http.createServer(function(request, response) {
     response.end("kabelo TESTING\n")
 }).listen(process.env.PORT)
 
-/* app.listen(process.env.PORT) */
+app.listen(process.env.PORT)
 module.exports=ad;
 app.listen(port, () =>
  console.log(`server running at http://localhost:${port}`)
