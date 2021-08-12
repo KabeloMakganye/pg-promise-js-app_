@@ -117,7 +117,22 @@ app.get('/get_by_email/:email',(req,res)=> {
      })
 })
 
-app.listen(process.env.PORT)
+http.createServer(function(request, response) {
+    response.writeHead(200, {"Constent-Type": "test/plain"})
+    response.end("kabelo TESTING\n")
+    response.get('/getall_workers',(req,res)=> {
+        db.func("getall_workers")
+         .then(rows => {
+             console.log(rows);
+             res.json(rows);
+         })
+         .catch(error => {
+             console.log(error);
+         })
+    })
+}).listen(process.env.PORT)
+
+/* app.listen(process.env.PORT) */
 module.exports=ad;
 app.listen(port, () =>
  console.log(`server running at http://localhost:${port}`)
