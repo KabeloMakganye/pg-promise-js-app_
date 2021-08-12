@@ -119,7 +119,7 @@ app.get('/get_by_email/:email',(req,res)=> {
 
 http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
-    request.get('/getall_workers',(req,res)=> {
+    app.get('/getall_workers',(req,res)=> {
         db.func("getall_workers")
          .then(rows => {
              console.log(rows);
