@@ -117,20 +117,10 @@ app.get('/get_by_email/:email',(req,res)=> {
      })
 })
 
-http.createServer(function(request, response) {
+/* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
-    app.get('/getall_workers',(req,res)=> {
-        db.func("getall_workers")
-         .then(rows => {
-             console.log(rows);
-             res.json(rows);
-         })
-         .catch(error => {
-             console.log(error);
-         })
-    })
     response.end("kabelo TESTING\n")
-}).listen(process.env.PORT)
+}).listen(process.env.PORT) */
 
 app.listen(process.env.PORT)
 module.exports=ad;
