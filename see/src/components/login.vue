@@ -8,7 +8,7 @@
     placeholder="employee name"
     ><br><br>
     <input type ='email' v-model="email" placeholder="@eafricatelecoms.co.za"><br><br>
-    <button @mouseenter= "clockin(0)" @click= "clockin(1)" type="button">
+    <button @click= "clockin(1)" type="button">
      Clock in
      </button>
      <br><br>
@@ -32,25 +32,25 @@ export default {
     }
   },
   methods: {
-    async clockin (i) {
+    async clockin (i) { /* NEED TO COME BACK AND CHECK IF ANYONE CLOCK IN ON SAME DAY BEFORE CLOCKING IN AGAIN */
       this.x++
       // console.log('button clicked: ', this.username, this.email)
       await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
         .then(response => response.json())
         .then(results => (this.resultsFetched_2 = results))
-      for (this.i = 0; this.i < this.resultsFetched_2.length; this.i++) {
-        if (this.username === this.resultsFetched_2[this.i].name_) {
-          if (this.email === this.resultsFetched_2[this.i].email_ && i === 1) {
-            await fetch(`https://warm-springs-22910.herokuapp.com/in/${this.username}/${this.email}`)
-            this.found = 'yes'
+      if (this.found !== this.username) {
+        for (this.i = 0; this.i < this.resultsFetched_2.length; this.i++) {
+          if (this.username === this.resultsFetched_2[this.i].name_) {
+            if (this.email === this.resultsFetched_2[this.i].email_ && i === 1) {
+              await fetch(`https://warm-springs-22910.herokuapp.com/in/${this.username}/${this.email}`)
+              this.found = this.username
+              alert(this.username + '  enjoy your day at work')
+            }
           }
         }
       }
-      if (this.found === 'no') {
+      if (this.found !== this.username) {
         alert('Invalid user name')
-      }
-      if (this.found === 'yes' && i === 1) {
-        alert(this.username + '  enjoy your day at work')
       }
       // fetch('http://localhost:3000/results')
     }

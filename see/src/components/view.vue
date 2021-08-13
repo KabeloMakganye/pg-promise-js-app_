@@ -69,9 +69,10 @@
     <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1)">
       View all employees
     </button>
-    <button v-if="employeesTable ==='true'" type = "button" @click= "calc()">
+    <!--   STILL NEEDS TO BE FIXED VISIT WHEN THERE IS TIME
+       <button v-if="employeesTable ==='true'" type = "button" @click= "calc()">
       Calculate hours
-    </button>
+    </button> -->
     <button v-if="employeesTable ==='true'" type = "button" @click= "hide_emp_table()">
       hide table
     </button><br><br>
@@ -90,7 +91,7 @@
         <td>{{em_nam[n-1]}}</td>
         <td>{{em_email[n-1]}}</td>
         <td>{{em_manager[n-1]}}</td>
-        <td>{{em_hours[n-1]}}</td>
+        <td>BETA</td><!--  <td>{{em_hours[n-1]}}</td> -->
       </tr>
     </tbody>
 </table><br>
@@ -157,15 +158,22 @@ export default {
     }
   },
   methods: {
+    /* this needs to be fixed ----- visit when there is time-----------------------NB-----------
     async calc () {
       for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
         await fetch(`https://warm-springs-22910.herokuapp.com/get_tot_hours/${this.em_email[this.c_2]}`)
           .then(response => response.json())
           .then(results => (this.resultsFetched_4 = results))
         this.em_hours[this.c_2] = this.resultsFetched_4[0].hours_
-        await fetch(`https://warm-springs-22910.herokuapp.com/fn_set_hours/${this.em_email[this.c_2]}/${this.em_hours[this.c_2]}`)
+        console.log(this.resultsFetched_4[0].hours_ + ' on web----:' + this.em_hours[this.c_2])
       }
     },
+    async calc2 () {
+      for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_set_hours/${this.em_email[this.c_2]}/${this.em_hours[this.c_2]}`)
+          .then(response => response.json())
+      }
+    }, ---------------------------------------------------------------------------------------- */
     hide_emp_table () {
       this.employeesTable = 'false'
     },
@@ -180,7 +188,7 @@ export default {
           this.em_nam[this.count] = this.resultsFetched_3[this.count].name_
           this.em_email[this.count] = this.resultsFetched_3[this.count].email_
           this.em_manager[this.count] = this.resultsFetched_3[this.count].manager_
-          this.em_hours[this.count] = this.resultsFetched_3[this.count].hours_
+          /* this.em_hours[this.count] = this.resultsFetched_3[this.count].hours_ */
         }
       }
     },
