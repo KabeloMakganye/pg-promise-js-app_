@@ -2,12 +2,12 @@
   <div>
     <form>
     <h1>Clocking in</h1>
-    <input
-    type ="text"
-    v-model="username"
-    placeholder="employee name"
-    ><br><br>
-    <input type ='email' v-model="email" placeholder="@eafricatelecoms.co.za"><br><br>
+    <label>Employee name:</label>
+    <input type ="text" v-model="username" placeholder="employee name">
+    <br><br>
+    <label>Employee email:</label>
+    <input type ='email' v-model="email" placeholder="@eafricatelecoms.co.za">
+    <br><br>
     <button @click= "clockin(1)" type="button">
      Clock in
      </button>

@@ -2,6 +2,7 @@
   <div>
     <form>
     <h1>Clocking out</h1>
+    <label>Employee email:</label>
     <input type ='email' v-model="email" placeholder="@eafricatelecoms.co.za"><br><br>
     <button @click= "clockout(1)" type="button">
      Clocking out

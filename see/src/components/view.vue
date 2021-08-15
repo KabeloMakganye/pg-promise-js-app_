@@ -10,9 +10,10 @@
     placeholder="Enter date"
     ><br><br>
 -->
-<input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name">
-<input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" >
-
+<input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
+<br><br>
+<input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" size = "25">
+<br><br>
 <button v-if="pass_right === 'false'" @click= "checkpassword(1); " type = "button">
      Log in
 </button><br><br>
