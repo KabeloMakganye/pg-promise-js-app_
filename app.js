@@ -51,6 +51,7 @@ app.use(function(req, res, next) {
   })
 
 app.get('/in/:name/:email',(req,res,next)=> {
+    res.header("Access-Control-Allow-Origin", "*")
     db.func("fn_add_new_clock",[req.params.email,req.params.name])
     // db.any("SELECT * FROM clock_in_out")
      .then(rows => {
