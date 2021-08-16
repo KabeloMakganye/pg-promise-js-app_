@@ -151,11 +151,7 @@ app.get("/get_tot_hours/:email",(req,res,next)=> {
     })
   })
   app.get("/fn_change_password/:email/:pass",(req,res,next)=> {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
     db.func("get_tot_hours",[req.params.email,req.params.pass])
-   // db.any("SELECT * FROM clock_in_out")
     .then(rows => {
         console.log(rows);
         res.json(rows);
