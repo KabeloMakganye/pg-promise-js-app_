@@ -97,6 +97,13 @@
     </tbody>
 </table><br>
 </label1>
+<label2 v-if="pass_right === 'true'">
+  <button v-if="newp === 'false'" type = "button" @click= "newpin()" >Change password</button>
+  <input v-if="newp === 'true'" type = "password" v-model="cPass" placeholder="Enter password">
+  <input v-if="newp === 'true'" type = "password" v-model="cPass_con" placeholder="Confirm password">
+  <button v-if="newp === 'true'" type= "button" @click = "adnewpin()">Change password</button>
+  &#128736;
+</label2><br><br>
 <button type = "button" onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
 Home
 </button>
@@ -155,7 +162,10 @@ export default {
       number_of_employees: 0,
       x: 0,
       count: 0,
-      c_2: 0
+      c_2: 0,
+      newp: 'false',
+      cPass: '',
+      cPass_con: ''
     }
   },
   methods: {
@@ -175,6 +185,17 @@ export default {
           .then(response => response.json())
       }
     }, ---------------------------------------------------------------------------------------- */
+    adnewpin () {
+      if (this.cPass === this.cPass_con) {
+        this.cPass_con = MD5(this.cPass_con).toString()
+
+        this.newp = 'false'
+      }
+
+    },
+    newpin () {
+      this.newp = 'true'
+    },
     hide_emp_table () {
       this.employeesTable = 'false'
     },
