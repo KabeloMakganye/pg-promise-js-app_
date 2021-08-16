@@ -141,6 +141,17 @@ app.get("/get_tot_hours/:email",(req,res,next)=> {
         console.log(error);
     })
   })
+  app.get("/fn_change_password/:email/:pass",(req,res,next)=> {
+    db.func("get_tot_hours",[req.params.email,req.params.pass])
+   // db.any("SELECT * FROM clock_in_out")
+    .then(rows => {
+        console.log(rows);
+        res.json(rows);
+    }) 
+    .catch(error => {
+        console.log(error);
+    })
+  })
 
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
