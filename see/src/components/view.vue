@@ -101,7 +101,7 @@
   <button v-if="newp === 'false'" type = "button" @click= "newpin()" >Change password</button>
   <input v-if="newp === 'true'" type = "password" v-model="cPass" placeholder="Enter password">
   <input v-if="newp === 'true'" type = "password" v-model="cPass_con" placeholder="Confirm password">
-  <button v-if="newp === 'true'" type= "button" @click = "adnewpin()">Change password</button>
+  <button v-if="newp === 'true'" type= "button" @click = "adnewpin()">Update password</button>
   &#128736;
 </label2><br><br>
 <button type = "button" onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
@@ -185,13 +185,16 @@ export default {
           .then(response => response.json())
       }
     }, ---------------------------------------------------------------------------------------- */
-    adnewpin () {
+    async adnewpin () {
       if (this.cPass === this.cPass_con) {
         this.cPass_con = MD5(this.cPass_con).toString()
-
+        console.log('email: ' + this.email + ' pass : ' + this.cPass_con)
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${this.cPass_con}/${this.email}`)
         this.newp = 'false'
+        alert('Password changed')
+      } else {
+        alert('Passwords did not match')
       }
-
     },
     newpin () {
       this.newp = 'true'
