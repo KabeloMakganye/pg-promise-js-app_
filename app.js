@@ -160,6 +160,7 @@ app.get("/get_tot_hours/:email",(req,res,next)=> {
     response.end("kabelo TESTING\n")
 }).listen(process.env.PORT) */
 
+app.use(cors());
 app.listen(process.env.PORT)
 module.exports=ad;
 app.listen(port, () =>
