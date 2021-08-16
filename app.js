@@ -140,7 +140,7 @@ app.get("/get_tot_hours/:email",(req,res,next)=> {
   })
 
   app.get("/fn_set_hours/:email/:hours",(req,res,next)=> {
-    db.func("get_tot_hours",[req.params.email,req.params.hours])
+    db.func("fn_set_hours",[req.params.email,req.params.hours])
    // db.any("SELECT * FROM clock_in_out")
     .then(rows => {
         console.log(rows);
@@ -154,7 +154,7 @@ app.get("/get_tot_hours/:email",(req,res,next)=> {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-    db.func("fn_change_password",[req.params.email,req.params.pass])
+    db.func("fn_change_password",[req.params.pass,req.params.email])
    // db.any("SELECT * FROM clock_in_out")
     .then(rows => {
         console.log(rows);

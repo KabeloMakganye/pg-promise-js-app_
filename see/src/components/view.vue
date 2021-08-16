@@ -189,7 +189,7 @@ export default {
       if (this.cPass === this.cPass_con) {
         this.cPass_con = MD5(this.cPass_con).toString()
         console.log('email: ' + this.email + ' pass : ' + this.cPass_con)
-        await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${this.cPass_con}/${this.email}`, {mode: 'no-cors'})
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${this.cPass_con}/${this.email}`)
         this.newp = 'false'
         alert('Password changed')
       } else {
