@@ -42,9 +42,7 @@ class ad{
 }
 z=new ad();
 
-app.use(cors({
-    origin: '*'
-}));
+app.use(cors());
 app.get('/in/:name/:email',(req,res,next)=> {
     db.func("fn_add_new_clock",[req.params.email,req.params.name])
     // db.any("SELECT * FROM clock_in_out")
