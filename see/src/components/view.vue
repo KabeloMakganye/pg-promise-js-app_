@@ -10,6 +10,7 @@
     placeholder="Enter date"
     ><br><br>
 -->
+<label0 v-if="pass_right === 'false'">
 <input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
 <br><br>
 <input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" size = "25">
@@ -17,6 +18,8 @@
 <button v-if="pass_right === 'false'" @click= "checkpassword(1); " type = "button">
      Log in
 </button><br><br>
+</label0>
+<label000 v-if="pass_right === 'true' && is_manager === 'true'">
 <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
    <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
      Display selected date
@@ -25,6 +28,7 @@
 <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "getbyemail(0)" @click= "getbyemail(1)" type="button" >
      Display selected employee
      </button><br><br>
+</label000>
    <button  v-if="pass_right === 'true'" @mouseenter= "fetchRes(0)" @click= "fetchRes(1)" type = "button" >
      Display all dates
      </button>
@@ -67,17 +71,19 @@
     <button v-if="newuser === 'true'" type= "button" @click = "addEmployee()">Add</button>
     <br><br>
 </label>
-    <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1)">
+<label0000 v-if="is_manager === 'true'" >
+    <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1); calc()">
       View all employees
     </button>
-    <!--   STILL NEEDS TO BE FIXED VISIT WHEN THERE IS TIME
-       <button v-if="employeesTable ==='true'" type = "button" @click= "calc()">
+    <!--   STILL NEEDS TO BE FIXED VISIT WHEN THERE IS TIME -->
+      <button type = "button" @click= "calc2()">
       Calculate hours
-    </button> -->
+    </button>
     <button v-if="employeesTable ==='true'" type = "button" @click= "hide_emp_table()">
       hide table
     </button><br><br>
-    <label1 v-if="employeesTable === 'true'">
+
+<label1 v-if="employeesTable === 'true'">
 <table style="width:100%" border="1px">
   <thead>
     <tr>
@@ -92,11 +98,12 @@
         <td>{{em_nam[n-1]}}</td>
         <td>{{em_email[n-1]}}</td>
         <td>{{em_manager[n-1]}}</td>
-        <td>BETA</td><!--  <td>{{em_hours[n-1]}}</td> -->
+        <!-- <td>BETA</td> --> <td>{{em_hours[n-1]}}</td>
       </tr>
     </tbody>
 </table><br>
 </label1>
+</label0000>
 <label2 v-if="pass_right === 'true'">
   <button v-if="newp === 'false'" type = "button" @click= "newpin()" >Change password</button>
   <input v-if="newp === 'true'" type = "password" v-model="cPass" placeholder="Enter password">
@@ -169,7 +176,7 @@ export default {
     }
   },
   methods: {
-    /* this needs to be fixed ----- visit when there is time-----------------------NB-----------
+    /* this needs to be fixed ----- visit when there is time-----------------------NB----------- */
     async calc () {
       for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
         await fetch(`https://warm-springs-22910.herokuapp.com/get_tot_hours/${this.em_email[this.c_2]}`)
@@ -181,10 +188,14 @@ export default {
     },
     async calc2 () {
       for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
-        await fetch(`https://warm-springs-22910.herokuapp.com/fn_set_hours/${this.em_email[this.c_2]}/${this.em_hours[this.c_2]}`)
-          .then(response => response.json())
+        if (this.em_hours[this.c_2] !== null) {
+          if (this.em_hours[this.c_2] !== undefined) {
+            console.log(`${this.em_email[this.c_2]} on web----:${this.em_hours[this.c_2]}`)
+            await fetch(`https://warm-springs-22910.herokuapp.com/fn_set_hours/${this.em_email[this.c_2]}/${this.em_hours[this.c_2]}`)
+          }
+        }
       }
-    }, ---------------------------------------------------------------------------------------- */
+    },
     async adnewpin () {
       if (this.cPass === this.cPass_con) {
         this.cPass_con = MD5(this.cPass_con).toString()
@@ -192,6 +203,8 @@ export default {
         await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${this.email}/${this.pass}`)
         this.newp = 'false'
         alert('Password changed')
+        this.cpass = ''
+        this.cPass_con = ''
       } else {
         alert('Passwords did not match')
       }
