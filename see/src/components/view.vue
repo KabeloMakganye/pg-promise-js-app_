@@ -15,7 +15,7 @@
 <br><br>
 <input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" size = "25">
 <br><br>
-<button v-if="pass_right === 'false'" @click= "checkpassword(1); " type = "button">
+<button v-if="pass_right === 'false'" @click= "checkpassword(1)" type = "button">
      Log in
 </button><br><br>
 </label0>
@@ -72,12 +72,15 @@
     <br><br>
 </label>
 <label0000 v-if="is_manager === 'true'" >
-    <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1); calc()">
+    <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1)">
       View all employees
     </button>
     <!--   STILL NEEDS TO BE FIXED VISIT WHEN THERE IS TIME -->
-      <button type = "button" @click= "calc2()">
+      <button v-if="employeesTable === 'true'" type = "button" @click= "calc()">
       Calculate hours
+    </button>
+    <button v-if="employeesTable === 'true'" type = "button" @click= "calc2()">
+      update table
     </button>
     <button v-if="employeesTable ==='true'" type = "button" @click= "hide_emp_table()">
       hide table
@@ -178,29 +181,35 @@ export default {
   methods: {
     /* this needs to be fixed ----- visit when there is time-----------------------NB----------- */
     async calc () {
+      this.employeesTable = 'false'
       for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
         await fetch(`https://warm-springs-22910.herokuapp.com/get_tot_hours/${this.em_email[this.c_2]}`)
           .then(response => response.json())
           .then(results => (this.resultsFetched_4 = results))
         this.em_hours[this.c_2] = this.resultsFetched_4[0].hours_
-        console.log(this.resultsFetched_4[0].hours_ + ' on web----:' + this.em_hours[this.c_2])
+        console.log(this.em_email[this.c_2] + ' hours: ' + this.em_hours[this.c_2])
       }
+      alert('Done calculating press update')
+      this.employeesTable = 'true'
     },
     async calc2 () {
+      this.employeesTable = 'false'
       for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
         if (this.em_hours[this.c_2] !== null) {
           if (this.em_hours[this.c_2] !== undefined) {
-            console.log(`${this.em_email[this.c_2]} on web----:${this.em_hours[this.c_2]}`)
             await fetch(`https://warm-springs-22910.herokuapp.com/fn_set_hours/${this.em_email[this.c_2]}/${this.em_hours[this.c_2]}`)
+          } else {
+            this.em_hours[this.c_2] = '0'
           }
+        } else {
+          this.em_hours[this.c_2] = '0'
         }
       }
+      this.employeesTable = 'true'
     },
     async adnewpin () {
       if (this.cPass === this.cPass_con) {
-        this.cPass_con = MD5(this.cPass_con).toString()
-        console.log('email: ' + this.email + ' pass : ' + this.cPass_con)
-        await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${this.email}/${this.pass}`)
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${MD5(this.cPass_con).toString()}/${this.email}`)
         this.newp = 'false'
         alert('Password changed')
         this.cpass = ''
@@ -226,7 +235,8 @@ export default {
           this.em_nam[this.count] = this.resultsFetched_3[this.count].name_
           this.em_email[this.count] = this.resultsFetched_3[this.count].email_
           this.em_manager[this.count] = this.resultsFetched_3[this.count].manager_
-          /* this.em_hours[this.count] = this.resultsFetched_3[this.count].hours_ */
+          this.em_hours[this.count] = this.resultsFetched_3[this.count].hours_
+          // console.log('hours for'+ this.em_nam[this.count] + ' are :' + this.em_hours[this.count])
         }
       }
     },
@@ -255,13 +265,13 @@ export default {
     },
     issuperior_emp () {
       const supercherckbox = document.getElementById('is_superior')
-      console.log('check box: ' + supercherckbox.checked)
+      // console.log('check box: ' + supercherckbox.checked)
       if (supercherckbox.checked) {
         this.is_superior = 'yes'
       } else {
         this.is_superior = 'no'
       }
-      console.log(this.is_superior)
+      // console.log(this.is_superior)
     },
     async load (i) {
       if (this.date_ !== 'n') {
@@ -271,7 +281,7 @@ export default {
           .then(results => (this.resultsFetched = results))
         if (i === 1) {
           this.showtable = 'true'
-          console.log(this.resultsFetched)
+          // console.log(this.resultsFetched)
           this.lim = this.resultsFetched.length
           for (this.i = 0; this.i < this.resultsFetched.length; this.i++) {
             this.all_nam[this.i] = this.resultsFetched[this.i].name_
@@ -290,10 +300,10 @@ export default {
     },
     test () {
       this.newuser = 'true'
-      console.log(this.newuser)
+      // console.log(this.newuser)
     },
     async checkpassword (i) {
-      console.log('Password: ' + MD5('Tebogompete#3').toString())
+      // console.log('Password: ' + MD5('Tebogompete#3').toString())
       this.x++
       await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
         .then(response => response.json())
@@ -303,7 +313,7 @@ export default {
         if (this.user === this.resultsFetched_2[this.i].name_) {
           if (this.cpass === this.resultsFetched_2[this.i].password_ && i === 1) {
             this.pass_right = 'true'
-            console.log('      pass right     ')
+            // console.log('      pass right     ')
             this.email = this.resultsFetched_2[this.i].email_
             if (this.resultsFetched_2[this.i].manager_) {
               this.is_manager = 'true'
@@ -317,7 +327,7 @@ export default {
         alert('incorrect login details')
         this.x = 0
       }
-      console.log(' pass wrong right:  ' + this.user + ' pass: ' + this.cpass)
+      // console.log(' pass wrong right:  ' + this.user + ' pass: ' + this.cpass)
     },
     async fetchRes (i) {
       this.z++
@@ -326,7 +336,7 @@ export default {
         await fetch('https://warm-springs-22910.herokuapp.com/all')
           .then(response => response.json())// This will convert it to a more readable way
           .then(results => (this.resultsFetched = results))
-        console.log(this.resultsFetched)
+        // console.log(this.resultsFetched)
         /* for (this.i = 0; this.i < this.resultsFetched.length; this.i++) {
           this.all += 'Clock num: ' + this.resultsFetched[this.i].clock_ + '\n' +
           'Email: ' + this.resultsFetched[this.i].email_ + '\n' +
@@ -357,17 +367,21 @@ export default {
           .then(response => response.json())// This will convert it to a more readable way
           .then(results => (this.resultsFetched = results))
         this.lim = this.resultsFetched.length
-        for (this.i = 0; this.i < this.resultsFetched.length; this.i++) {
-          this.all_nam[this.i] = this.resultsFetched[this.i].name_
-          this.all_email[this.i] = this.email
-          this.all_in[this.i] = this.resultsFetched[this.i].log_in_
-          if (this.resultsFetched[this.i].log_out_ !== '00:00:00') {
-            this.all_out[this.i] = this.resultsFetched[this.i].log_out_
+        if (i === 1) {
+          for (this.i = 0; this.i < this.resultsFetched.length; this.i++) {
+            this.all_nam[this.i] = this.resultsFetched[this.i].name_
+            this.all_email[this.i] = this.email
+            this.all_in[this.i] = this.resultsFetched[this.i].log_in_
+            if (this.resultsFetched[this.i].log_out_ !== '00:00:00') {
+              this.all_out[this.i] = this.resultsFetched[this.i].log_out_
+            } else {
+              this.all_out[this.i] = 'Not out yet'
+            }
+            this.all_date[this.i] = this.resultsFetched[this.i].date_
+            this.all_pass[this.i] = this.resultsFetched[this.i].password_
           }
-          this.all_date[this.i] = this.resultsFetched[this.i].date_
-          this.all_pass[this.i] = this.resultsFetched[this.i].password_
+          this.showtable = 'true'
         }
-        this.showtable = 'true'
       }
       //   console.log('Password: ' + MD5('Tebogompete#3').toString())
     },
@@ -377,7 +391,7 @@ export default {
         await fetch(`https://warm-springs-22910.herokuapp.com/get_by_email/${this.searchemail}`)
           .then(response => response.json())
           .then(results => (this.resultsFetched_em = results))
-        console.log(this.resultsFetched_em)
+        // console.log(this.resultsFetched_em)
         if (this.gtemail > 1 && i === 1) {
           this.showtable = 'true'
           this.lim = this.resultsFetched_em.length
