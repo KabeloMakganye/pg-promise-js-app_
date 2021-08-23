@@ -52,7 +52,14 @@
         <td>{{all_nam[n-1]}}</td>
         <td>{{all_email[n-1]}}</td>
         <td>{{all_in[n-1]}}</td>
-        <td>{{all_out[n-1]}}</td>
+        <td v-if="all_out[n-1] !== 'Not out yet'">{{all_out[n-1]}}</td>
+        <td v-if="all_out[n-1] === 'Not out yet'">
+          <button v-if="lock !== n" type = "button" @click= "seeing(n)">Clock out</button> <!-- come back here -->
+          <labela v-if="lock === n">
+            <input type="time" v-model="offtime">
+            <button type = "button" @click= "customlockout(n)">Set time</button>
+          </labela> <!-- come back here -->
+        </td>
         <td>{{all_date[n-1]}}</td>
       </tr>
     </tbody>
@@ -175,11 +182,19 @@ export default {
       c_2: 0,
       newp: 'false',
       cPass: '',
-      cPass_con: ''
+      cPass_con: '',
+      lock: 'false',
+      offtime: '17:00'
     }
   },
   methods: {
-    /* this needs to be fixed ----- visit when there is time-----------------------NB----------- */
+    async customlockout(i) {
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_cunstomlockout/${this.all_email[i]}/${this.all_date[i]}/${this.all_out}}`)
+    },
+    seeing (i) {
+      alert(this.offtime)
+      this.lock = i
+    },
     async calc () {
       this.employeesTable = 'false'
       for (this.c_2 = 0; this.c_2 < this.number_of_employees; this.c_2++) {
