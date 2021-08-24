@@ -52,13 +52,20 @@
         <td>{{all_nam[n-1]}}</td>
         <td>{{all_email[n-1]}}</td>
         <td>{{all_in[n-1]}}</td>
-        <td v-if="all_out[n-1] !== 'Not out yet'">{{all_out[n-1]}}</td>
-        <td v-if="all_out[n-1] === 'Not out yet'">
-          <button v-if="lock !== n" type = "button" @click= "seeing(n)">Clock out</button> <!-- come back here -->
-          <labela v-if="lock === n">
-            <input type="time" v-model="offtime">
-            <button type = "button" @click= "customlockout(n)">Set time</button>
-          </labela> <!-- come back here -->
+        <td>
+        <label v-if="is_manager === 'true'">
+          <label2 v-if="all_out[n-1] !== 'Not out yet'">
+            {{all_out[n-1]}}
+          </label2>
+          <label3 v-else>
+              <button v-if="lock !== n" type = "button" @click= "seeing(n)">Clock out</button> <!-- come back here -->
+               <labela v-if="lock === n">
+                <input type="time" v-model="offtime" placeholder="17:00:00" step="1" >
+                <button type = "button" @click= "customlockout(n)">Set time</button>
+              </labela> <!-- come back here -->
+          </label3>
+        </label>
+        <label55 v-else>{{all_out[n-1]}}</label55>
         </td>
         <td>{{all_date[n-1]}}</td>
       </tr>
@@ -184,15 +191,18 @@ export default {
       cPass: '',
       cPass_con: '',
       lock: 'false',
-      offtime: '17:00'
+      offtime: '17:00:00'
     }
   },
   methods: {
-    async customlockout(i) {
-      await fetch(`https://warm-springs-22910.herokuapp.com/fn_cunstomlockout/${this.all_email[i]}/${this.all_date[i]}/${this.all_out}}`)
+    async customlockout (i) {
+      this.showtable = 'false'
+      i = i - 1
+      this.all_out[i] = this.offtime
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_cunstomlockout/${this.all_email[i]}/${this.all_date[i]}/${this.all_out[i]}`)
+      this.showtable = 'true'
     },
     seeing (i) {
-      alert(this.offtime)
       this.lock = i
     },
     async calc () {
@@ -417,6 +427,8 @@ export default {
             this.all_in[this.i] = this.resultsFetched_em[this.i].log_in_
             if (this.resultsFetched_em[this.i].log_out_ !== '00:00:00') {
               this.all_out[this.i] = this.resultsFetched_em[this.i].log_out_
+            } else {
+              this.all_out[this.i] = 'Not out yet'
             }
             this.all_date[this.i] = this.resultsFetched_em[this.i].date_
             this.all_pass[this.i] = this.resultsFetched_em[this.i].password_

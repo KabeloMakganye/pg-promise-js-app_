@@ -174,6 +174,17 @@ app.get("/get_tot_hours/:email",(req,res,next)=> {
     })
   })
 
+  app.get('/fn_get_activities',(req,res)=> {
+    db.func("fn_get_activities")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
