@@ -212,7 +212,6 @@ export default {
           .then(response => response.json())
           .then(results => (this.resultsFetched_4 = results))
         this.em_hours[this.c_2] = Math.round(this.resultsFetched_4[0].hours_)
-        console.log(this.em_email[this.c_2] + ' hours: ' + this.em_hours[this.c_2])
       }
       alert('Done calculating press update')
       this.employeesTable = 'true'
@@ -223,7 +222,6 @@ export default {
         if (this.em_hours[this.c_2] !== null) {
           if (this.em_hours[this.c_2] !== undefined) {
             await fetch(`https://warm-springs-22910.herokuapp.com/fn_set_hours/${this.em_email[this.c_2]}/${this.em_hours[this.c_2]}`)
-            console.log(Math.round(this.em_hours[this.c_2]))
           } else {
             this.em_hours[this.c_2] = '0'
           }

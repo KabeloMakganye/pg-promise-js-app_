@@ -2,7 +2,7 @@
 
   <div>
     <form >
-    <h1>Employees table</h1>
+    <h1>Activities table</h1>
     <h2 v-if="pass_right === 'true'">User: {{user}}</h2>
 <!--    <input
     type ="date"
@@ -22,7 +22,7 @@
 <label000 v-if="pass_right === 'true' && is_manager === 'true'">
 </label000>
    <button  v-if="pass_right === 'true'" @mouseenter= "fetchRes(0)" @click= "fetchRes(1)" type = "button" >
-     Display all dates
+     Display all tasks
      </button>
      <button v-if="showtable === 'true' && z >= 2" @click= "removetable()" type = "button">
        Hide table
@@ -33,7 +33,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
+      <!-- <th>Email</th> -->
       <th>Acticity</th>
       <th>Activity details</th>
       <th>Priority</th>
@@ -44,10 +44,16 @@
     </tr>
   </thead>
     <tbody>
-      <tr v-for="n in 2" :key= "n">
-        <!-- <td>{{all_nam[n-1]}}</td> -->
-        <td>Kabelo demo</td>
-        <td>programming@eafricatelecoms.co.za</td>
+      <tr v-for="n in lim" :key= "n">
+        <td>{{all_nam[n-1]}}</td>
+        <!-- <td>{{all_email[n-1]}}</td> -->
+        <td>{{all_activity[n-1]}}</td>
+        <td>{{all_ac_details[n-1]}}</td>
+        <td>{{all_priority[n-1]}}</td>
+        <td>{{all_deadline[n-1]}}</td>
+        <td>{{all_em_feedback[n-1]}}</td>
+        <td>{{all_man_feedback[n-1]}}</td>
+        <td>{{all_complete[n-1]}}</td>
         <!-- <td>
         <label v-if="is_manager === 'true'">
           <label2 v-if="all_out[n-1] !== 'Not out yet'">
@@ -69,15 +75,32 @@
 </table><br>
 </label>
 <label v-if="is_manager === 'true'">
-    <button type = "button" v-if="pass_right === 'true'" @click= "test()">
+    <button type = "button" v-if="pass_right === 'true' && newuser === 'false'" @click= "test();viewemployees(1)">
     Create task
     </button>
-    <input v-if="newuser === 'true'" type ="text" v-model="newEmployee" placeholder="Enter employee name">
+    <!--  <input v-if="newuser === 'true'" type ="text" v-model="newEmployee" placeholder="Enter employee name">  -->
+    <labelnewtask v-if="newuser === 'true'">
       <label>Choose employee</label>
-      <select name="employees" id="cars">
-        <option value="kabelo" @click= "selectedemp(value)">Kabelo</option>
-        <option value="moloto" @click= "selectedemp(value)">Moloto</option>
-      </select>
+      <select v-model="newEmployee">
+        <option v-for="p in number_of_employees" :key= "p">
+          {{em_nam[p-1]}}
+        </option>
+      </select><br><br>
+      <textarea type= "text" rows= "10" cols="40" v-model= "new_activity" placeholder="Write activity name"></textarea>
+      <textarea type= "text" rows= "10" cols="40" v-model= "new_ac_details" placeholder="Write activity details"></textarea>
+      <br><br>
+      <label111 >Priority:
+        <select v-model= "new_priority">
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
+      </label111>
+      <label>Deadline date</label>
+      <input type= "date" v-model= "new_deadline">
+      <br><br>
+      <button @click= "selectedemp()">Upload activity</button>
+    </labelnewtask>
     <!--  <input v-if="newuser === 'true'" type ='email' v-model="newEmail" placeholder="Enter employee email">
     <input v-if="newuser === 'true'" type ="checkbox" id="is_superior" name="is_superior" value="yes" @click = 'issuperior_emp ()'>
     <label v-if="newuser === 'true'">Superior user</label>
@@ -148,11 +171,8 @@ export default {
       newPass: '',
       newPass_con: '',
       is_superior: 'no',
-      newEmployee: '',
-      newEmail: '',
       date_: 'n',
       newuser: 'false',
-      user: '',
       pass: '',
       cpass: '',
       n: '',
@@ -171,8 +191,22 @@ export default {
       all_day: '',
       space: '           ', */
       i: 0,
-      all_nam: [],
+      newEmployee: '',
+      newEmail: '',
+      new_activity: '',
+      new_ac_details: '',
+      new_priority: '',
+      new_deadline: '',
+      user: '', // aslo passed to activity trackiing as manager who assigned the task
+      all_nam: [], // activity arrays
       all_email: [],
+      all_activity: [],
+      all_ac_details: [],
+      all_priority: [],
+      all_deadline: [],
+      all_em_feedback: [],
+      all_man_feedback: [],
+      all_complete: [], //  activity arrays
       all_in: [],
       all_out: [],
       all_date: [],
@@ -196,8 +230,20 @@ export default {
     }
   },
   methods: {
-    selectedemp (v) {
-      alert(v)
+    get_nam (i) {
+      // this.newEmployee = this.em_nam[i - 1]
+      this.newEmail = this.em_email[i - 1]
+      alert(this.newEmail + ' i=' + i)
+    },
+    async selectedemp () {
+      this.newuser = 'false'
+      for (let index = 0; index < this.number_of_employees; index++) {
+        if (this.newEmployee === this.em_nam[index]) {
+          this.newEmail = this.em_email[index]
+        }
+      }
+      alert(this.newEmployee + this.new_activity + this.new_priority + this.newEmail + 'done')
+      // await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_activity/${this.newEmployee}/:email/:newac/:newacdes/:newpriority/:newdeadline/:byuser`)
     },
     async customlockout (i) {
       this.showtable = 'false'
@@ -363,32 +409,21 @@ export default {
       this.z++
       this.all = ''
       if (this.is_manager === 'true') {
-        await fetch('https://warm-springs-22910.herokuapp.com/all')
+        await fetch('https://warm-springs-22910.herokuapp.com/fn_get_activities')
           .then(response => response.json())// This will convert it to a more readable way
           .then(results => (this.resultsFetched = results))
-        // console.log(this.resultsFetched)
-        /* for (this.i = 0; this.i < this.resultsFetched.length; this.i++) {
-          this.all += 'Clock num: ' + this.resultsFetched[this.i].clock_ + '\n' +
-          'Email: ' + this.resultsFetched[this.i].email_ + '\n' +
-          'Name: ' + this.resultsFetched[this.i].name_ + '\n' +
-          'Date: ' + this.resultsFetched[this.i].date_ + '\n' +
-          'log in time: ' + this.resultsFetched[this.i].log_in_ + '\n' +
-          'log out time: ' + this.resultsFetched[this.i].log_out_ + '\n\n'
-        }
-        alert(this.all) */
         if (i === 1) {
           this.lim = this.resultsFetched.length
           for (this.i = 0; this.i < this.resultsFetched.length; this.i++) {
-            this.all_nam[this.i] = this.resultsFetched[this.i].name_
-            this.all_email[this.i] = this.resultsFetched[this.i].email_
-            this.all_in[this.i] = this.resultsFetched[this.i].log_in_
-            if (this.resultsFetched[this.i].log_out_ !== '00:00:00') {
-              this.all_out[this.i] = this.resultsFetched[this.i].log_out_
-            } else {
-              this.all_out[this.i] = 'Not out yet'
-            }
-            this.all_date[this.i] = this.resultsFetched[this.i].date_
-            this.all_pass[this.i] = this.resultsFetched[this.i].password_
+            this.all_nam[this.i] = this.resultsFetched[this.i].name_get_
+            this.all_email[this.i] = this.resultsFetched[this.i].email_get_
+            this.all_activity[this.i] = this.resultsFetched[this.i].task_
+            this.all_ac_details[this.i] = this.resultsFetched[this.i].task_details_
+            this.all_priority[this.i] = this.resultsFetched[this.i].priority_
+            this.all_deadline[this.i] = this.resultsFetched[this.i].deadline_
+            this.all_em_feedback[this.i] = this.resultsFetched[this.i].progress_comment_
+            this.all_man_feedback[this.i] = this.resultsFetched[this.i].manager_progress_feedback_
+            this.all_complete[this.i] = this.resultsFetched[this.i].done_
           }
           this.showtable = 'true'
         }

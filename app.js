@@ -185,6 +185,28 @@ app.get("/get_tot_hours/:email",(req,res,next)=> {
      })
 })
 
+
+app.get("/fn_add_new_activity/:name/:email/:newac/:newacdes/:newpriority/:newdeadline/:byuser",(req,res,next)=> {
+    db.func("fn_add_new_activity",
+    [
+        req.params.name,
+        req.params.email,
+        req.params.newac,
+        req.params.newacdes,
+        req.params.newpriority,
+        req.params.newdeadline,
+        req.params.byuser
+    ])
+   // db.any("SELECT * FROM clock_in_out")
+    .then(rows => {
+        console.log(rows);
+        res.json(rows);
+    }) 
+    .catch(error => {
+        console.log(error);
+    })
+  })
+
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")

@@ -4,7 +4,7 @@
     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/login';">Clock in</button><br><br>
     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/logout';">Clock out</button><br><br>
     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/view';">View all in</button><br><br>
-    <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/activity';">Tasks</button>&#128736;<br><br>
+    <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/activity';">Tasks</button><label>BETA</label>&#128736;&#9888;<br><br>
   </div>
 </template>
 
