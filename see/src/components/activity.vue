@@ -78,8 +78,9 @@
     <button type = "button" v-if="pass_right === 'true' && newuser === 'false'" @click= "test();viewemployees(1)">
     Create task
     </button>
+</label>
     <!--  <input v-if="newuser === 'true'" type ="text" v-model="newEmployee" placeholder="Enter employee name">  -->
-    <labelnewtask v-if="newuser === 'true'">
+    <labelnewtask v-if="is_manager === 'true' && newuser === 'true'">
       <label>Choose employee</label>
       <select v-model="newEmployee">
         <option v-for="p in number_of_employees" :key= "p">
@@ -99,7 +100,7 @@
       <label>Deadline date</label>
       <input type= "date" v-model= "new_deadline">
       <br><br>
-      <button @click= "selectedemp()">Upload activity</button>
+      <button @click= "selectedemp(); setfalse();">Upload activity</button>
     </labelnewtask>
     <!--  <input v-if="newuser === 'true'" type ='email' v-model="newEmail" placeholder="Enter employee email">
     <input v-if="newuser === 'true'" type ="checkbox" id="is_superior" name="is_superior" value="yes" @click = 'issuperior_emp ()'>
@@ -108,7 +109,6 @@
     <input v-if="newuser === 'true'" type = "password" v-model="newPass_con" placeholder="Confirm password">
     <button v-if="newuser === 'true'" type= "button" @click = "addEmployee()">Add</button> -->
     <br><br>
-</label>
 <label0000 v-if="is_manager === 'true'" >
     <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1)">
       View all employees
@@ -131,7 +131,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Superior user</th>
-      <th>Total hours worked</th>
+      <!-- <th>Total hours worked</th> -->
     </tr>
   </thead>
     <tbody>
@@ -139,7 +139,7 @@
         <td>{{em_nam[n-1]}}</td>
         <td>{{em_email[n-1]}}</td>
         <td>{{em_manager[n-1]}}</td>
-        <!-- <td>BETA</td> --> <td>{{em_hours[n-1]}}</td>
+        <!-- <td>{{em_hours[n-1]}}</td> -->
       </tr>
     </tbody>
 </table><br>
@@ -230,6 +230,9 @@ export default {
     }
   },
   methods: {
+    setfalse () {
+      this.newuser = 'false'
+    },
     get_nam (i) {
       // this.newEmployee = this.em_nam[i - 1]
       this.newEmail = this.em_email[i - 1]
@@ -242,8 +245,8 @@ export default {
           this.newEmail = this.em_email[index]
         }
       }
-      alert(this.newEmployee + this.new_activity + this.new_priority + this.newEmail + 'done')
-      // await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_activity/${this.newEmployee}/:email/:newac/:newacdes/:newpriority/:newdeadline/:byuser`)
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_activity/${this.newEmployee}/${this.newEmail}/${this.new_activity}/${this.new_ac_details}/${this.new_priority}/${this.new_deadline}/${this.user}`)
+      alert(this.newEmployee + this.new_activity + this.new_priority + this.newEmail + 'done' + this.newuser)
     },
     async customlockout (i) {
       this.showtable = 'false'

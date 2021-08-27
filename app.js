@@ -207,6 +207,17 @@ app.get("/fn_add_new_activity/:name/:email/:newac/:newacdes/:newpriority/:newdea
     })
   })
 
+  app.get('/fn_get_activitiy_by_email/:email',(req,res)=> {
+    db.func("fn_get_activitiy_by_email",req.params.email)
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
