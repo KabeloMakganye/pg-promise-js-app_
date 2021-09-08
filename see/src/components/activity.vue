@@ -53,23 +53,17 @@
         <td>{{all_deadline[n-1]}}</td>
         <td>{{all_em_feedback[n-1]}}</td>
         <td>{{all_man_feedback[n-1]}}</td>
-        <td>{{all_complete[n-1]}}</td>
-        <!-- <td>
-        <label v-if="is_manager === 'true'">
-          <label2 v-if="all_out[n-1] !== 'Not out yet'">
-            {{all_out[n-1]}}
+        <!-- <td>{{all_complete[n-1]}}</td> -->
+        <td>
+        <!-- <label v-if="is_manager === 'true'"> -->
+          <label2 v-if="all_complete[n-1] !== false">
+            {{all_complete[n-1]}}
           </label2>
-          <label3 v-else>
-              <button v-if="lock !== n" type = "button" @click= "seeing(n)">Clock out</button>
-               <labela v-if="lock === n">
-                <input type="time" v-model="offtime" placeholder="17:00:00" step="1" >
-                <button type = "button" @click= "customlockout(n)">Set time</button>
-              </labela>
+          <label3 v-else>No
+              <button v-if="lock !== n" type = "button" @click= "seeing(n)">Done</button>
           </label3>
-        </label>
-        <label55 v-else>{{all_out[n-1]}}</label55>
+        <!-- </label> -->
         </td>
-        <td>{{all_date[n-1]}}</td> -->
       </tr>
     </tbody>
 </table><br>
@@ -256,7 +250,8 @@ export default {
       this.showtable = 'true'
     },
     seeing (i) {
-      this.lock = i
+      // this.lock = i
+      alert('button clicked' + i)
     },
     async calc () {
       this.employeesTable = 'false'
@@ -426,19 +421,35 @@ export default {
             this.all_deadline[this.i] = this.resultsFetched[this.i].deadline_
             this.all_em_feedback[this.i] = this.resultsFetched[this.i].progress_comment_
             this.all_man_feedback[this.i] = this.resultsFetched[this.i].manager_progress_feedback_
-            this.all_complete[this.i] = this.resultsFetched[this.i].done_
+            if (this.resultsFetched[this.i].done_ === 'true') {
+              this.all_complete[this.i] = this.resultsFetched[this.i].done_
+            } else {
+              this.all_complete[this.i] = this.resultsFetched[this.i].done_ // 'Not out yet'
+            }
           }
           this.showtable = 'true'
         }
       } else {
-        await fetch(`https://warm-springs-22910.herokuapp.com/get_by_email/${this.email}`)
-          .then(response => response.json())// This will convert it to a more readable way
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_activitiy_by_email/${this.email}`)
+          .then(response => response.json())
           .then(results => (this.resultsFetched = results))
         this.lim = this.resultsFetched.length
         if (i === 1) {
           for (this.i = 0; this.i < this.resultsFetched.length; this.i++) {
             this.all_nam[this.i] = this.resultsFetched[this.i].name_
-            this.all_email[this.i] = this.email
+            this.all_email[this.i] = this.resultsFetched[this.i].email_get_
+            this.all_activity[this.i] = this.resultsFetched[this.i].task_
+            this.all_ac_details[this.i] = this.resultsFetched[this.i].task_details_
+            this.all_priority[this.i] = this.resultsFetched[this.i].priority_
+            this.all_deadline[this.i] = this.resultsFetched[this.i].deadline_
+            this.all_em_feedback[this.i] = this.resultsFetched[this.i].progress_comment_
+            this.all_man_feedback[this.i] = this.resultsFetched[this.i].manager_progress_feedback_
+            if (this.resultsFetched[this.i].done_ === 'true') {
+              this.all_complete[this.i] = this.resultsFetched[this.i].done_
+            } else {
+              this.all_complete[this.i] = this.resultsFetched[this.i].done_ // 'Not out yet'
+            }
+            /* this.all_email[this.i] = this.email
             this.all_in[this.i] = this.resultsFetched[this.i].log_in_
             if (this.resultsFetched[this.i].log_out_ !== '00:00:00') {
               this.all_out[this.i] = this.resultsFetched[this.i].log_out_
@@ -446,7 +457,7 @@ export default {
               this.all_out[this.i] = 'Not out yet'
             }
             this.all_date[this.i] = this.resultsFetched[this.i].date_
-            this.all_pass[this.i] = this.resultsFetched[this.i].password_
+            this.all_pass[this.i] = this.resultsFetched[this.i].password_ */
           }
           this.showtable = 'true'
         }
