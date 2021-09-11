@@ -44,7 +44,7 @@
     </tr>
   </thead>
     <tbody>
-      <tr v-for="n in lim" :key= "n">
+      <tr @dblclick="seeing(n)" v-for="n in lim" :key= "n">
         <td>{{all_nam[n-1]}}</td>
         <!-- <td>{{all_email[n-1]}}</td> -->
         <td>{{all_activity[n-1]}}</td>
@@ -59,8 +59,8 @@
           <label2 v-if="all_complete[n-1] !== false">
             {{all_complete[n-1]}}
           </label2>
-          <label3 v-else>No
-              <button v-if="lock !== n" type = "button" @click= "seeing(n)">Done</button>
+          <label3 v-if="all_complete[n-1] !== true">false
+            <!-- <label4><button v-if="lock !== n" type = "button" @click= "seeing(n)">Done</button></label4> -->
           </label3>
         <!-- </label> -->
         </td>
@@ -69,7 +69,7 @@
 </table><br>
 </label>
 <label v-if="is_manager === 'true'">
-    <button type = "button" v-if="pass_right === 'true' && newuser === 'false'" @click= "test();viewemployees(1)">
+    <button type = "button" v-if="pass_right === 'true' && newuser === 'false'" @click= "test();viewemployees(2)">
     Create task
     </button>
 </label>
@@ -304,6 +304,17 @@ export default {
         .then(results => (this.resultsFetched_3 = results))
       if (i === 1) {
         this.employeesTable = 'true'
+        this.number_of_employees = this.resultsFetched_3.length
+        for (this.count = 0; this.count < this.number_of_employees; this.count++) {
+          this.em_nam[this.count] = this.resultsFetched_3[this.count].name_
+          this.em_email[this.count] = this.resultsFetched_3[this.count].email_
+          this.em_manager[this.count] = this.resultsFetched_3[this.count].manager_
+          this.em_hours[this.count] = this.resultsFetched_3[this.count].hours_
+          // console.log('hours for'+ this.em_nam[this.count] + ' are :' + this.em_hours[this.count])
+        }
+      }
+      if (i === 2) {
+        this.employeesTable = 'false'
         this.number_of_employees = this.resultsFetched_3.length
         for (this.count = 0; this.count < this.number_of_employees; this.count++) {
           this.em_nam[this.count] = this.resultsFetched_3[this.count].name_
