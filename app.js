@@ -229,6 +229,17 @@ app.get('/set_on/:pin',(req,res)=> {
      })
 })
 
+app.get('/get_pir/',(req,res)=> {
+    db.func("get_pir")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
