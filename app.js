@@ -240,6 +240,17 @@ app.get('/get_pir/',(req,res)=> {
      })
 })
 
+app.get('/fn_get_gitlinks/',(req,res)=> {
+    db.func("fn_get_gitlinks")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
