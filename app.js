@@ -240,7 +240,7 @@ app.get('/get_pir/',(req,res)=> {
      })
 })
 
-app.get('/fn_get_gitlinks/',(req,res)=> {
+app.get('/fn_get_gitlink/',(req,res)=> {
     db.func("fn_get_gitlinks")
      .then(rows => {
          console.log(rows);
