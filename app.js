@@ -251,6 +251,17 @@ app.get('/fn_get_gitlink/',(req,res)=> {
      })
 })
 
+app.get('/fn_add_new_github/:prmName/:urllink/:addedbyemail',(req,res)=> {
+    db.func("fn_add_new_github",req.params.pin)
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
