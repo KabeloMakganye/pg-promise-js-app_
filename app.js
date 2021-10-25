@@ -251,12 +251,12 @@ app.get('/fn_get_gitlink/',(req,res)=> {
      })
 })
 
-app.get("/fn_add_new_github/:program/:url_links/:addedBy",(req,res)=> {
+app.get("/fn_add_new_github/:program_name_/:githublink_/:addedBy",(req,res)=> {
     db.func("fn_add_new_github",
     [
-        req.params.prmName,
-        req.params.urllink,
-        req.params.addedbyemail
+        req.params.program_name_,
+        req.params.githublink_,
+        req.params.addedBy
     ])
      .then(rows => {
          console.log(rows);
