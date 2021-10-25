@@ -250,7 +250,7 @@ app.get('/fn_get_gitlink/',(req,res)=> {
          console.log(error);
      })
 })
-fn_add_new_github
+
 app.get("/fn_add_new_github/:program/:url_links/:addedBy",(req,res)=> {
     db.func("fn_add_new_github",
     [
