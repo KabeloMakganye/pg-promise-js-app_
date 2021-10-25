@@ -251,7 +251,7 @@ app.get('/fn_get_gitlink/',(req,res)=> {
      })
 })
 fn_add_new_github
-app.get("/fn_add_new_github/:prmName/:urllink/:addedbyemail",(req,res)=> {
+app.get("/fn_add_new_github/:program/:url_links/:addedBy",(req,res)=> {
     db.func("fn_add_new_github",
     [
         req.params.prmName,
