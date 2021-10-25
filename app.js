@@ -250,9 +250,14 @@ app.get('/fn_get_gitlink/',(req,res)=> {
          console.log(error);
      })
 })
-
-app.get('/fn_add_new_github/:prmName/:urllink/:addedbyemail',(req,res)=> {
-    db.func("fn_add_new_github",req.params.prmName,req.params.urllink,req.params.addedbyemail)
+fn_add_new_github
+app.get("/fn_add_new_github/:prmName/:urllink/:addedbyemail",(req,res)=> {
+    db.func("fn_add_new_github",
+    [
+        req.params.prmName,
+        req.params.urllink,
+        req.params.addedbyemail
+    ])
      .then(rows => {
          console.log(rows);
          res.json(rows);
