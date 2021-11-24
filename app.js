@@ -240,6 +240,17 @@ app.get('/get_pir/',(req,res)=> {
      })
 })
 
+app.get('/fn_get_chat/',(req,res)=> {
+    db.func("fn_get_chat")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 app.get('/fn_add_chat/:name/:email/:chat',(req,res)=> {
     db.func("fn_add_chat",
     [
