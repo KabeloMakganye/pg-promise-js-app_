@@ -278,6 +278,17 @@ app.get('/fn_get_gitlink/',(req,res)=> {
      })
 })
 
+app.get("/fn_set_seen/:message",(req,res)=> {
+    db.func("fn_set_seen",req.params.message)
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 app.get("/fn_add_new_github/:program_name_/:githublink_/:addedBy",(req,res)=> {
     db.func("fn_add_new_github",
     [
