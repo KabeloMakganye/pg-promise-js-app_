@@ -229,6 +229,18 @@ app.get('/set_on/:pin',(req,res)=> {
      })
 })
 
+app.get('/set_room2on/:pin',(req,res)=> {
+    db.func("set_room2on",req.params.pin)
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
+
 app.get('/get_pir/',(req,res)=> {
     db.func("get_pir")
      .then(rows => {
