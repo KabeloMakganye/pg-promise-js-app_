@@ -6,26 +6,26 @@
     <input type ='email' v-model="email" placeholder="@eafricatelecoms.co.za" required>
     <br><br> -->
     <form style="text-align: left;">
-    <label>Name:</label>
-    <input type ="text" v-model="username" placeholder="Employee name" required>
+    <label>email:</label>
+    <input type ="email" v-model="email" placeholder="Employee email" required>
     <br><br>
     <label>Password:</label>
-    <input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Employee password" autocomplete="off" required>
+    <input v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Employee password" autocomplete="off" disabled>
     <br><br>
     <div style="border: 1px solid rgb(185, 15, 29); width: 150px; border-radius: 5px;">
     <label>Choose status:</label><br>
-    <input type="radio" id="available" name="set_status" value="Available">
+    <input type="radio" id="available" v-model="set_status" value="Available">
     <label for="available">Available</label><br>
-    <input type="radio" id="busy" name="set_status" value="Busy">
+    <input type="radio" id="busy" v-model="set_status" value="Busy">
     <label for="busy">Busy</label><br>
-    <input type="radio" id="away" name="set_status" value="Field work">
+    <input type="radio" id="away" v-model="set_status" value="Field work">
     <label for="away">Field work</label><br>
-    <input type="radio" id="lunch" name="set_status" value="Lunch">
+    <input type="radio" id="lunch" v-model="set_status" value="Lunch">
     <label for="lunch">On lunch</label>
     </div><br><br>
     <label>Short status message:</label><br>
-    <input title="please keep it short, 18 charectors max" type="text" style="width: 200px;" maxlength="18" placeholder="18 charectors max"><br><br>
-    <button @click= "clockin(1)" type="submit">
+    <input v-model="short_message" title="please keep it short, 18 charectors max" type="text" style="width: 200px;" maxlength="18" placeholder="18 charectors max"><br><br>
+    <button @click= "clockin(1)" type="button">
      Update status
      </button>
      <br><br>
@@ -41,6 +41,8 @@
 export default {
   data () {
     return {
+      short_message: '',
+      set_status: '',
       pass: '',
       pass_right: 'false',
       username: '',
@@ -54,7 +56,10 @@ export default {
   methods: {
     async clockin (i) { /* NEED TO COME BACK AND CHECK IF ANYONE CLOCK IN ON SAME DAY BEFORE CLOCKING IN AGAIN */
       this.x++
-      alert('Not online yet')
+      await fetch(`https://warm-springs-22910.herokuapp.com/set_status/${this.set_status}/${this.email}/${this.short_message}`)
+        .then(response => response.json())
+        .then(results => (this.resultsFetched_2 = results))
+      alert('Status updated')
       /* await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
         .then(response => response.json())
         .then(results => (this.resultsFetched_2 = results))

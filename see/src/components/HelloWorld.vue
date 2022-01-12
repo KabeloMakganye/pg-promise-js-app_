@@ -1,5 +1,5 @@
 <template>
-<body>
+<body @load= "getData()">
   <div class="hello">
    <!-- <h1>{{ msg }}</h1>
 
@@ -11,7 +11,7 @@
   <!-- <a href="mailto:kabeloref@gmail.com">Send email</a> -->
 <form style="text-align: left;" @dblclick = "closeNav()" id="myForm">
   <div id="mySidebar" class="sidebar">
-      <a href="javascript:void(0)" class="closebtn" @click = "closeNav()">×</a>
+      <a href="javascript:void(0)" class="closebtn" @click = "closeNav(); getData()">×</a>
     <a href="https://clock-system-6a6f8.web.app/#/login">Clock in</a>
     <a href="https://clock-system-6a6f8.web.app/#/logout">Clock out</a>
     <a href="https://clock-system-6a6f8.web.app/#/status">Work status&#128736;&#9888;</a>
@@ -23,8 +23,8 @@
 </div>
 </form>
 <form id="mainForm">
-<div>
-  <form class="empStatuses" id="empStatus">
+<div >
+  <form class="empStatuses" id="empStatus" @click = "getData()">
   <H1>Employees work Status&#128736;&#9888;</H1>
   <div class="container">
     <div class="innnerContainer">
@@ -32,27 +32,13 @@
       <tr>
         <th>Name</th>
         <th>Status</th>
+        <th>Note</th>
       </tr>
-      <tr>
-        <td>Kabelo</td>
-        <td>Busy</td>
-      </tr>
-       <tr>
-        <td>Kabelo</td>
-        <td>Busy</td>
-      </tr>
-       <tr>
-        <td>Kabelo</td>
-        <td>Busy</td>
-      </tr>
-       <tr>
-        <td>Kabelo</td>
-        <td>Busy</td>
-      </tr>
-      <tr>
-        <td>Prince</td>
-        <td>Busy</td>
-      </tr>
+      <tr v-for="n in lim" :key= "n">
+        <td>{{all_nam[n-1]}}</td>
+        <td>{{all_status[n-1]}}</td>
+        <td>{{all_note[n-1]}}</td>
+       </tr>
     </table>
     </div>
   </div>
@@ -68,10 +54,30 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Keep your mask on'
+      msg: 'Keep your mask on',
+      resultsFetched_2: '',
+      all_nam: [],
+      all_status: [],
+      all_note: [],
+      lim: ''
     }
   },
   methods: {
+    async getData () {
+      await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
+        .then(response => response.json())
+        .then(results => (this.resultsFetched_2 = results))
+      this.lim = 0
+      for (let index = 0; index < this.resultsFetched_2.length; index++) {
+        if (this.resultsFetched_2[index].status_ !== 'none') {
+          this.all_nam[index] = this.resultsFetched_2[index].name_
+          this.all_status[index] = this.resultsFetched_2[index].status_
+          this.all_note[index] = this.resultsFetched_2[index].note_
+          this.lim = this.lim + 1
+        }
+      }
+      alert(this.lim)
+    },
     openNav () {
       for (let index = 0; index < 2; index++) {
         document.getElementById('mySidebar').style.width = '250px'
