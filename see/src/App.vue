@@ -20,6 +20,8 @@ export default {
   color: #2c3e50;
   /*margin-top: 60px;*/
   margin: 10px ;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(252, 197, 197);
+  /*height: 100%;*/
+  background-size: cover;
 }
 </style>

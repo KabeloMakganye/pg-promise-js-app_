@@ -6,6 +6,7 @@ import HelloWorld from '@/components/HelloWorld'
 import logout from '@/components/logout'
 import view from '@/components/view'
 import activity from '@/components/activity'
+import status from '@/components/status'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/activity',
       name: 'activity',
       component: activity
+    },
+    {
+      path: '/status',
+      name: 'status',
+      component: status
     }
   ]
 })

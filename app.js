@@ -300,7 +300,21 @@ app.get("/fn_set_seen/:message",(req,res)=> {
          console.log(error);
      })
 })
-
+app.get("/set_status/:sts_/:email_/:note_",(req,res)=> {
+    db.func("set_status",
+    [
+        req.params.sts_,
+        req.params.email_,
+        req.params.note_
+    ])
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
 app.get("/fn_add_new_github/:program_name_/:githublink_/:addedBy",(req,res)=> {
     db.func("fn_add_new_github",
     [
