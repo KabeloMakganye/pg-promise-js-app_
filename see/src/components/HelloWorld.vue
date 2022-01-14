@@ -1,5 +1,5 @@
 <template>
-<body @load= "getData()">
+<body>
   <div class="hello">
    <!-- <h1>{{ msg }}</h1>
 
@@ -9,7 +9,7 @@
     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/view';">View all in</button><br><br>
     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/activity';">Tasks</button><label>BETA</label>&#128736;&#9888;<br><br> -->
   <!-- <a href="mailto:kabeloref@gmail.com">Send email</a> -->
-<form style="text-align: left;" @dblclick = "closeNav()" id="myForm">
+<!-- <form style="text-align: left;" @dblclick = "closeNav()" id="myForm">
   <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" @click = "closeNav(); getData()">×</a>
     <a href="https://clock-system-6a6f8.web.app/#/login">Clock in</a>
@@ -21,12 +21,12 @@
   <div id="main">
   <button id="btn" class="openbtn" @click = "openNav()" @mouseenter= "openNav()" @mouseover= "openNav()"><span>☰ Menu</span></button>
 </div>
-</form>
+</form> -->
 <form id="mainForm">
 <div >
-  <form class="empStatuses" id="empStatus" @click = "getData()">
-  <H1>Employees work Status&#128736;&#9888;</H1>
-  <div class="container">
+  <form class="empStatuses" id="empStatus">
+  <a href="javascript:void(0)" id="click" @click = "getData()"><h1 id="clicks">Click here for employees work status&#128736;&#9888;</h1></a>
+  <!-- <div class="container">
     <div class="innnerContainer">
     <table>
       <tr>
@@ -35,16 +35,33 @@
         <th>Note</th>
       </tr>
       <tr v-for="n in lim" :key= "n">
-        <td>{{all_nam[n-1]}}</td>
-        <td>{{all_status[n-1]}}</td>
-        <td>{{all_note[n-1]}}</td>
+        <td>{{all_nam[n+1]}}</td>
+        <td>{{all_status[n+1]}}</td>
+        <td>{{all_note[n+1]}}</td>
        </tr>
     </table>
     </div>
-  </div>
+  </div> -->
   </form>
 </div>
 </form>
+    <section class="testimonials-section">
+        <div class="container">
+            <ul>
+                <li v-for="n in lim" :key= "n">
+                    <img src="../assets/kb.jpg" alt="Person">
+                    <blockquote>{{all_status[n-1]}}</blockquote>
+                    <blockquote>"{{all_note[n-1]}}"</blockquote>
+                    <cite>-{{all_nam[n-1]}}</cite>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="testimonials-section">
+        <div class="container">
+        </div>
+    </section>
+
   </div>
 </body>
 </template>
@@ -59,24 +76,23 @@ export default {
       all_nam: [],
       all_status: [],
       all_note: [],
-      lim: ''
+      lim: 0,
+      tst: '',
+      n: 0
     }
   },
   methods: {
     async getData () {
-      await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
+      await fetch(`https://warm-springs-22910.herokuapp.com/get_all_status`)
         .then(response => response.json())
         .then(results => (this.resultsFetched_2 = results))
-      this.lim = 0
+      this.lim = this.resultsFetched_2.length
       for (let index = 0; index < this.resultsFetched_2.length; index++) {
-        if (this.resultsFetched_2[index].status_ !== 'none') {
-          this.all_nam[index] = this.resultsFetched_2[index].name_
-          this.all_status[index] = this.resultsFetched_2[index].status_
-          this.all_note[index] = this.resultsFetched_2[index].note_
-          this.lim = this.lim + 1
-        }
+        this.all_nam[index] = this.resultsFetched_2[index].name_
+        this.all_status[index] = this.resultsFetched_2[index].status_
+        this.all_note[index] = this.resultsFetched_2[index].note_
       }
-      alert(this.lim)
+      document.getElementById('clicks').innerHTML = 'Employees work status&#128736;&#9888;'
     },
     openNav () {
       for (let index = 0; index < 2; index++) {
@@ -96,26 +112,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 h1, h2 {
   font-weight: normal;
 }
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 5em 2em;
+  background-color: rgb(252, 197, 197);
+  margin: 0;
 }
 li {
   display: inline-block;
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  font-weight: normal;
+  text-decoration: none;
+  color: #000000;
 }
 body {
-  font-family: "Lato", sans-serif;
-  background: rgb(252, 197, 197);
-  margin: 8px;
+  background: #f2f2f2;
+  margin: 0;
   font-family: 'poppins';
-  height: 100%;
 }
 
 .sidebar {
@@ -179,13 +198,15 @@ body {
 }
 #myForm {
   background-color: rgb(197, 123, 124);
+  margin: 0;
+  padding: 1em;
 }
 #mainForm {
   background-color: rgb(197, 123, 124);
-  margin-top: 10px;
+  margin: 0;
   /* margin-bottom: 10px; */
   /* max-height:  100%; */
-  padding: 16px;
+  padding: 5em 2em;
   height: 100%;
 }
 .container {
@@ -230,4 +251,26 @@ th, td {
 tr:nth-child(even) {
   background-color: rgb(247, 129, 129);
 }
+section {
+  padding: 5em 2em;
+}
+.testimonials-section {
+    background: rgb(252, 197, 197);
+    color: white;
+}
+.testimonials-section li {
+            background: rgb(197, 123, 124);
+            text-align: center;
+            padding: 2em 1em;
+            width: 80%;
+            margin: 0 auto 5em auto;
+            border-radius: 1em;
+}
+.testimonials-section li img {
+                width: 5em;
+                height: 5em;
+                border: 5px solid rgb(197, 123, 124);
+                border-radius: 50%;
+                margin-top: -4.5em;
+            }
 </style>

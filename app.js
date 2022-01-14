@@ -116,6 +116,17 @@ app.get('/getall_workers',(req,res)=> {
      })
 })
 
+app.get('/get_all_status',(req,res)=> {
+    db.func("get_all_status")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 app.get('/get_by_email/:email',(req,res)=> {
     db.func("get_by_email",req.params.email)
      .then(rows => {
