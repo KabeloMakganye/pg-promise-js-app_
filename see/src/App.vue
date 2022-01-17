@@ -2,17 +2,17 @@
 <body>
   <div id="app">
     <form style="text-align: left;" @dblclick = "closeNav()" id="myForm">
-  <div id="mySidebar" class="sidebar">
+  <div id="mySidebar" class="sidebar" @mouseleave= "closeNav()">
     <a href="javascript:void(0)" class="closebtn" @click = "closeNav()">×</a>
-    <a href="https://clock-system-6a6f8.web.app/#/login">Clock in</a>
-    <a href="https://clock-system-6a6f8.web.app/#/logout">Clock out</a>
-    <a href="https://clock-system-6a6f8.web.app/#/status">Work status&#128736;&#9888;</a>
-    <a href="https://clock-system-6a6f8.web.app/#/view">Account settings</a>
-    <a href="https://clock-system-6a6f8.web.app/#/activity">Task&#128736;&#9888;</a>
+    <a href="https://clock-system-6a6f8.web.app/#/login" @click = "closeNav()">Clock in</a>
+    <a href="https://clock-system-6a6f8.web.app/#/logout" @click = "closeNav()">Clock out</a>
+    <a href="https://clock-system-6a6f8.web.app/#/status" @click = "closeNav()">Work status&#128736;&#9888;</a>
+    <a href="https://clock-system-6a6f8.web.app/#/view" @click = "closeNav()">Account settings</a>
+    <a href="https://clock-system-6a6f8.web.app/#/activity" @click = "closeNav()">Task&#128736;&#9888;</a>
   </div>
   <div id="main">
-  <button id="btn" class="openbtn" @click = "openNav()"  ><span>☰ Menu</span></button>
-  <img src="./assets/eafrica.png">
+  <button id="btn" class="openbtn" @click = "openNav()" @mouseenter = "openNav" ontouchstart = "openNav"><span>☰ Menu</span></button>
+  <img onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';" src="./assets/eafrica.png">
 </div>
 </form>
     <router-view/>

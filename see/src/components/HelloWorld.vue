@@ -24,8 +24,8 @@
 </form> -->
 <form id="mainForm">
 <div >
-  <form class="empStatuses" id="empStatus">
-  <a href="javascript:void(0)" id="click" @click = "getData()"><h1 id="clicks">Click here for employees work status&#128736;&#9888;</h1></a>
+  <form class="empStatuses" id="empStatus" mousemove = "getData()">
+  <a href="javascript:void(0)" id="click" ><h1 id="clicks">Employees work status&#128736;&#9888;</h1></a>
   <!-- <div class="container">
     <div class="innnerContainer">
     <table>
@@ -92,7 +92,6 @@ export default {
         this.all_status[index] = this.resultsFetched_2[index].status_
         this.all_note[index] = this.resultsFetched_2[index].note_
       }
-      document.getElementById('clicks').innerHTML = 'Employees work status&#128736;&#9888;'
     },
     openNav () {
       for (let index = 0; index < 2; index++) {
@@ -106,6 +105,9 @@ export default {
       // document.getElementById('main').style.marginLeft = '0'
       document.getElementById('btn').style.visibility = 'visible'
     }
+  },
+  beforeMount () {
+    this.getData()
   }
 }
 </script>
