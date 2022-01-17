@@ -240,6 +240,7 @@ app.get('/set_on/:pin',(req,res)=> {
      })
 })
 
+<<<<<<< HEAD
 app.get('/set_room2on/:pin',(req,res)=> {
     db.func("set_room2on",req.params.pin)
      .then(rows => {
@@ -252,6 +253,8 @@ app.get('/set_room2on/:pin',(req,res)=> {
 })
 
 
+=======
+>>>>>>> 5328ecdd2e0fa5e8c0a7cbd4a8b4bc9b0c14d6db
 app.get('/get_pir/',(req,res)=> {
     db.func("get_pir")
      .then(rows => {
@@ -263,6 +266,7 @@ app.get('/get_pir/',(req,res)=> {
      })
 })
 
+<<<<<<< HEAD
 app.get('/fn_get_chat/',(req,res)=> {
     db.func("fn_get_chat")
      .then(rows => {
@@ -290,6 +294,8 @@ app.get('/fn_add_chat/:name/:email/:chat',(req,res)=> {
      })
 })
 
+=======
+>>>>>>> 5328ecdd2e0fa5e8c0a7cbd4a8b4bc9b0c14d6db
 app.get('/fn_get_gitlink/',(req,res)=> {
     db.func("fn_get_gitlinks")
      .then(rows => {
@@ -301,6 +307,7 @@ app.get('/fn_get_gitlink/',(req,res)=> {
      })
 })
 
+<<<<<<< HEAD
 app.get("/fn_set_seen/:message",(req,res)=> {
     db.func("fn_set_seen",req.params.message)
      .then(rows => {
@@ -342,6 +349,8 @@ app.get("/fn_add_new_github/:program_name_/:githublink_/:addedBy",(req,res)=> {
      })
 })
 
+=======
+>>>>>>> 5328ecdd2e0fa5e8c0a7cbd4a8b4bc9b0c14d6db
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
