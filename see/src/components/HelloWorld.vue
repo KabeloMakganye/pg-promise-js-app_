@@ -87,13 +87,7 @@ export default {
       document.getElementById('mySidebar').style.width = '0'
       // document.getElementById('main').style.marginLeft = '0'
       document.getElementById('btn').style.visibility = 'visible'
-    },
-    rerun () {
-      setInterval(() => this.getData(), 1000)
     }
-  },
-  beforeMount () {
-    this.rerun()
   }
 }
 </script>

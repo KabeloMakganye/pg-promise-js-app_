@@ -39,9 +39,9 @@
             <section class="testimonials-section">
         <div class="container">
             <ul>
-                <li v-for="n in lim" :key= "n">
+                <li  v-for="n in lim" :key= "n">
                     <img src="../assets/kb.jpg" alt="Person">
-                    <blockquote>{{all_status[n-1]}}</blockquote>
+                    <blockquote >{{all_status[n-1]}}</blockquote>
                     <blockquote>"{{all_note[n-1]}}"</blockquote>
                     <cite>-{{all_nam[n-1]}}</cite>
                 </li>
@@ -93,6 +93,9 @@ export default {
         this.all_status[index] = this.resultsFetched_3[index].status_
         this.all_note[index] = this.resultsFetched_3[index].note_
       }
+      let p = this.lim
+      this.lim = 0
+      this.lim = p
     },
     async checkpassword (i) {
       // console.log('Password: ' + MD5('Tebogompete#3').toString())
@@ -141,10 +144,13 @@ export default {
       }
       // fetch('http://localhost:3000/results')
       */
+    },
+    rerun () {
+      setInterval(() => this.getData(), 1000)
     }
   },
   beforeMount () {
-    this.getData()
+    this.rerun()
   }
 }
 </script>
