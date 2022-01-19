@@ -24,8 +24,8 @@
 </form> -->
 <form id="mainForm">
 <div >
-  <form class="empStatuses" id="empStatus" mousemove = "getData()">
-  <a href="javascript:void(0)" id="click" ><h1 id="clicks">E-Africa <span style="color: rgb(134,6,8);">Telecoms</span> Vitual Office&#128736;&#9888;</h1></a>
+  <form class="empStatuses" id="empStatus">
+  <a href="javascript:void(0)" id="click" ><h1 id="clicks">E-Africa <span style="color: rgb(134,6,8);">Telecoms</span> Vitual Office</h1></a>
   <!-- <div class="container">
     <div class="innnerContainer">
     <table>
@@ -182,12 +182,12 @@ body {
   .sidebar a {font-size: 18px;}
 }
 #myForm {
-  background-color: rgb(197, 123, 124);
+  background-color: rgb(242,242,242);
   margin: 0;
   padding: 1em;
 }
 #mainForm {
-  background-color: rgb(197, 123, 124);
+  background-color: rgb(242,242,242);
   margin: 0;
   /* margin-bottom: 10px; */
   /* max-height:  100%; */
