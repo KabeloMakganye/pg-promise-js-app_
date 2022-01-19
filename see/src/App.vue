@@ -7,9 +7,9 @@
         <a href="#" ><span class="fa fa-instagram"></span></a>
          </div>
          <div class="navin2">
-        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0121117420">012 111 7420</a>
-        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0876546448">087 654 6448</a>
-        <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@eafricatelecoms.co.za"> info@eafricatelecoms.co.za</a>
+        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0121117420"><span class="num"> 012 111 7420</span></a>
+        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0876546448"><span class="num"> 087 654 6448</span> </a>
+        <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@eafricatelecoms.co.za"><span class="num"> info@eafricatelecoms.co.za</span></a>
          </div>
       </div>
   <div id="app">
@@ -142,31 +142,28 @@ img {
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
+  .fa-envelope::before {
+    background: rgb(242,242,242);
+    color: rgb(134,6,8);
+    font-size: 25px;
+    padding: 0px 0px 0px 15px;
+    margin: 0;
+  }
+  .fa-phone::before {
+    background: rgb(242,242,242);
+    color: rgb(134,6,8);
+    font-size: 25px;
+    margin: 0;
+    padding: 0px 0px 0px 15px;
+  }
+  a .num {
+    display: none;
+  }
 }
-.fa::before {
-  padding: 20px;
-  font-size: 25px;
-  width: 50px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-}
-
-.fa:hover {
-    opacity: 0.7;
-}
-
-.fa-facebook {
+@media screen and (min-height: 420px) {
+  .fa-phone::before {
   background: rgb(242,242,242);
-  color: rgb(134,6,8);
-}
-.fa-instagram {
-  background: rgb(242,242,242);
-  color: rgb(134,6,8);
-}
-.fa-phone::before {
-  background: rgb(242,242,242);
-  color: rgb(134,6,8);
+  color: rgb(12, 12, 12);
   font-size: 15px;
   margin: 0;
   padding: 0px 0px 0px 15px;
@@ -178,6 +175,30 @@ img {
   padding: 0px 0px 0px 15px;
   margin: 0;
 }
+}
+.fa::before {
+  padding: 20px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook::before {
+  background: rgb(242,242,242);
+  color: rgb(134,6,8);
+  font-size: 25px;
+}
+.fa-instagram::before {
+  background: rgb(242,242,242);
+  color: rgb(134,6,8);
+  font-size: 25px;
+}
+
 .navbarup {
   transition: margin-left .5s;
   padding: 16px;
@@ -186,9 +207,17 @@ img {
 }
 .navin {
   padding: 0px;
+  display: flex;
+  place-content: space-between;
 }
 .navin2 {
   padding: 0px;
   font-size: 15px;
+  display: flex;
+  place-content: space-between;
+}
+a {
+  text-decoration: none;
+  color: #000000;
 }
 </style>
