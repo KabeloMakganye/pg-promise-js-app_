@@ -3,8 +3,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        <div class="navbarup">
          <div class="navin">
-        <a href="#" ><span class="fa fa-facebook"></span></a>
-        <a href="#" ><span class="fa fa-instagram"></span></a>
+        <a href="https://web.facebook.com/eafricatelecoms/" ><span class="fa fa-facebook"></span></a>
+        <a href="https://www.instagram.com/e_africatelecoms/" ><span class="fa fa-instagram"></span></a>
          </div>
          <div class="navin2">
         <i title="0121117420" class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0121117420"><span class="num"> 012 111 7420</span></a>
