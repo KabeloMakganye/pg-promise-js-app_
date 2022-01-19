@@ -1,5 +1,17 @@
 <template>
 <body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <div class="navbarup">
+         <div class="navin">
+        <a href="#" ><span class="fa fa-facebook"></span></a>
+        <a href="#" ><span class="fa fa-instagram"></span></a>
+         </div>
+         <div class="navin2">
+        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0121117420">012 111 7420</a>
+        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0876546448">087 654 6448</a>
+        <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@eafricatelecoms.co.za"> info@eafricatelecoms.co.za</a>
+         </div>
+      </div>
   <div id="app">
     <form style="text-align: left;" @dblclick = "closeNav()" id="myForm">
   <div id="mySidebar" class="sidebar" @mouseleave= "closeNav()">
@@ -36,6 +48,15 @@ export default {
       // document.getElementById('main').style.marginLeft = '0'
       document.getElementById('btn').style.visibility = 'visible'
     }
+  },
+  head: {
+    title: {
+      inner: 'E-Africa Telecoms Vitual Office'
+    },
+    link: {
+      rel: 'stylesheet',
+      href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+    }
   }
 }
 </script>
@@ -57,7 +78,7 @@ img {
   color: #2c3e50;
   /*margin-top: 60px;*/
   margin: 0;
-  background-color: rgb(252, 197, 197);
+  background-color: rgb(255,255,255);
   /*height: 100%;*/
   background-size: cover;
 }
@@ -98,7 +119,7 @@ img {
 .openbtn {
   font-size: 20px;
   cursor: pointer;
-  background-color: rgb(252, 197, 197);
+  background-color: rgb(255, 255, 255);
   color: white;
   padding: 0;
   border: none;
@@ -121,5 +142,53 @@ img {
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
+}
+.fa::before {
+  padding: 20px;
+  font-size: 25px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: rgb(242,242,242);
+  color: rgb(134,6,8);
+}
+.fa-instagram {
+  background: rgb(242,242,242);
+  color: rgb(134,6,8);
+}
+.fa-phone::before {
+  background: rgb(242,242,242);
+  color: rgb(134,6,8);
+  font-size: 15px;
+  margin: 0;
+  padding: 0px 0px 0px 15px;
+}
+.fa-envelope::before {
+  background: rgb(242,242,242);
+  color: rgb(134,6,8);
+  font-size: 15px;
+  padding: 0px 0px 0px 15px;
+  margin: 0;
+}
+.navbarup {
+  transition: margin-left .5s;
+  padding: 16px;
+  display: flex;
+  place-content: space-between;
+}
+.navin {
+  padding: 0px;
+}
+.navin2 {
+  padding: 0px;
+  font-size: 15px;
 }
 </style>

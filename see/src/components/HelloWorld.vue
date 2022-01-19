@@ -25,7 +25,7 @@
 <form id="mainForm">
 <div >
   <form class="empStatuses" id="empStatus" mousemove = "getData()">
-  <a href="javascript:void(0)" id="click" ><h1 id="clicks">Employees work status&#128736;&#9888;</h1></a>
+  <a href="javascript:void(0)" id="click" ><h1 id="clicks">E-Africa <span style="color: rgb(134,6,8);">Telecoms</span> Vitual Office&#128736;&#9888;</h1></a>
   <!-- <div class="container">
     <div class="innnerContainer">
     <table>
@@ -45,23 +45,6 @@
   </form>
 </div>
 </form>
-    <section class="testimonials-section">
-        <div class="container">
-            <ul>
-                <li v-for="n in lim" :key= "n">
-                    <img src="../assets/kb.jpg" alt="Person">
-                    <blockquote>{{all_status[n-1]}}</blockquote>
-                    <blockquote>"{{all_note[n-1]}}"</blockquote>
-                    <cite>-{{all_nam[n-1]}}</cite>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <section class="testimonials-section">
-        <div class="container">
-        </div>
-    </section>
-
   </div>
 </body>
 </template>
@@ -274,5 +257,5 @@ section {
                 border: 5px solid rgb(197, 123, 124);
                 border-radius: 50%;
                 margin-top: -4.5em;
-            }
+}
 </style>
