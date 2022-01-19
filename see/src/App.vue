@@ -7,9 +7,9 @@
         <a href="#" ><span class="fa fa-instagram"></span></a>
          </div>
          <div class="navin2">
-        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0121117420"><span class="num"> 012 111 7420</span></a>
-        <i class="fa fa-phone" id="b" aria-hidden="true"></i> <a href="tel:0876546448"><span class="num"> 087 654 6448</span> </a>
-        <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@eafricatelecoms.co.za"><span class="num"> info@eafricatelecoms.co.za</span></a>
+        <i title="0121117420" class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0121117420"><span class="num"> 012 111 7420</span></a>
+        <i title="0876546448" class="fa fa-phone" id="b" aria-hidden="true"></i> <a href="tel:0876546448"><span class="num"> 087 654 6448</span> </a>
+        <i title="info@eafricatelecoms.co.za" class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@eafricatelecoms.co.za"><span class="num"> info@eafricatelecoms.co.za</span></a>
          </div>
       </div>
   <div id="app">
