@@ -139,7 +139,7 @@ img {
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
+@media screen and (max-width: 600px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
   .fa-envelope::before {
@@ -160,10 +160,10 @@ img {
     display: none;
   }
 }
-@media screen and (min-height: 420px) {
+@media screen and (min-width: 600px) {
   .fa-phone::before {
   background: rgb(242,242,242);
-  color: rgb(12, 12, 12);
+  color: rgb(134,6,8);
   font-size: 15px;
   margin: 0;
   padding: 0px 0px 0px 15px;
