@@ -23,6 +23,7 @@
   <label>choose Picture:</label>
   <input type="file" @change="onFileChange">
   <img :src="pic" />
+  <button @click="uploadd()">Upload</button>
 <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
    <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
      Display selected date
@@ -199,6 +200,9 @@ export default {
     }
   },
   methods: {
+    async uploadd () {
+      await fetch(`https://warm-springs-22910.herokuapp.com/set_img/${this.user}/${this.pic}`)
+    },
     onFileChange (e) {
       var files = e.target.files || e.dataTransfer.files
       if (!files.length) {
@@ -206,7 +210,7 @@ export default {
       }
       this.createImage(files[0])
     },
-    async createImage (file) {
+    createImage (file) {
       var image = new Image()
       var reader = new FileReader()
       var vm = this
@@ -214,9 +218,9 @@ export default {
       reader.onload = (e) => {
         vm.image = e.target.result
         this.pic = e.target.result
-         await fetch(`https://warm-springs-22910.herokuapp.com/set_img/${this.email}/${this.pic}`)
         alert(vm.image)
       }
+
       reader.readAsDataURL(file)
     },
     async customlockout (i) {
