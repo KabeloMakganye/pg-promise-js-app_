@@ -206,7 +206,7 @@ export default {
       }
       this.createImage(files[0])
     },
-    createImage (file) {
+    async createImage (file) {
       var image = new Image()
       var reader = new FileReader()
       var vm = this
@@ -214,6 +214,7 @@ export default {
       reader.onload = (e) => {
         vm.image = e.target.result
         this.pic = e.target.result
+         await fetch(`https://warm-springs-22910.herokuapp.com/set_img/${this.email}/${this.pic}`)
         alert(vm.image)
       }
       reader.readAsDataURL(file)
