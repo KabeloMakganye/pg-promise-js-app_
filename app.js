@@ -240,6 +240,17 @@ app.get('/set_on/:pin',(req,res)=> {
      })
 })
 
+app.get('/set_img/:email/:pic',(req,res)=> {
+    db.func("set_on",[req.params.email,req.params.pic])
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
 app.get('/set_room2on/:pin',(req,res)=> {
     db.func("set_room2on",req.params.pin)
      .then(rows => {
