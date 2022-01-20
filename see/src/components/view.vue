@@ -20,6 +20,9 @@
 </button><br><br>
 </label0>
 <label000 v-if="pass_right === 'true' && is_manager === 'true'">
+  <label>choose Picture:</label>
+  <input type="file" @change="onFileChange">
+  <img :src="pic" />
 <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
    <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
      Display selected date
@@ -139,6 +142,7 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      pic: '',
       gtemail: 0,
       searchemail: '@eafricatelecoms.co.za',
       z: 0,
@@ -195,6 +199,25 @@ export default {
     }
   },
   methods: {
+    onFileChange (e) {
+      var files = e.target.files || e.dataTransfer.files
+      if (!files.length) {
+        return
+      }
+      this.createImage(files[0])
+    },
+    createImage (file) {
+      var image = new Image()
+      var reader = new FileReader()
+      var vm = this
+      alert(image)
+      reader.onload = (e) => {
+        vm.image = e.target.result
+        this.pic = e.target.result
+        alert(vm.image)
+      }
+      reader.readAsDataURL(file)
+    },
     async customlockout (i) {
       this.showtable = 'false'
       i = i - 1
@@ -440,5 +463,10 @@ export default {
 </script>
 
 <style scoped>
-
+img {
+  width: 30%;
+  margin: auto;
+  display: block;
+  margin-bottom: 10px;
+}
 </style>

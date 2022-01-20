@@ -25,7 +25,7 @@
 <form id="mainForm">
 <div >
   <form class="empStatuses" id="empStatus">
-  <a href="javascript:void(0)" id="click" ><h1 id="clicks">E-Africa <span style="color: rgb(134,6,8);">Telecoms</span> Vitual Office</h1></a>
+  <a href="javascript:void(0)" id="click" ><h1 id="clicks">E-Africa <span style="color: rgb(134,6,8);">Telecoms</span> Virtual Office</h1></a>
   <!-- <div class="container">
     <div class="innnerContainer">
     <table>
