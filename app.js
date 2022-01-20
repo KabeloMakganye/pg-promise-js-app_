@@ -241,7 +241,7 @@ app.get('/set_on/:pin',(req,res)=> {
 })
 
 app.get('/set_img/:email/:pic',(req,res)=> {
-    db.func("set_on",[req.params.email,req.params.pic])
+    db.func("set_img",[req.params.email,req.params.pic])
      .then(rows => {
          console.log(rows);
          res.json(rows);

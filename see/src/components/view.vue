@@ -143,6 +143,7 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      resultsFetched_7: '',
       pic: '',
       gtemail: 0,
       searchemail: '@eafricatelecoms.co.za',
@@ -201,6 +202,7 @@ export default {
   },
   methods: {
     async uploadd () {
+      alert('doone')
       await fetch(`https://warm-springs-22910.herokuapp.com/set_img/${this.user}/${this.pic}`)
     },
     onFileChange (e) {
@@ -365,6 +367,11 @@ export default {
         if (this.user === this.resultsFetched_2[this.i].name_) {
           if (this.cpass === this.resultsFetched_2[this.i].password_ && i === 1) {
             this.pass_right = 'true'
+            await fetch(`https://warm-springs-22910.herokuapp.com/get_img/${this.user}`)
+              .then(response => response.json())
+              .then(results => (this.resultsFetched_7 = results))
+            this.pic = this.resultsFetched_7[0].pic_
+            alert(this.resultsFetched_7[0].pic_)
             // console.log('      pass right     ')
             this.email = this.resultsFetched_2[this.i].email_
             if (this.resultsFetched_2[this.i].manager_) {
