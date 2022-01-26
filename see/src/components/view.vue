@@ -20,10 +20,10 @@
 </button><br><br>
 </label0>
 <label000 v-if="pass_right === 'true' && is_manager === 'true'">
-  <label>choose Picture:</label>
+  <!-- <label>choose Picture:</label>
   <input type="file" @change="onFileChange">
   <img :src="pic" />
-  <button @click="uploadd()">Upload</button>
+  <button @click="uploadd()">Upload</button> -->
 <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
    <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
      Display selected date
@@ -201,7 +201,7 @@ export default {
     }
   },
   methods: {
-    async uploadd () {
+    /* async uploadd () {
       alert('doone')
       await fetch(`https://warm-springs-22910.herokuapp.com/set_img/${this.user}/${this.pic}`)
     },
@@ -224,7 +224,7 @@ export default {
       }
 
       reader.readAsDataURL(file)
-    },
+    }, */
     async customlockout (i) {
       this.showtable = 'false'
       i = i - 1

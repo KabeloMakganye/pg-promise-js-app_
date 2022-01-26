@@ -44,11 +44,53 @@
   </div> -->
   </form>
 </div>
+<div class="con">
+    <h1 class="info" style="color: rgb(255,255,255);">OUR SOLUTIONS</h1>
+    <p style="color: rgb(255,255,255)">We believe telecommunications is the single most powerful way to extend economic opportunities and reduce inequality to millions of people across the African continent.</p>
+  <div class="grid-container">
+    <div class="grid-item">
+      <div class="grid-container">
+        <div class="grid-item2">
+          <h2>Home Solutions</h2>
+          <p>E-africa’s wireless home LTE is designed specifically for home use. We provide you with the best connectivity and high speeds even if the whole family is using it at the same time.</p>
+          <a href="https://eafricatelecoms.co.za/for-you">LEARN MORE</a>
+          <p></p>
+        </div>
+        <div class="grid-item">
+          <img src="https://eafricatelecoms.co.za/images/2020/05/29/home-solutions-01.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="grid-container">
+        <div class="grid-item3">
+          <h2>Business Solutions</h2>
+          <p>E africa telecoms’s cloud solutions help businesses transform their customer and employee experience. With one System of engagement for voice, video...</p>
+          <a href="https://eafricatelecoms.co.za/for-your-business">LEARN MORE</a>
+        </div>
+        <div class="grid-item">
+          <img src="https://eafricatelecoms.co.za/images/2020/05/29/business-solutions-01.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="grid-container">
+        <div class="grid-item4">
+          <h2>Internet Solutions</h2>
+          <p>We are passionate about enabling your business through technology. From getting connected, to building an online presence and staying protected our services are there for every step of your journey towards success. Let us be the spark to your potential to deliver a world-class service to your customers, leveraging technology and the value that E-africa Telecoms can add.</p>
+          <a href="https://eafricatelecoms.co.za/internet-solutions">LEARN MORE</a>
+        </div>
+        <div class="grid-item">
+          <img src="https://eafricatelecoms.co.za/images/2020/05/29/internet-solutions-01.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </form>
   </div>
 </body>
 </template>
-
 <script>
 export default {
   name: 'HelloWorld',
@@ -188,7 +230,7 @@ body {
   margin: 0;
   /* margin-bottom: 10px; */
   /* max-height:  100%; */
-  padding: 5em 2em;
+  padding: 0;
   height: 100%;
 }
 .container {
@@ -254,5 +296,183 @@ section {
                 border: 5px solid rgb(197, 123, 124);
                 border-radius: 50%;
                 margin-top: -4.5em;
+}
+.con {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(10,20,40);
+
+}
+h1 .info{
+  color: rgb(255,255,255);
+}
+.grid-container {
+  margin: 0;
+  display: -ms-grid;
+  display: grid;
+  background-color: rgb(10,20,40);
+  padding: 0px;
+  width: 100%;
+}
+
+.grid-item {
+  margin: 0;
+  background-color: rgb(10,20,40);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+}
+.grid-item a:hover{
+  margin: 0;
+  color: rgb(216, 97, 99);
+  background-color: rgb(122, 120, 120);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item2 {
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+}
+.grid-item2 a{
+  margin: 0;
+  color: rgb(255, 255, 255);
+  background-color: rgb(134,6,8);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 2px solid rgb(134,6,8);
+  border-radius: 10%;
+}
+.grid-item4 a:hover{
+  margin: 0;
+  color: rgb(216, 97, 99);
+  background-color: rgb(122, 120, 120);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item3 {
+  margin: 0;
+  background-color: rgb(134,6,8);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+}
+.grid-item3 a{
+  margin: 0;
+  color: rgb(134,6,8);
+  background-color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item3 a:hover{
+  margin: 0;
+  color: rgb(216, 97, 99);
+  background-color: rgb(122, 120, 120);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item3 h2 {
+  margin: 0;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 10%;
+}
+.grid-item3 p {
+  margin: 0;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 10%;
+}
+.grid-item2 h2, p{
+  margin: 0;
+  color: rgb(0, 0, 0);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 10%;
+}
+
+.grid-item4 {
+  margin: 0;
+  background-color: rgb(4,7,15);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+}
+.grid-item4 a{
+  margin: 0;
+  color: rgb(134,6,8);
+  background-color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item4 a:hover{
+  margin: 0;
+  color: rgb(216, 97, 99);
+  background-color: rgb(122, 120, 120);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item4 h2 {
+  margin: 0;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(4,7,15);
+  border-radius: 10%;
+}
+.grid-item4 p {
+  margin: 0;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 10%;
+}
+
+.grid-item img {
+    margin: 0;
+  background-color: rgb(10,20,40);
+  padding: 0px;
+  place-items: center;
+  width: 100%;
+  object-fit: cover;
+  -o-object-fit: cover;
+}
+.grid-inner {
+  transition: margin-left .5s;
+  padding: 16px;
+  display: flex;
+  place-content: space-between;
 }
 </style>
