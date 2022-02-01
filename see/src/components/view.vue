@@ -370,8 +370,6 @@ export default {
             await fetch(`https://warm-springs-22910.herokuapp.com/get_img/${this.user}`)
               .then(response => response.json())
               .then(results => (this.resultsFetched_7 = results))
-            this.pic = this.resultsFetched_7[0].pic_
-            alert(this.resultsFetched_7[0].pic_)
             // console.log('      pass right     ')
             this.email = this.resultsFetched_2[this.i].email_
             if (this.resultsFetched_2[this.i].manager_) {
