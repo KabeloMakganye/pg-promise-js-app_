@@ -20,7 +20,6 @@
 </button><br><br>
 </label0>
 <label000 v-if="pass_right === 'true' && is_manager === 'true'">
-  
 <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
    <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
      Display selected date
@@ -146,7 +145,7 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
-      email_reset_pin: '',
+      email_reset_pin: '@eafricatelecoms.co.za',
       resultsFetched_7: '',
       pic: '',
       gtemail: 0,
@@ -164,6 +163,7 @@ export default {
       user: '',
       pass: '',
       cpass: '',
+      cPass1: '0000',
       n: '',
       pass_right: 'false',
       lim: 4,
@@ -268,7 +268,8 @@ export default {
     },
     async adnewpin1 () {
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${MD5(this.cPass1).toString()}/${this.email_reset_pin}`)
-        this.newp1 = 'false'
+      this.newp1 = 'false'
+      this.email_reset_pin = '@eafricatelecoms.co.za'
     },
     async adnewpin () {
       if (this.cPass === this.cPass_con) {
@@ -285,7 +286,7 @@ export default {
       this.newp1 = 'true'
     },
     newpin () {
-      this.newp1 = 'true'
+      this.newp = 'true'
     },
     hide_emp_table () {
       this.employeesTable = 'false'
