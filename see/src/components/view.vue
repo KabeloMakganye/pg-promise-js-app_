@@ -20,10 +20,7 @@
 </button><br><br>
 </label0>
 <label000 v-if="pass_right === 'true' && is_manager === 'true'">
-  <!-- <label>choose Picture:</label>
-  <input type="file" @change="onFileChange">
-  <img :src="pic" />
-  <button @click="uploadd()">Upload</button> -->
+  
 <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
    <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
      Display selected date
@@ -132,6 +129,12 @@
   <button v-if="newp === 'true'" type= "button" @click = "adnewpin()">Update password</button>
   &#128736;
 </label2><br><br>
+<div v-if="is_manager === 'true'">
+  <button v-if="newp1 === 'false'" type = "button" @click= "newpin1()" >Reset password</button>
+  <input v-if="newp1 === 'true'" type = "email" v-model="email_reset_pin" placeholder="Enter Email" required>
+  <button v-if="newp1 === 'true'" type= "button" @click = "adnewpin1()">Update password</button>
+  &#128736;
+</div>
 <button type = "button" onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
 Home
 </button>
@@ -143,6 +146,7 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      email_reset_pin: '',
       resultsFetched_7: '',
       pic: '',
       gtemail: 0,
@@ -194,6 +198,7 @@ export default {
       count: 0,
       c_2: 0,
       newp: 'false',
+      newp1: 'false',
       cPass: '',
       cPass_con: '',
       lock: 'false',
@@ -261,6 +266,10 @@ export default {
       }
       this.employeesTable = 'true'
     },
+    async adnewpin1 () {
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${MD5(this.cPass1).toString()}/${this.email_reset_pin}`)
+        this.newp1 = 'false'
+    },
     async adnewpin () {
       if (this.cPass === this.cPass_con) {
         await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${MD5(this.cPass_con).toString()}/${this.email}`)
@@ -272,8 +281,11 @@ export default {
         alert('Passwords did not match')
       }
     },
+    newpin1 () {
+      this.newp1 = 'true'
+    },
     newpin () {
-      this.newp = 'true'
+      this.newp1 = 'true'
     },
     hide_emp_table () {
       this.employeesTable = 'false'
