@@ -7,6 +7,7 @@ import logout from '@/components/logout'
 import view from '@/components/view'
 import activity from '@/components/activity'
 import status from '@/components/status'
+import departmentsLogin from '@/components/departmentsLogin'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/status',
       name: 'status',
       component: status
+    },
+    {
+      path: '/departmentsLogin',
+      name: 'departmentsLogin',
+      component: departmentsLogin
     }
   ]
 })

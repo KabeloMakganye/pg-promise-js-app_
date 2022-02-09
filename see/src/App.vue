@@ -18,6 +18,7 @@
     <a href="javascript:void(0)" class="closebtn" @click = "closeNav()">×</a>
     <a href="https://clock-system-6a6f8.web.app/#/login" @click = "closeNav()">Clock in</a>
     <a href="https://clock-system-6a6f8.web.app/#/logout" @click = "closeNav()">Clock out</a>
+    <a href="https://clock-system-6a6f8.web.app/#/departmentsLogin" @click = "closeNav()">Departments</a>
     <a href="https://clock-system-6a6f8.web.app/#/status" @click = "closeNav()">Work status&#128736;&#9888;</a>
     <a href="https://clock-system-6a6f8.web.app/#/view" @click = "closeNav()">Account settings</a>
     <a href="https://clock-system-6a6f8.web.app/#/activity" @click = "closeNav()">Task&#128736;&#9888;</a>
@@ -145,14 +146,12 @@ img {
 }
 @media screen and (max-width: 600px) {
   .fa-envelope::before {
-    background: rgb(242,242,242);
     color: rgb(134,6,8);
     font-size: 25px;
     padding: 0px 0px 0px 15px;
     margin: 0;
   }
   .fa-phone::before {
-    background: rgb(242,242,242);
     color: rgb(134,6,8);
     font-size: 25px;
     margin: 0;
@@ -167,14 +166,12 @@ img {
 }
 @media screen and (min-width: 600px) {
   .fa-phone::before {
-  background: rgb(242,242,242);
   color: rgb(134,6,8);
   font-size: 15px;
   margin: 0;
   padding: 0px 0px 0px 15px;
 }
 .fa-envelope::before {
-  background: rgb(242,242,242);
   color: rgb(134,6,8);
   font-size: 15px;
   padding: 0px 0px 0px 15px;
@@ -194,17 +191,16 @@ img {
 }
 
 .fa-facebook::before {
-  background: rgb(242,242,242);
   color: rgb(134,6,8);
   font-size: 25px;
 }
 .fa-instagram::before {
-  background: rgb(242,242,242);
   color: rgb(134,6,8);
   font-size: 25px;
 }
 
 .navbarup {
+  background: #f2f2f2;
   transition: margin-left .5s;
   padding: 16px;
   display: flex;

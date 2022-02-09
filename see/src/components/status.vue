@@ -39,12 +39,48 @@
             <section class="testimonials-section">
         <div class="container">
             <ul>
-                <li  v-for="n in lim" :key= "n">
-                    <img src="../assets/kb.jpg" alt="Person">
+              <div v-for="n in lim" :key= "n">
+                <div v-if="all_status[n-1] === 'Busy'">
+                <li style="background: rgb(177,16,21);">
+                     <img style=" border: 5px solid rgb(177,16,21);" src="../assets/kb.jpg" alt="Person">
                     <blockquote >{{all_status[n-1]}}</blockquote>
                     <blockquote>"{{all_note[n-1]}}"</blockquote>
                     <cite>-{{all_nam[n-1]}}</cite>
                 </li>
+                </div>
+                <div v-if="all_status[n-1] === 'Available'">
+                <li style="background: rgb(48, 202, 28);">
+                    <img style=" border: 5px solid rgb(48, 202, 28);" src="../assets/kb.jpg" alt="Person">
+                    <blockquote >{{all_status[n-1]}}</blockquote>
+                    <blockquote>"{{all_note[n-1]}}"</blockquote>
+                    <cite>-{{all_nam[n-1]}}</cite>
+                </li>
+                </div>
+                <div v-if="all_status[n-1] === 'Field work'">
+                <li style="background: rgb(48, 202, 28);">
+                    <img style=" border: 5px solid rgb(48, 202, 28;" src="../assets/kb.jpg" alt="Person">
+                    <blockquote >{{all_status[n-1]}}</blockquote>
+                    <blockquote>"{{all_note[n-1]}}"</blockquote>
+                    <cite>-{{all_nam[n-1]}}</cite>
+                </li>
+                </div>
+                <div v-if="all_status[n-1] === 'On lunch'">
+                <li style="background: rgb(48, 202, 28);">
+                    <img style=" border: 5px solid rgb(48, 202, 28);" src="../assets/kb.jpg" alt="Person">
+                    <blockquote >{{all_status[n-1]}}</blockquote>
+                    <blockquote>"{{all_note[n-1]}}"</blockquote>
+                    <cite>-{{all_nam[n-1]}}</cite>
+                </li>
+                </div>
+                <div v-if="all_status[n-1] === 'On meeting'">
+                <li style="background: rgb(48, 202, 28);">
+                    <img style=" border: 5px solid rgb(197, 123, 124);" src="../assets/kb.jpg" alt="Person">
+                    <blockquote >{{all_status[n-1]}}</blockquote>
+                    <blockquote>"{{all_note[n-1]}}"</blockquote>
+                    <cite>-{{all_nam[n-1]}}</cite>
+                </li>
+                </div>
+              </div>
             </ul>
         </div>
     </section>
@@ -167,11 +203,10 @@ section {
   padding: 5em 2em;
 }
 .testimonials-section {
-    background: rgb(252, 197, 197);
-    color: white;
+    background: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 .testimonials-section li {
-            background: rgb(197, 123, 124);
             text-align: center;
             padding: 2em 1em;
             width: 80%;
