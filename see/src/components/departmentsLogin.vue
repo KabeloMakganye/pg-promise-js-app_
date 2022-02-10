@@ -6,12 +6,12 @@
   <a href="https://eafricatelecoms.co.za/for-you" target="_blank">HOME SOLUTIONS</a>
   <a href="https://eafricatelecoms.co.za/for-your-business" target="_blank">BUSINESS SOLUTIONS</a>
   <div class="dropdown">
-    <button class="dropbtn"> APPLY NOW
+    <button class="dropbtn" @mouseenter = "showdropdown()"> APPLY NOW
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content">
+    <div class="dropdown-content" id="dropdown-content">
       <a href="javascript:void()" type="button" @click = "showbus()" >BUSINESS SOLUTIONS APPLICATION FORM</a>
-      <a href="javascript:void()" >INDIVIDUAL APPLICATION FORM</a>
+      <a href="javascript:void()" type="button" @click = "showindiv()" >INDIVIDUAL APPLICATION FORM</a>
     </div>
   </div>
 </div>
@@ -61,7 +61,7 @@
 <div v-if="department !== 'Departments'">
 <label0 v-if="pass_right === 'false'">
 <input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
-<br><br>
+<br>
 <input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" size = "25">
 <br><br>
 <button v-if="pass_right === 'false'" @click= "checkpassword(1)" type = "button">
@@ -72,17 +72,159 @@
 
 <div class="formbus" id="formbus">
     <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
+    <h4>Date</h4>
     <input class="forminput" type="date" placeholder="Date">
     <h3>Product</h3>
     <input class="forminput" type="text" placeholder="Product Name">
     <input class="forminput" type="text" placeholder="Cost">
     <h4>Contract Term</h4>
     <input type="radio" id="month1" v-model="set_term" value="24months">
-        <label for="month1">24months</label><br>
+        <label for="month1">24months</label><br><br>
         <input type="radio" id="month2" v-model="set_term" value="36months">
-        <label for="month2">36months</label><br>
+        <label for="month2">36months</label><br><br>
         <input type="radio" id="month3" v-model="set_term" value="60months">
-        <label for="month3">60months</label><br>
+        <label for="month3">60months</label><br><br>
+    <input class="forminput" type="text" placeholder="Escallation 0%"><br>
+    <h4>Settlements</h4>
+      <input type="radio" id="settle1" v-model="settle" value="yes">
+      <label for="settle1">Yes</label><br><br>
+      <input type="radio" id="settle2" v-model="settle" value="no">
+      <label for="settle2">No</label><br><br>
+    <h4>Company Details</h4>
+    <input class="forminput" type="text" placeholder="Street Number"><br><br>
+    <input class="forminput" type="text" placeholder="Name"><br><br>
+    <input class="forminput" type="text" placeholder="Town"><br><br>
+    <input class="forminput" type="text" placeholder="City"><br><br>
+        <select class="forminput" v-model= "bussProvince" placeholder="Province">
+      <option value="" disabled selected hidden>Choose Province</option>
+      <option>
+        Gauteng
+      </option>
+      <option>
+        North West
+      </option>
+      <option>
+        Northern Cape
+      </option>
+      <option>
+        Western Cape
+      </option>
+      <option>
+        Eastern Cape
+      </option>
+      <option>
+        KwaZulu-Natal
+      </option>
+      <option>
+        Mpumalanga
+      </option>
+      <option>
+        Free State
+      </option>
+      <option>
+        Limpopo
+      </option>
+    </select><br><br>
+    <input class="forminput" type="text" placeholder="Registered Company Name"><br><br>
+    <input class="forminput" type="text" placeholder="Trading As"><br><br>
+    <input class="forminput" type="text" placeholder="Years Trading"><br><br>
+    <input class="forminput" type="text" placeholder="Registration Number"><br><br>
+    <input class="forminput" type="text" placeholder="Vat Number"><br><br>
+    <input class="forminput" type="text" placeholder="Turnover More than 2 Mill or Less"><br><br>
+    <input class="forminput" type="text" placeholder="Owners ID Number"><br><br>
+    <input class="forminput" type="text" placeholder="Designation"><br><br>
+    <input class="forminput" type="tel" placeholder="Telephone"><br><br>
+    <input class="forminput" type="tel" placeholder="Cell Number"><br><br>
+    <input class="forminput" type="tel" placeholder="Fax"><br><br>
+    <input class="forminput" type="text" placeholder="Postal Address"><br><br>
+    <input class="forminput" type="text" placeholder="Email Address"><br><br>
+    <input class="forminput" type="text" placeholder="Next of kin"><br><br>
+    <input class="forminput" type="text" placeholder="Landlord Details"><br><br>
+    <input class="forminput" type="text" placeholder="Company"><br><br>
+    <input class="forminput" type="text" placeholder="No"><br><br>
+    <h4>Banking Details</h4>
+    <input class="forminput" type="text" placeholder="Bank name"><br><br>
+    <input class="forminput" type="text" placeholder="Account number"><br><br>
+    <input class="forminput" type="text" placeholder="Branch Name"><br><br>
+    <textarea type= "text" class="forminput2" placeholder="3 Trade Reference(3 companies or suppliers you working with)"></textarea><br><br>
+    <label>1 + 1 = </label><input class="forminput3" type="text">
+</div>
+
+<div class="formindiv" id="formindiv">
+    <h1>INDIVIDUAL APPLICATION FORM</h1>
+    <h4>Date</h4>
+    <input class="forminput" type="date" placeholder="Date">
+    <h3>Product</h3>
+    <input class="forminput" type="text" placeholder="Product Name">
+    <input class="forminput" type="text" placeholder="Cost">
+    <h4>Contract Term</h4>
+      <input type="radio" id="month1" v-model="set_term" value="24months">
+      <label for="month1">24 months</label><br><br>
+      <input type="radio" id="month2" v-model="set_term" value="month to month">
+      <label for="month2">Month to Month</label><br><br>
+    <input class="forminput" type="text" placeholder="Escallation 0%"><br>
+    <h4>Settlements</h4>
+      <input type="radio" id="settle1" v-model="settle" value="yes">
+      <label for="settle1">Yes</label><br><br>
+      <input type="radio" id="settle2" v-model="settle" value="no">
+      <label for="settle2">No</label><br><br>
+    <h4>Installation Details</h4>
+    <input class="forminput" type="text" placeholder="Street Number"><br><br>
+    <input class="forminput" type="text" placeholder="Name"><br><br>
+    <input class="forminput" type="text" placeholder="Town"><br><br>
+    <input class="forminput" type="text" placeholder="City" required><br><br>
+    <select class="forminput" v-model= "indivProvince" placeholder="Province" required>
+      <option value="" disabled selected hidden>Choose Province</option>
+      <option>
+        Gauteng
+      </option>
+      <option>
+        North West
+      </option>
+      <option>
+        Northern Cape
+      </option>
+      <option>
+        Western Cape
+      </option>
+      <option>
+        Eastern Cape
+      </option>
+      <option>
+        KwaZulu-Natal
+      </option>
+      <option>
+        Mpumalanga
+      </option>
+      <option>
+        Free State
+      </option>
+      <option>
+        Limpopo
+      </option>
+    </select><br><br>
+    <input class="forminput" type="text" placeholder="Employers Name"><br><br>
+    <input class="forminput" type="text" placeholder="Years at Employment"><br><br>
+    <input class="forminput" type="text" placeholder="No"><br><br>
+    <input class="forminput" type="text" placeholder="Work Fax No"><br><br>
+    <input class="forminput" type="text" placeholder="Alternative Contact No"><br><br>
+    <input class="forminput" type="text" placeholder="ID No"><br><br>
+    <input class="forminput" type="text" placeholder="Marital status"><br><br>
+    <input class="forminput" type="text" placeholder="Designation"><br><br>
+    <input class="forminput" type="tel" placeholder="Telephone"><br><br>
+    <input class="forminput" type="tel" placeholder="Cell Number"><br><br>
+    <input class="forminput" type="tel" placeholder="Fax"><br><br>
+    <input class="forminput" type="text" placeholder="Postal address"><br><br>
+    <input class="forminput" type="text" placeholder="Email address"><br><br>
+    <input class="forminput" type="text" placeholder="Next of kin"><br><br>
+    <h4>Next of Kin Contact</h4>
+    <input class="forminput" type="text" placeholder=""><br><br>
+    <h4>Banking Details</h4>
+    <input class="forminput" type="text" placeholder="Bank name"><br><br>
+    <input class="forminput" type="text" placeholder="Account number"><br><br>
+    <input class="forminput" type="text" placeholder="Branch Name"><br><br>
+    <textarea type= "text" class="forminput2" placeholder="3 Trade Reference(3 companies or suppliers you working with)"></textarea><br><br>
+    <label>1 + 1 = </label><input class="forminput3" type="text">
 </div>
 <!-- <label000 v-if="pass_right === 'true' && is_manager === 'true'">
 <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
@@ -206,6 +348,9 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      bussProvince: '',
+      indivProvince: '',
+      settle: '',
       set_term: '',
       busiform: 0,
       department: 'Departments',
@@ -294,9 +439,18 @@ export default {
 
       reader.readAsDataURL(file)
     }, */
+    showdropdown () {
+      document.getElementById('dropdown-content').style.display = 'inline'
+    },
+    showindiv () {
+      document.getElementById('formindiv').style.display = 'inline'
+      document.getElementById('formbus').style.display = 'none'
+      document.getElementById('dropdown-content').style.display = 'none'
+    },
     showbus () {
       document.getElementById('formbus').style.display = 'inline'
-      alert('opoenwjhgke ' + this.busiform)
+      document.getElementById('formindiv').style.display = 'none'
+      document.getElementById('dropdown-content').style.display = 'none'
     },
     showdep () {
       alert(this.department)
@@ -638,13 +792,38 @@ body {
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  display: inline;
 }
 .formbus {
     display: none;
+    transition: 0.9s;
+}
+.formindiv {
+  display: none;
+  transition: 0.9s;
 }
 .forminput {
     width: 80%;
     height: 30px;
+}
+.forminput2 {
+    width: 80%;
+    height: 120px;
+}
+input, textarea, select {
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 5px rgb(165,6,8);;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgb(165,6,8);;
+}
+.forminput3 {
+    width: 3%;
+    height: 25px;
 }
 </style>

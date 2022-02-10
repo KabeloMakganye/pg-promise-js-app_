@@ -18,7 +18,7 @@
     <a href="javascript:void(0)" class="closebtn" @click = "closeNav()">×</a>
     <a href="https://clock-system-6a6f8.web.app/#/login" @click = "closeNav()">Clock in</a>
     <a href="https://clock-system-6a6f8.web.app/#/logout" @click = "closeNav()">Clock out</a>
-    <a href="https://clock-system-6a6f8.web.app/#/departmentsLogin" @click = "closeNav()">Departments</a>
+    <a href="https://clock-system-6a6f8.web.app/#/departmentsLogin" @click = "closeNav()">Departments&#128736;&#9888;</a>
     <a href="https://clock-system-6a6f8.web.app/#/status" @click = "closeNav()">Work status&#128736;&#9888;</a>
     <a href="https://clock-system-6a6f8.web.app/#/view" @click = "closeNav()">Account settings</a>
     <a href="https://clock-system-6a6f8.web.app/#/activity" @click = "closeNav()">Task&#128736;&#9888;</a>
