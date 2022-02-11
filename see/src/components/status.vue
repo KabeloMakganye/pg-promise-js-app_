@@ -57,24 +57,24 @@
                 </li>
                 </div>
                 <div v-if="all_status[n-1] === 'Field work'">
-                <li style="background: rgb(48, 202, 28);">
-                    <img style=" border: 5px solid rgb(48, 202, 28;" src="../assets/kb.jpg" alt="Person">
+                <li style="background: rgb(128, 128, 128);">
+                    <img style=" border: 5px solid rgb(128, 128, 128);" src="../assets/kb.jpg" alt="Person">
                     <blockquote >{{all_status[n-1]}}</blockquote>
                     <blockquote>"{{all_note[n-1]}}"</blockquote>
                     <cite>-{{all_nam[n-1]}}</cite>
                 </li>
                 </div>
-                <div v-if="all_status[n-1] === 'On lunch'">
-                <li style="background: rgb(48, 202, 28);">
-                    <img style=" border: 5px solid rgb(48, 202, 28);" src="../assets/kb.jpg" alt="Person">
+                <div v-if="all_status[n-1] === 'Lunch'">
+                <li style="background: rgb(255, 215, 0);">
+                    <img style=" border: 5px solid rgb(255, 215, 0);" src="../assets/kb.jpg" alt="Person">
                     <blockquote >{{all_status[n-1]}}</blockquote>
                     <blockquote>"{{all_note[n-1]}}"</blockquote>
                     <cite>-{{all_nam[n-1]}}</cite>
                 </li>
                 </div>
-                <div v-if="all_status[n-1] === 'On meeting'">
-                <li style="background: rgb(48, 202, 28);">
-                    <img style=" border: 5px solid rgb(197, 123, 124);" src="../assets/kb.jpg" alt="Person">
+                <div v-if="all_status[n-1] === 'Meeting'">
+                <li style="background: rgb(255, 140, 0);">
+                    <img style=" border: 5px solid rgb(255, 140, 0);" src="../assets/kb.jpg" alt="Person">
                     <blockquote >{{all_status[n-1]}}</blockquote>
                     <blockquote>"{{all_note[n-1]}}"</blockquote>
                     <cite>-{{all_nam[n-1]}}</cite>
