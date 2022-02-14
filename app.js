@@ -363,7 +363,7 @@ app.get("/fn_add_new_github/:program_name_/:githublink_/:addedBy",(req,res)=> {
          console.log(error);
      })
 })
-app.get("/fn_add_new_sales_business_application/:date_written_/:product_name_/:cost_/:contract_term_/:escallation_/:settlements_/:company_street_number_/:company_name_/:company_town_/:company_city_/:province_/:registered_company_name_/:trading_as_/:years_trading_/:registration_number_/:vat_number_/:turnover_/:owners_id_/:designation_/:telephone_/:cell_number_/:fax_/:postal_address_/:email_address_/:next_of_kin_/:landlord_details_/:company_/:no_/:bank_name_/:account_number_/:branch_name_/:trade_references_",(req,res)=> {
+app.get("/fn_add_new_sales_business_application/:date_written_/:product_name_/:cost_/:contract_term_/:escallation_/:settlements_/:company_street_number_/:company_name_/:company_town_/:company_city_/:province_/:registered_company_name_/:trading_as_/:years_trading_/:registration_number_/:vat_number_/:turnover_/:owners_id_/:designation_/:telephone_/:cell_number_/:fax_/:postal_address_/:email_address_/:next_of_kin_/:landlord_details_/:company_/:no_/:bank_name_/:account_number_/:branch_name_/:trade_references_/:agent_",(req,res)=> {
     db.func("fn_add_new_sales_business_application",
     [
         req.params.date_written_,
@@ -397,7 +397,8 @@ app.get("/fn_add_new_sales_business_application/:date_written_/:product_name_/:c
         req.params.bank_name_,
         req.params.account_number_,
         req.params.branch_name_,
-        req.params.trade_references_
+        req.params.trade_references_,
+        req.params.agent_
     ])
      .then(rows => {
          console.log(rows);
