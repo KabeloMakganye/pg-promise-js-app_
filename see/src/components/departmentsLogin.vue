@@ -6,12 +6,21 @@
   <a href="https://eafricatelecoms.co.za/for-you" target="_blank">HOME SOLUTIONS</a>
   <a href="https://eafricatelecoms.co.za/for-your-business" target="_blank">BUSINESS SOLUTIONS</a>
   <div class="dropdown">
-    <button class="dropbtn" @mouseenter = "showdropdown()"> APPLY NOW
-      <i class="fa fa-caret-down"></i>
+    <button @click="showdropdown()" class="dropbtn" > APPLY NOW
+      <!-- <i class="fa fa-caret-down"></i> -->
     </button>
     <div class="dropdown-content" id="dropdown-content">
       <a href="javascript:void()" type="button" @click = "showbus()" >BUSINESS SOLUTIONS APPLICATION FORM</a>
       <a href="javascript:void()" type="button" @click = "showindiv()" >INDIVIDUAL APPLICATION FORM</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button @click="showdropdown2()" class="dropbtn2" > FILLED FORMS
+      <!-- <i class="fa fa-caret-down"></i> -->
+    </button>
+    <div class="dropdown-content" id="dropdown-content2">
+      <a href="javascript:void()" type="button" @click = "showbusfilled()" >BUSINESS SOLUTIONS FILLED FORMS</a>
+      <a href="javascript:void()" type="button" @click = "showindivfilled()" >INDIVIDUAL FILLED FORMS</a>
     </div>
   </div>
 </div>
@@ -52,12 +61,6 @@
     </div>
     <div>
     </div>
-<!--    <input
-    type ="date"
-    v-model="username"
-    placeholder="Enter date"
-    ><br><br>
--->
 <div v-if="department !== 'Departments'">
 <label0 v-if="pass_right === 'false'">
 <input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
@@ -173,8 +176,8 @@
     <input class="forminput" type="text" placeholder="Street Number"><br><br>
     <input class="forminput" type="text" placeholder="Name"><br><br>
     <input class="forminput" type="text" placeholder="Town"><br><br>
-    <input class="forminput" type="text" placeholder="City" required><br><br>
-    <select class="forminput" v-model= "indivProvince" placeholder="Province" required>
+    <input class="forminput" type="text" placeholder="City"><br><br>
+    <select class="forminput" v-model= "indivProvince" placeholder="Province">
       <option value="" disabled selected hidden>Choose Province</option>
       <option>
         Gauteng
@@ -227,120 +230,6 @@
     <textarea type= "text" class="forminput2" placeholder="3 Trade Reference(3 companies or suppliers you working with)"></textarea><br><br>
     <label>1 + 1 = </label><input class="forminput3" type="text">
 </div>
-<!-- <label000 v-if="pass_right === 'true' && is_manager === 'true'">
-<input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
-   <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
-     Display selected date
-     </button><br><br>
-<input v-if="pass_right === 'true' && is_manager === 'true'" type= "email" v-model="searchemail" placeholder="employee@eafricatelecoms.co.za">
-<button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "getbyemail(0)" @click= "getbyemail(1)" type="button" >
-     Display selected employee
-     </button><br><br>
-</label000>
-   <button  v-if="pass_right === 'true'" @mouseenter= "fetchRes(0)" @click= "fetchRes(1)" type = "button" >
-     Display all dates
-     </button>
-     <button v-if="showtable === 'true' && z >= 2" @click= "removetable()" type = "button">
-       Hide table
-     </button>
-        <br><br>
-<label v-if="showtable === 'true' && z >= 2">
-<table v-if="pass_right === 'true'" style="width:100%" border="1px">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Log in time</th>
-      <th>Log out time</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-    <tbody>
-      <tr v-for="n in lim" :key= "n">
-        <td>{{all_nam[n-1]}}</td>
-        <td>{{all_email[n-1]}}</td>
-        <td>{{all_in[n-1]}}</td>
-        <td>
-        <label v-if="is_manager === 'true'">
-          <label2 v-if="all_out[n-1] !== 'Not out yet'">
-            {{all_out[n-1]}}
-          </label2>
-          <label3 v-else>
-              <button v-if="lock !== n" type = "button" @click= "seeing(n)">Clock out</button>--> <!-- come back here -->
-               <!-- <labela v-if="lock === n">
-                <input type="time" v-model="offtime" placeholder="17:00:00" step="1" >
-                <button type = "button" @click= "customlockout(n)">Set time</button>
-              </labela>
-          </label3>
-        </label>
-        <label55 v-else>{{all_out[n-1]}}</label55>
-        </td>
-        <td>{{all_date[n-1]}}</td>
-      </tr>
-    </tbody>
-</table><br>
-</label>
-<label v-if="is_manager === 'true'">
-    <button type = "button" v-if="pass_right === 'true'" @click= "test()">
-    Add new employee
-    </button>
-    <input v-if="newuser === 'true'" type ="text" v-model="newEmployee" placeholder="Enter employee name">
-    <input v-if="newuser === 'true'" type ='email' v-model="newEmail" placeholder="Enter employee email">
-    <input v-if="newuser === 'true'" type ="checkbox" id="is_superior" name="is_superior" value="yes" @click = 'issuperior_emp ()'>
-    <label v-if="newuser === 'true'">Superior user</label>
-    <input v-if="newuser === 'true'" type = "password" v-model="newPass" placeholder="Enter password">
-    <input v-if="newuser === 'true'" type = "password" v-model="newPass_con" placeholder="Confirm password">
-    <button v-if="newuser === 'true'" type= "button" @click = "addEmployee()">Add</button>
-    <br><br>
-</label>
-<label0000 v-if="is_manager === 'true'" >
-    <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1)">
-      View all employees
-    </button>
-      <button v-if="employeesTable === 'true'" type = "button" @click= "calc()">
-      Calculate hours
-    </button>
-    <button v-if="employeesTable === 'true'" type = "button" @click= "calc2()">
-      update table
-    </button>
-    <button v-if="employeesTable ==='true'" type = "button" @click= "hide_emp_table()">
-      hide table
-    </button><br><br>
-
-<label1 v-if="employeesTable === 'true'">
-<table style="width:100%" border="1px">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Superior user</th>
-      <th>Total hours worked</th>
-    </tr>
-  </thead>
-    <tbody>
-      <tr v-for="n in number_of_employees" :key= "n">
-        <td>{{em_nam[n-1]}}</td>
-        <td>{{em_email[n-1]}}</td>
-        <td>{{em_manager[n-1]}}</td>
-        <td>{{em_hours[n-1]}}</td>
-      </tr>
-    </tbody>
-</table><br>
-</label1>
-</label0000>
-<label2 v-if="pass_right === 'true'">
-  <button v-if="newp === 'false'" type = "button" @click= "newpin()" >Change password</button>
-  <input v-if="newp === 'true'" type = "password" v-model="cPass" placeholder="Enter password">
-  <input v-if="newp === 'true'" type = "password" v-model="cPass_con" placeholder="Confirm password">
-  <button v-if="newp === 'true'" type= "button" @click = "adnewpin()">Update password</button>
-  &#128736;
-</label2><br><br>
-<div v-if="is_manager === 'true'">
-  <button v-if="newp1 === 'false'" type = "button" @click= "newpin1()" >Reset password</button>
-  <input v-if="newp1 === 'true'" type = "email" v-model="email_reset_pin" placeholder="Enter Email" required>
-  <button v-if="newp1 === 'true'" type= "button" @click = "adnewpin1()">Update password</button>
-  &#128736;
-</div> -->
      </form>
   </div>
 </template>
@@ -446,30 +335,6 @@ export default {
     }
   },
   methods: {
-    /* async uploadd () {
-      alert('doone')
-      await fetch(`https://warm-springs-22910.herokuapp.com/set_img/${this.user}/${this.pic}`)
-    },
-    onFileChange (e) {
-      var files = e.target.files || e.dataTransfer.files
-      if (!files.length) {
-        return
-      }
-      this.createImage(files[0])
-    },
-    createImage (file) {
-      var image = new Image()
-      var reader = new FileReader()
-      var vm = this
-      alert(image)
-      reader.onload = (e) => {
-        vm.image = e.target.result
-        this.pic = e.target.result
-        alert(vm.image)
-      }
-
-      reader.readAsDataURL(file)
-    }, */
     async uploadbusform () {
       let allAreFilled = true /* check if all required fields are entered */
       document.getElementById('formbus').querySelectorAll('[required]').forEach(function (i) {
@@ -483,6 +348,9 @@ export default {
         alert('not submitted')
       }
     },
+    showdropdown2 () {
+      document.getElementById('dropdown-content2').style.display = 'inline'
+    },
     showdropdown () {
       document.getElementById('dropdown-content').style.display = 'inline'
     },
@@ -495,6 +363,28 @@ export default {
       document.getElementById('formbus').style.display = 'inline'
       document.getElementById('formindiv').style.display = 'none'
       document.getElementById('dropdown-content').style.display = 'none'
+    },
+    showapplydropdown () {
+      document.getElementById('formindiv').style.display = 'none'
+      document.getElementById('formbus').style.display = 'none'
+      document.getElementById('dropdown-content').style.display = 'inline'
+    },
+    showfilleddropdown () {
+      document.getElementById('formbus').style.display = 'none'
+      document.getElementById('formindiv').style.display = 'none'
+      document.getElementById('dropdown-content2').style.display = 'inline'
+    },
+    async showindivfilled () {
+      alert('individual filled form')
+      document.getElementById('formindiv').style.display = 'none'
+      document.getElementById('formbus').style.display = 'none'
+      document.getElementById('dropdown-content2').style.display = 'none'
+    },
+    async showbusfilled () {
+      alert('business filled form')
+      document.getElementById('formindiv').style.display = 'none'
+      document.getElementById('formbus').style.display = 'none'
+      document.getElementById('dropdown-content2').style.display = 'none'
     },
     showdep () {
       alert(this.department)
@@ -794,6 +684,12 @@ body {
   transition: 0.3s;
 }
 
+.dropdown2 {
+  float: left;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
 .dropdown .dropbtn {
   float: left;
   text-decoration: none;
@@ -807,7 +703,24 @@ body {
   font-weight: bold;
 }
 
+.dropdown2 .dropbtn2 {
+  float: left;
+  text-decoration: none;
+  font-size: 16px;
+  color: #000000;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: rgb(133, 133, 133);
+  font-weight: bold;
+}
+
 .navbar a:hover, .dropdown:hover .dropbtn {
+  color: rgb(165,6,8);
+}
+
+.dropdown2:hover .dropbtn2 {
   color: rgb(165,6,8);
 }
 
@@ -836,6 +749,9 @@ body {
 }
 
 .dropdown:hover .dropdown-content {
+  display: inline;
+}
+.dropdown2:hover .dropdown-content {
   display: inline;
 }
 .formbus {
