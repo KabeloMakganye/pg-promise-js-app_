@@ -44,7 +44,7 @@ export default {
             if (this.email === this.resultsFetched_2[this.i].email_ && i === 1) {
               await fetch(`https://warm-springs-22910.herokuapp.com/in/${this.username}/${this.email}`)
               this.found = this.username
-              alert(this.username + '  enjoy your day at work')
+              alert('Hello ' + this.username + ', Hope you enjoyed your valentine\'s day, enjoy your day at work')
             }
           }
         }
