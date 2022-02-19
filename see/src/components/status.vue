@@ -86,9 +86,6 @@
     </section>
       </div>
     </form>
-     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
-      Home
-</button>
     </form>
   </div>
 </template>

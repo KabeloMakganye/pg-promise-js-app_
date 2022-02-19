@@ -10,25 +10,25 @@
     placeholder="Enter date"
     ><br><br>
 -->
-<label0 v-if="pass_right === 'false'">
-<input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
-<br><br>
-<input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" size = "25">
-<br><br>
-<button v-if="pass_right === 'false'" @click= "checkpassword(1)" type = "button">
+<div v-if="pass_right === 'false'">
+  <input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
+  <br><br>
+  <input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" size = "25">
+  <br><br>
+  <button v-if="pass_right === 'false'" @click= "checkpassword(1)" type = "button">
      Log in
-</button><br><br>
-</label0>
-<label000 v-if="pass_right === 'true' && is_manager === 'true'">
-<input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
+  </button><br><br>
+</div>
+<div v-if="pass_right === 'true' && is_manager === 'true'">
+  <input v-if="pass_right === 'true' && is_manager === 'true'" type= "date" v-model="date_" placeholder="yyyy-mm-dd" >
    <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "load(0)" @click= "load(1)" type="button" >
      Display selected date
      </button><br><br>
-<input v-if="pass_right === 'true' && is_manager === 'true'" type= "email" v-model="searchemail" placeholder="employee@eafricatelecoms.co.za">
-<button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "getbyemail(0)" @click= "getbyemail(1)" type="button" >
+  <input v-if="pass_right === 'true' && is_manager === 'true'" type= "email" v-model="searchemail" placeholder="employee@eafricatelecoms.co.za">
+  <button v-if="pass_right === 'true' && is_manager === 'true'" @mouseenter= "getbyemail(0)" @click= "getbyemail(1)" type="button" >
      Display selected employee
      </button><br><br>
-</label000>
+</div>
    <button  v-if="pass_right === 'true'" @mouseenter= "fetchRes(0)" @click= "fetchRes(1)" type = "button" >
      Display all dates
      </button>
@@ -36,7 +36,7 @@
        Hide table
      </button>
         <br><br>
-<label v-if="showtable === 'true' && z >= 2">
+<div v-if="showtable === 'true' && z >= 2">
 <table v-if="pass_right === 'true'" style="width:100%" border="1px">
   <thead>
     <tr>
@@ -71,8 +71,8 @@
       </tr>
     </tbody>
 </table><br>
-</label>
-<label v-if="is_manager === 'true'">
+</div>
+<div v-if="is_manager === 'true'">
     <button type = "button" v-if="pass_right === 'true'" @click= "test()">
     Add new employee
     </button>
@@ -84,8 +84,8 @@
     <input v-if="newuser === 'true'" type = "password" v-model="newPass_con" placeholder="Confirm password">
     <button v-if="newuser === 'true'" type= "button" @click = "addEmployee()">Add</button>
     <br><br>
-</label>
-<label0000 v-if="is_manager === 'true'" >
+</div>
+<div v-if="is_manager === 'true'" >
     <button v-if="is_manager === 'true'" type = "button" @click= "viewemployees(1)">
       View all employees
     </button>
@@ -120,23 +120,20 @@
     </tbody>
 </table><br>
 </label1>
-</label0000>
-<label2 v-if="pass_right === 'true'">
+</div>
+<div v-if="pass_right === 'true'">
   <button v-if="newp === 'false'" type = "button" @click= "newpin()" >Change password</button>
   <input v-if="newp === 'true'" type = "password" v-model="cPass" placeholder="Enter password">
   <input v-if="newp === 'true'" type = "password" v-model="cPass_con" placeholder="Confirm password">
   <button v-if="newp === 'true'" type= "button" @click = "adnewpin()">Update password</button>
   &#128736;
-</label2><br><br>
+</div><br><br>
 <div v-if="is_manager === 'true'">
   <button v-if="newp1 === 'false'" type = "button" @click= "newpin1()" >Reset password</button>
   <input v-if="newp1 === 'true'" type = "email" v-model="email_reset_pin" placeholder="Enter Email" required>
   <button v-if="newp1 === 'true'" type= "button" @click = "adnewpin1()">Update password</button>
   &#128736;
 </div>
-<button type = "button" onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
-Home
-</button>
      </form>
   </div>
 </template>
@@ -346,17 +343,16 @@ export default {
       // console.log(this.newuser)
     },
     async checkpassword (i) {
-      // console.log('Password: ' + MD5('Tebogompete#3').toString())
+      /* console.log('Password: ' + MD5('Tebogompete#3').toString()) */
       this.x++
       await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
         .then(response => response.json())
         .then(results => (this.resultsFetched_2 = results))
-      this.cpass = MD5(this.pass).toString()
+      console.log(this.resultsFetched_2)
       for (this.i = 0; this.i < this.resultsFetched_2.length; this.i++) {
         if (this.user === this.resultsFetched_2[this.i].name_) {
-          if (this.cpass === this.resultsFetched_2[this.i].password_ && i === 1) {
+          if (MD5(this.pass).toString() === this.resultsFetched_2[this.i].password_ && i === 1) {
             this.pass_right = 'true'
-              .then(results => (this.resultsFetched_7 = results))
             // console.log('      pass right     ')
             this.email = this.resultsFetched_2[this.i].email_
             if (this.resultsFetched_2[this.i].manager_) {

@@ -12,9 +12,6 @@
      Clock in
      </button>
      <br><br>
-     <button onClick="window.location.href='https://clock-system-6a6f8.web.app/#/';">
-      Home
-</button>
      </form>
   </div>
 </template>
@@ -44,7 +41,7 @@ export default {
             if (this.email === this.resultsFetched_2[this.i].email_ && i === 1) {
               await fetch(`https://warm-springs-22910.herokuapp.com/in/${this.username}/${this.email}`)
               this.found = this.username
-              alert('Hello ' + this.username + ', Hope you enjoyed your valentine\'s day, enjoy your day at work')
+              alert('Hello ' + this.username + ', enjoy your day at work')
             }
           }
         }

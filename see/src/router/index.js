@@ -8,6 +8,7 @@ import view from '@/components/view'
 import activity from '@/components/activity'
 import status from '@/components/status'
 import departmentsLogin from '@/components/departmentsLogin'
+import foot from '@/components/foot'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/departmentsLogin',
       name: 'departmentsLogin',
       component: departmentsLogin
+    },
+    {
+      path: '/foot',
+      name: 'foot',
+      component: foot
     }
   ]
 })

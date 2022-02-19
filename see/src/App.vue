@@ -29,12 +29,15 @@
 </div>
 </form>
     <router-view/>
+    <app-footer/>
   </div>
 </body>
 </template>
 
 <script>
+import foot from './components/foot.vue'
 export default {
+  components: { 'app-footer': foot },
   name: 'App',
   methods: {
     openNav () {
@@ -64,9 +67,10 @@ export default {
 
 <style>
 body {
-    background: #f2f2f2;
+    background: #ffffff;
   margin: 0;
   font-family: 'poppins';
+  height: 100%;
 }
 img {
   text-align: center;
@@ -163,6 +167,11 @@ img {
   a .num {
     display: none;
   }
+  .navbardown {
+  background: rgb(10,20,40);
+  transition: margin-left .5s;
+  padding: 16px;
+}
 }
 @media screen and (min-width: 600px) {
   .fa-phone::before {
@@ -176,6 +185,13 @@ img {
   font-size: 15px;
   padding: 0px 0px 0px 15px;
   margin: 0;
+}
+.navbardown {
+  background: rgb(10,20,40);
+  transition: margin-left .5s;
+  padding: 16px;
+  display: flex;
+  place-content: space-between;
 }
 }
 .fa::before {
@@ -220,5 +236,33 @@ img {
 a {
   text-decoration: none;
   color: #000000;
+}
+.navin3 a {
+  font-family: 'poppins';
+  color: white;
+  font-size: 14px;
+}
+.feet {
+  background-color: rgb(53, 53, 53);
+  border-top: 10px solid rgb(53, 53, 53);
+  border-bottom: 10px solid rgb(53, 53, 53);
+}
+.feet h5 {
+  color: white;
+  margin: 0%;
+}
+.feet a {
+  color: rgb(224, 15, 19)
+}
+.navin3 h5 {
+  margin: 0;
+}
+.navin3 {
+  padding: 0px;
+  display: flex;
+  place-content: space-between;
+}
+.navin3 h4 {
+  color: rgb(201, 160, 160);
 }
 </style>
