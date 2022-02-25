@@ -25,9 +25,11 @@
   </div>
 </div>
 </div>
+<div class="heading-div">
     <h1>{{department}}</h1>
     <h2 v-if="pass_right === 'true'">User: {{user}}</h2>
-    <div v-if="department === 'Departments'">
+</div>
+<div class="choose-department-div" v-if="department === 'Departments'">
     <label>Choose department</label>
       <select v-model="department">
         <option>
@@ -59,9 +61,7 @@
         </option>
       </select><br><br>
     </div>
-    <div>
-    </div>
-<div v-if="department !== 'Departments'">
+<div class="login-div" v-if="department !== 'Departments'">
 <label0 v-if="pass_right === 'false'">
 <input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
 <br>
@@ -157,27 +157,47 @@
 <div class="formindiv" id="formindiv">
     <h1>INDIVIDUAL APPLICATION FORM</h1>
     <h4>Date</h4>
-    <input class="forminput" type="date" placeholder="Date">
+    <input class="forminput" type="date" placeholder="Date" required oninvalid="this.setCustomValidity('Enter valid date')" oninput="this.setCustomValidity('')" >
     <h3>Product</h3>
-    <input class="forminput" type="text" placeholder="Product Name">
-    <input class="forminput" type="text" placeholder="Cost">
+    <select title="" class="forminput" v-model= "indivProductName" required oninvalid="this.setCustomValidity('Choose Product if not found choose other')" oninput="this.setCustomValidity('')">
+      <option value="" disabled selected hidden>Choose Product</option>
+      <option>
+        Home LTE
+      </option>
+      <option>
+        Wireless Home Landline
+      </option>
+      <option>
+        Capped Fibre
+      </option>
+      <option>
+        Uncapped Fibre
+      </option>
+      <option>
+        Other
+      </option>
+    </select><br><br>
+    <div v-if = "indivProductName === 'Other'">
+    <input class="forminput" type="text" placeholder="Product Name" required oninvalid="this.setCustomValidity('Fill in product name')" oninput="this.setCustomValidity('')">
+    </div>
+    <input class="forminput" type="text" placeholder="Cost" required oninvalid="this.setCustomValidity('Enter Cost')" oninput="this.setCustomValidity('')">
     <h4>Contract Term</h4>
-      <input type="radio" id="month4" v-model="set_term" value="24months">
+      <input type="radio" id="month4" v-model="set_term_2" value="24months">
       <label for="month1">24 months</label><br><br>
-      <input type="radio" id="month5" v-model="set_term" value="month to month">
+      <input type="radio" id="month5" v-model="set_term_2" value="monthtomonth">
       <label for="month2">Month to Month</label><br><br>
-    <input class="forminput" type="text" placeholder="Escallation 0%"><br>
+    <input class="forminput" type="text" placeholder="Escallation 0%" required><br>
     <h4>Settlements</h4>
-      <input type="radio" id="settle3" v-model="settle" value="yes">
+      <input type="radio" id="settle3" v-model="settle_2" value= true>
       <label for="settle1">Yes</label><br><br>
-      <input type="radio" id="settle4" v-model="settle" value="no">
+      <input type="radio" id="settle4" v-model="settle_2" value= false>
       <label for="settle2">No</label><br><br>
     <h4>Installation Details</h4>
-    <input class="forminput" type="text" placeholder="Street Number"><br><br>
-    <input class="forminput" type="text" placeholder="Name"><br><br>
-    <input class="forminput" type="text" placeholder="Town"><br><br>
-    <input class="forminput" type="text" placeholder="City"><br><br>
-    <select class="forminput" v-model= "indivProvince" placeholder="Province">
+    <input class="forminput" type="text" placeholder="Street Number" required><br><br>
+    <input class="forminput" type="text" placeholder="Name" required><br><br>
+    <input class="forminput" type="text" placeholder="Town" required><br><br>
+    <input class="forminput" type="text" placeholder="City" required><br><br>
+    <select class="forminput" v-model= "indivProvince" placeholder="Province" required oninvalid="this.setCustomValidity('Choose Province')" oninput="this.setCustomValidity('')">
       <option value="" disabled selected hidden>Choose Province</option>
       <option>
         Gauteng
@@ -207,37 +227,43 @@
         Limpopo
       </option>
     </select><br><br>
-    <input class="forminput" type="text" placeholder="Employers Name"><br><br>
-    <input class="forminput" type="text" placeholder="Years at Employment"><br><br>
-    <input class="forminput" type="text" placeholder="No"><br><br>
-    <input class="forminput" type="text" placeholder="Work Fax No"><br><br>
-    <input class="forminput" type="text" placeholder="Alternative Contact No"><br><br>
-    <input class="forminput" type="text" placeholder="ID No"><br><br>
-    <input class="forminput" type="text" placeholder="Marital status"><br><br>
-    <input class="forminput" type="text" placeholder="Designation"><br><br>
-    <input class="forminput" type="tel" placeholder="Telephone"><br><br>
-    <input class="forminput" type="tel" placeholder="Cell Number"><br><br>
-    <input class="forminput" type="tel" placeholder="Fax"><br><br>
-    <input class="forminput" type="text" placeholder="Postal address"><br><br>
-    <input class="forminput" type="text" placeholder="Email address"><br><br>
-    <input class="forminput" type="text" placeholder="Next of kin"><br><br>
+    <input class="forminput" type="text" placeholder="Employers Name" required><br><br>
+    <input class="forminput" type="text" placeholder="Years at Employment" required><br><br>
+    <input class="forminput" type="text" placeholder="No" required><br><br>
+    <input class="forminput" type="text" placeholder="Work Fax No" required><br><br>
+    <input class="forminput" type="text" placeholder="Alternative Contact No" required><br><br>
+    <input class="forminput" type="text" placeholder="ID No" required oninvalid="this.setCustomValidity('Enter client Identity Number')" oninput="this.setCustomValidity('')"><br><br>
+    <input class="forminput" type="text" placeholder="Marital status" required><br><br>
+    <input class="forminput" type="text" placeholder="Designation" required><br><br>
+    <input class="forminput" type="tel" placeholder="Telephone" required><br><br>
+    <input class="forminput" type="tel" placeholder="Cell Number" required><br><br>
+    <input class="forminput" type="tel" placeholder="Fax" required><br><br>
+    <input class="forminput" type="text" placeholder="Postal address" required><br><br>
+    <input class="forminput" type="text" placeholder="Email address" required><br><br>
+    <input class="forminput" type="text" placeholder="Next of kin" required><br><br>
     <h4>Next of Kin Contact</h4>
-    <input class="forminput" type="text" placeholder=""><br><br>
+    <input class="forminput" type="text" placeholder="" required><br><br>
     <h4>Banking Details</h4>
-    <input class="forminput" type="text" placeholder="Bank name"><br><br>
-    <input class="forminput" type="text" placeholder="Account number"><br><br>
-    <input class="forminput" type="text" placeholder="Branch Name"><br><br>
-    <textarea type= "text" class="forminput2" placeholder="3 Trade Reference(3 companies or suppliers you working with)"></textarea><br><br>
-    <label>1 + 1 = </label><input class="forminput3" type="text">
+    <input class="forminput" type="text" placeholder="Bank name" required oninvalid="this.setCustomValidity('Enter Client bank name')" oninput="this.setCustomValidity('')"><br><br>
+    <input class="forminput" type="text" placeholder="Account number" required oninvalid="this.setCustomValidity('Enter client account number')" oninput="this.setCustomValidity('')"><br><br>
+    <input class="forminput" type="text" placeholder="Branch Name" required oninvalid="this.setCustomValidity('Enter client branch name')" oninput="this.setCustomValidity('')"><br><br>
+    <textarea type= "text" class="forminput2" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea><br><br>
+    <label>1 + 1 = </label><input class="forminput3" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
+    <button type="submit" @click = "uploadindivform()">Submit</button>
 </div>
      </form>
   </div>
 </template>
 <script>
+
 import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      indivProductName: '',
+      set_term_2: 'monthtomonth',
+      settle_2: false,
+
       date_written: '',
       product_name: '',
       cost: '',
@@ -294,7 +320,7 @@ export default {
       cpass: '',
       cPass1: '0000',
       n: '',
-      pass_right: 'false',
+      pass_right: 'false', // set this to false to enable password entering
       lim: 4,
       username: '',
       email: '@eafricatelecoms.co.za',
@@ -335,6 +361,31 @@ export default {
     }
   },
   methods: {
+    /* checkKey (evt) {
+      console.log(evt.which)
+      return evt.which
+    },
+    invokeFunc () {
+      addEventListener('keydown', function (evt) {
+        var whichKey = this.checkKey(evt)
+        if (whichKey === 13) {
+          console.log('successful')
+        }
+      })
+    }, */
+    async uploadindivform () {
+      let allAreFilled = true /* check if all required fields are entered */
+      document.getElementById('formbus').querySelectorAll('[required]').forEach(function (i) {
+        if (!allAreFilled) return
+        if (!i.value) allAreFilled = false
+      })
+      if (this.sumcheck === '2' && allAreFilled) {
+        // await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_business_application/${this.date_written}/${this.product_name}/${this.cost}/${this.set_term}/${this.escalation}/${this.settle}/${this.streetnumber}/${this.names}/${this.town}/${this.city}/${this.bussProvince}/${this.registeredcompanyname}/${this.tradingas}/${this.yearstrading}/${this.regnum}/${this.vatnum}/${this.turnover}/${this.ownerid}/${this.desisgnation}/${this.telephone}/${this.cellnum}/${this.fax}/${this.postaladdress}/${this.eaddress}/${this.nextofkin}/${this.landlorddetails}/${this.company}/${this.no}/${this.bankname}/${this.accountnum}/${this.branchname}/${this.traderef}/${this.user}`)
+        alert('submitted')
+      } else {
+        alert('not submitted')
+      }
+    },
     async uploadbusform () {
       let allAreFilled = true /* check if all required fields are entered */
       document.getElementById('formbus').querySelectorAll('[required]').forEach(function (i) {
