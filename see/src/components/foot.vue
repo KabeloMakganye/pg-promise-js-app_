@@ -316,14 +316,16 @@ img {
 
 .fa:hover {
     opacity: 0.7;
+    transition: .8s;
 }
-
 .fa-facebook::before {
   color: rgb(134,6,8);
   font-size: 25px;
+  transition: .8s;
 }
 .fa-instagram::before {
   color: rgb(134,6,8);
+  transition: .8s;
   font-size: 25px;
 }
 
@@ -353,6 +355,7 @@ a {
   font-family: 'poppins';
   color: white;
   font-size: 14px;
+  transition: .8s;
 }
 .feet {
   background-color: rgb(53, 53, 53);
@@ -364,7 +367,7 @@ a {
   margin: 0%;
 }
 .feet a {
-  color: rgb(224, 15, 19)
+  color: rgb(224, 15, 19);
 }
 .navin3 h5 {
   margin: 0;
@@ -389,5 +392,10 @@ a {
 }
 .navin3 h4 {
   color: rgb(201, 160, 160);
+}
+a:hover {
+    opacity: 0.7;
+    font-size: 15px;
+    transition: .8s;
 }
 </style>

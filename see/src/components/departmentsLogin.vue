@@ -229,25 +229,23 @@
     </select><br><br>
     <input class="forminput" type="text" placeholder="Employers Name" required><br><br>
     <input class="forminput" type="text" placeholder="Years at Employment" required><br><br>
-    <input class="forminput" type="text" placeholder="No" required><br><br>
+    <input class="forminput" type="text" placeholder="Work Tel No" required><br><br>
     <input class="forminput" type="text" placeholder="Work Fax No" required><br><br>
-    <input class="forminput" type="text" placeholder="Alternative Contact No" required><br><br>
     <input class="forminput" type="text" placeholder="ID No" required oninvalid="this.setCustomValidity('Enter client Identity Number')" oninput="this.setCustomValidity('')"><br><br>
     <input class="forminput" type="text" placeholder="Marital status" required><br><br>
     <input class="forminput" type="text" placeholder="Designation" required><br><br>
     <input class="forminput" type="tel" placeholder="Telephone" required><br><br>
     <input class="forminput" type="tel" placeholder="Cell Number" required><br><br>
     <input class="forminput" type="tel" placeholder="Fax" required><br><br>
+    <input class="forminput" type="tel" placeholder="Alternative Contact No" required><br><br>
     <input class="forminput" type="text" placeholder="Postal address" required><br><br>
     <input class="forminput" type="text" placeholder="Email address" required><br><br>
     <input class="forminput" type="text" placeholder="Next of kin" required><br><br>
-    <h4>Next of Kin Contact</h4>
-    <input class="forminput" type="text" placeholder="" required><br><br>
+    <input class="forminput" type="text" placeholder="Next of kin Contacts" required><br><br>
     <h4>Banking Details</h4>
     <input class="forminput" type="text" placeholder="Bank name" required oninvalid="this.setCustomValidity('Enter Client bank name')" oninput="this.setCustomValidity('')"><br><br>
     <input class="forminput" type="text" placeholder="Account number" required oninvalid="this.setCustomValidity('Enter client account number')" oninput="this.setCustomValidity('')"><br><br>
     <input class="forminput" type="text" placeholder="Branch Name" required oninvalid="this.setCustomValidity('Enter client branch name')" oninput="this.setCustomValidity('')"><br><br>
-    <textarea type= "text" class="forminput2" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea><br><br>
     <label>1 + 1 = </label><input class="forminput3" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
     <button type="submit" @click = "uploadindivform()">Submit</button>
 </div>

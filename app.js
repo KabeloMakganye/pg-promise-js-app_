@@ -239,29 +239,6 @@ app.get('/set_on/:pin',(req,res)=> {
          console.log(error);
      })
 })
-
-/*app.get('/set_img/:email/:pic',(req,res)=> {
-    db.func("set_img",[req.params.email,req.params.pic])
-     .then(rows => {
-         console.log(rows);
-         res.json(rows);
-     })
-     .catch(error => {
-         console.log(error);
-     })
-})
-
-app.get('/get_img/:name',(req,res)=> {
-    db.func("get_img",req.params.name)
-     .then(rows => {
-         console.log(rows);
-         res.json(rows);
-     })
-     .catch(error => {
-         console.log(error);
-     })
-})*/
-
 app.get('/set_room2on/:pin',(req,res)=> {
     db.func("set_room2on",req.params.pin)
      .then(rows => {
@@ -398,6 +375,49 @@ app.get("/fn_add_new_sales_business_application/:date_written_/:product_name_/:c
         req.params.account_number_,
         req.params.branch_name_,
         req.params.trade_references_,
+        req.params.agent_
+    ])
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
+
+app.get("/fn_add_new_sales_business_application/:date_written_/:product_name_/:cost_/:contract_term_/:escallation_/:settlements_/:street_number_/:customer_name_/:customer_town_/:customer_city_/:province_/:employers_name_/:years_employed_/:work_telephone_no_/:work_fax_no_/:id_no_/:marital_status_/:designation_/:telephone_/:cell_number_/:fax_/:alternative_number_/:postal_address_/:email_address_/:next_of_kin_/:next_of_kin_contacts_/:bank_name_/:account_number_/:branch_name_/:",(req,res)=> {
+    db.func("fn_add_new_sales_business_application",
+    [
+        req.params.date_written_,
+        req.params.product_name_,
+        req.params.cost_,
+        req.params.contract_term_,
+        req.params.escallation_,
+        req.params.settlements_,
+        req.params.street_number_,
+        req.params.customer_name_,
+        req.params.customer_town_,
+        req.params.customer_city_,
+        req.params.province_,
+        req.params.employers_name_,
+        req.params.years_employed_,
+        req.params.work_telephone_no_,
+        req.params.work_fax_no_,
+        req.params.id_no_,
+        req.params.marital_status_,
+        req.params.designation_,
+        req.params.telephone_,
+        req.params.cell_number_,
+        req.params.fax_,
+        req.params.alternative_number_,
+        req.params.postal_address_,
+        req.params.email_address_,
+        req.params.next_of_kin_,
+        req.params.next_of_kin_contacts_,
+        req.params.bank_name_,
+        req.params.account_number_,
+        req.params.branch_name_,
         req.params.agent_
     ])
      .then(rows => {
