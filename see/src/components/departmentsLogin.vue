@@ -157,7 +157,7 @@
 <div class="formindiv" id="formindiv">
     <h1>INDIVIDUAL APPLICATION FORM</h1>
     <h4>Date</h4>
-    <input class="forminput" type="date" placeholder="Date" required oninvalid="this.setCustomValidity('Enter valid date')" oninput="this.setCustomValidity('')" >
+    <input class="forminput" v-model= "indivDate" type="date" placeholder="Date" required oninvalid="this.setCustomValidity('Enter valid date')" oninput="this.setCustomValidity('')" >
     <h3>Product</h3>
     <select title="" class="forminput" v-model= "indivProductName" required oninvalid="this.setCustomValidity('Choose Product if not found choose other')" oninput="this.setCustomValidity('')">
       <option value="" disabled selected hidden>Choose Product</option>
@@ -180,24 +180,24 @@
     <div v-if = "indivProductName === 'Other'">
     <input class="forminput" type="text" placeholder="Product Name" required oninvalid="this.setCustomValidity('Fill in product name')" oninput="this.setCustomValidity('')">
     </div>
-    <input class="forminput" type="text" placeholder="Cost" required oninvalid="this.setCustomValidity('Enter Cost')" oninput="this.setCustomValidity('')">
+    <input class="forminput" type="text" placeholder="Cost" v-model= "indivcost" required oninvalid="this.setCustomValidity('Enter Cost')" oninput="this.setCustomValidity('')">
     <h4>Contract Term</h4>
       <input type="radio" id="month4" v-model="set_term_2" value="24months">
       <label for="month1">24 months</label><br><br>
       <input type="radio" id="month5" v-model="set_term_2" value="monthtomonth">
       <label for="month2">Month to Month</label><br><br>
-    <input class="forminput" type="text" placeholder="Escallation 0%" required><br>
+    <input class="forminput" type="text" v-model= "indivescallation" placeholder="Escallation 0%" required><br>
     <h4>Settlements</h4>
       <input type="radio" id="settle3" v-model="settle_2" value= true>
       <label for="settle1">Yes</label><br><br>
       <input type="radio" id="settle4" v-model="settle_2" value= false>
       <label for="settle2">No</label><br><br>
     <h4>Installation Details</h4>
-    <input class="forminput" type="text" placeholder="Street Number" required><br><br>
-    <input class="forminput" type="text" placeholder="Name" required><br><br>
-    <input class="forminput" type="text" placeholder="Town" required><br><br>
-    <input class="forminput" type="text" placeholder="City" required><br><br>
-    <select class="forminput" v-model= "indivProvince" placeholder="Province" required oninvalid="this.setCustomValidity('Choose Province')" oninput="this.setCustomValidity('')">
+    <input class="forminput" type="text" v-model= "indivname" placeholder="Name and Surname" required><br><br>
+    <input class="forminput" type="text" v-model= "streetnumber" placeholder="Street Number" required><br><br>
+    <input class="forminput" type="text" v-model= "indivtown" placeholder="Town" required><br><br>
+    <input class="forminput" type="text" v-model= "indivcity" placeholder="City" required><br><br>
+    <select class="forminput" v-model= "indivprovince" placeholder="Province" required oninvalid="this.setCustomValidity('Choose Province')" oninput="this.setCustomValidity('')">
       <option value="" disabled selected hidden>Choose Province</option>
       <option>
         Gauteng
@@ -227,15 +227,16 @@
         Limpopo
       </option>
     </select><br><br>
-    <input class="forminput" type="text" placeholder="Employers Name" required><br><br>
-    <input class="forminput" type="text" placeholder="Years at Employment" required><br><br>
-    <input class="forminput" type="text" placeholder="Work Tel No" required><br><br>
-    <input class="forminput" type="text" placeholder="Work Fax No" required><br><br>
-    <input class="forminput" type="text" placeholder="ID No" required oninvalid="this.setCustomValidity('Enter client Identity Number')" oninput="this.setCustomValidity('')"><br><br>
-    <input class="forminput" type="text" placeholder="Marital status" required><br><br>
-    <input class="forminput" type="text" placeholder="Designation" required><br><br>
-    <input class="forminput" type="tel" placeholder="Telephone" required><br><br>
-    <input class="forminput" type="tel" placeholder="Cell Number" required><br><br>
+    <input class="forminput" type="text" v-model= "employeename" placeholder="Employers Name" required><br><br>
+    <input class="forminput" type="text" v-model= "indivyearemployee" placeholder="Years at Employment" required><br><br>
+    <input class="forminput" type="text" v-model= "indivworktel" placeholder="Work Tel No" required><br><br>
+    <input class="forminput" type="text" v-model= "indivworkfax" placeholder="Work Fax No" required><br><br>
+    <input class="forminput" type="text" v-model= "individno" placeholder="ID No" required oninvalid="this.setCustomValidity('Enter client Identity Number')" oninput="this.setCustomValidity('')"><br><br>
+    <input class="forminput" type="text" v-model= "indivmarital" placeholder="Marital status" required><br><br>
+    <input class="forminput" type="text" v-model= "indivdesignation" placeholder="Designation" required><br><br>
+    <input class="forminput" type="tel" v-model= "indivcell" placeholder="Cell Number" required><br><br>
+    <input class="forminput" type="tel" v-model= "indivtel" placeholder="Telephone" required><br><br>
+    <!-- Continue from here -->
     <input class="forminput" type="tel" placeholder="Fax" required><br><br>
     <input class="forminput" type="tel" placeholder="Alternative Contact No" required><br><br>
     <input class="forminput" type="text" placeholder="Postal address" required><br><br>
@@ -258,9 +259,26 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      indivDate: '',
       indivProductName: '',
-      set_term_2: 'monthtomonth',
+      indivcost: '',
+      indivescallation: '',
       settle_2: false,
+      set_term_2: 'monthtomonth',
+      streetnumber: '',
+      indivtown: '',
+      indivcity: '',
+      indivprovince: '',
+      employeename: '',
+      indivyearemployee: '',
+      indivworktel: '',
+      indivworkfax: '',
+      individno: '',
+      indivmarital: '',
+      indivdesignation: '',
+      indivcell: '',
+      indivtel: '',
+      // continue from here
 
       date_written: '',
       product_name: '',
@@ -378,7 +396,7 @@ export default {
         if (!i.value) allAreFilled = false
       })
       if (this.sumcheck === '2' && allAreFilled) {
-        // await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_business_application/${this.date_written}/${this.product_name}/${this.cost}/${this.set_term}/${this.escalation}/${this.settle}/${this.streetnumber}/${this.names}/${this.town}/${this.city}/${this.bussProvince}/${this.registeredcompanyname}/${this.tradingas}/${this.yearstrading}/${this.regnum}/${this.vatnum}/${this.turnover}/${this.ownerid}/${this.desisgnation}/${this.telephone}/${this.cellnum}/${this.fax}/${this.postaladdress}/${this.eaddress}/${this.nextofkin}/${this.landlorddetails}/${this.company}/${this.no}/${this.bankname}/${this.accountnum}/${this.branchname}/${this.traderef}/${this.user}`)
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_business_application/${date_written_}/${product_name_}/${cost_}/:contract_term_/:escallation_/:settlements_/:street_number_/:customer_name_/:customer_town_/:customer_city_/:province_/:employers_name_/:years_employed_/:work_telephone_no_/:work_fax_no_/:id_no_/:marital_status_/:designation_/:telephone_/:cell_number_/:fax_/:alternative_number_/:postal_address_/:email_address_/:next_of_kin_/:next_of_kin_contacts_/:bank_name_/:account_number_/:branch_name_/:agent_`)
         alert('submitted')
       } else {
         alert('not submitted')
@@ -689,7 +707,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 img {
   width: 30%;
