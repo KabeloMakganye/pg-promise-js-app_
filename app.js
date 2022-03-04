@@ -385,6 +385,7 @@ app.get("/fn_add_new_sales_business_application/:date_written_/:product_name_/:c
          console.log(error);
      })
 })
+/*
 app.get("/fn_add_new_sales_indiv_application/:date_written_/:product_name_/:cost_/:contract_term_/:escallation_/:settlements_/:street_number_/:customer_name_/:customer_town_/:customer_city_/:province_/:employers_name_/:years_employed_/:work_telephone_no_/:work_fax_no_/:id_no_/:marital_status_/:designation_/:telephone_/:cell_number_/:fax_/:alternative_number_/:postal_address_/:email_address_/:next_of_kin_/:next_of_kin_contacts_/:bank_name_/:account_number_/:branch_name_/:agent_",(req,res)=> {
     db.func("fn_add_new_sales_indiv_application",
     [
@@ -426,7 +427,7 @@ app.get("/fn_add_new_sales_indiv_application/:date_written_/:product_name_/:cost
      .catch(error => {
          console.log(error);
      })
-})
+})*/
 
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
