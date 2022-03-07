@@ -1,6 +1,6 @@
 <template>
   <div id="dep">
-    <form >
+    <form>
     <div v-if="pass_right === 'true' && department === 'Sales Department'" class="salesdep">
     <div class="navbar">
   <a href="https://eafricatelecoms.co.za/for-you" target="_blank">HOME SOLUTIONS</a>
@@ -62,7 +62,7 @@
       </select><br><br>
     </div>
 <div class="login-div" v-if="department !== 'Departments'">
-<label0 v-if="pass_right === 'false'">
+<div v-if="pass_right === 'false'">
 <input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
 <br>
 <input  v-if="pass_right === 'false'" type= "password" v-model="pass" placeholder="Enter password" autocomplete="off" size = "25">
@@ -70,7 +70,7 @@
 <button v-if="pass_right === 'false'" @click= "checkpassword(1)" type = "button">
      Log in
 </button><br><br>
-</label0>
+</div>
 </div>
 
 <div class="formbus" id="formbus">
@@ -177,9 +177,9 @@
         Other
       </option>
     </select><br><br>
-    <div v-if = "indivProductName === 'Other'">
-    <input class="forminput" type="text" placeholder="Product Name" required oninvalid="this.setCustomValidity('Fill in product name')" oninput="this.setCustomValidity('')">
-    </div>
+    <!--<div v-if = "indivProductName === 'Other'">
+    <input class="forminput" type="text" v-model= "indivProductName" placeholder="Product Name" required oninvalid="this.setCustomValidity('Fill in product name')" oninput="this.setCustomValidity('')">
+    </div> -->
     <input class="forminput" type="text" placeholder="Cost" v-model= "indivcost" required oninvalid="this.setCustomValidity('Enter Cost')" oninput="this.setCustomValidity('')">
     <h4>Contract Term</h4>
       <input type="radio" id="month4" v-model="set_term_2" value="24months">
@@ -194,7 +194,7 @@
       <label for="settle2">No</label><br><br>
     <h4>Installation Details</h4>
     <input class="forminput" type="text" v-model= "indivname" placeholder="Name and Surname" required><br><br>
-    <input class="forminput" type="text" v-model= "streetnumber" placeholder="Street Number" required><br><br>
+    <input class="forminput" type="text" v-model= "indivstreetnumber" placeholder="Street Number" required><br><br>
     <input class="forminput" type="text" v-model= "indivtown" placeholder="Town" required><br><br>
     <input class="forminput" type="text" v-model= "indivcity" placeholder="City" required><br><br>
     <select class="forminput" v-model= "indivprovince" placeholder="Province" required oninvalid="this.setCustomValidity('Choose Province')" oninput="this.setCustomValidity('')">
@@ -248,7 +248,7 @@
     <input class="forminput" type="text" v-model= "indivbankname" placeholder="Bank name" required oninvalid="this.setCustomValidity('Enter Client bank name')" oninput="this.setCustomValidity('')"><br><br>
     <input class="forminput" type="text" v-model= "indivacountnumber" placeholder="Account number" required oninvalid="this.setCustomValidity('Enter client account number')" oninput="this.setCustomValidity('')"><br><br>
     <input class="forminput" type="text" v-model= "indivbranchname" placeholder="Branch Name" required oninvalid="this.setCustomValidity('Enter client branch name')" oninput="this.setCustomValidity('')"><br><br>
-    <label>1 + 1 = </label><input class="forminput3" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
+    <label>1 + 1 = </label><input class="forminput3" v-model="sumcheck" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
     <button type="submit" @click = "uploadindivform()">Submit</button>
 </div>
      </form>
@@ -260,34 +260,35 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
-      indivDate: '',
-      indivProductName: '',
-      indivcost: '',
-      indivescallation: '',
+      indivDate: 'test',
+      indivProductName: 'test',
+      indivcost: 'test',
+      indivescallation: 'test',
       settle_2: false,
-      set_term_2: 'monthtomonth',
-      indivstreetnumber: '',
-      indivtown: '',
-      indivcity: '',
-      indivprovince: '',
-      employeename: '',
-      indivyearemployee: '',
-      indivworktel: '',
-      indivworkfax: '',
-      individno: '',
-      indivmarital: '',
-      indivdesignation: '',
-      indivcell: '',
-      indivtel: '', //
-      indivfax: '',
-      indivaltcontact: '',
-      indivpostaddress: '',
-      indivemail: '',
-      indivnextofkinname: '',
-      indivnextofkincontacts: '', //come bak her
-      indivbankname: '',
-      indivacountnumber: '',
-      indivbranchname: '',
+      indivname: 'test',
+      set_term_2: 'test',
+      indivstreetnumber: 'test',
+      indivtown: 'test',
+      indivcity: 'test',
+      indivprovince: 'test',
+      employeename: 'test',
+      indivyearemployee: 'test',
+      indivworktel: 'test',
+      indivworkfax: 'test',
+      individno: 'test',
+      indivmarital: 'test',
+      indivdesignation: 'test',
+      indivcell: 'test',
+      indivtel: 'test',
+      indivfax: 'test',
+      indivaltcontact: 'test',
+      indivpostaddress: 'test',
+      indivemail: 'test',
+      indivnextofkinname: 'test',
+      indivnextofkincontacts: 'test',
+      indivbankname: 'test',
+      indivacountnumber: 'test',
+      indivbranchname: 'test',
 
       date_written: '',
       product_name: '',
@@ -322,7 +323,6 @@ export default {
       branchname: '',
       traderef: '',
       sumcheck: '',
-      indivProvince: '',
       busiform: 0,
       department: 'Departments',
       email_reset_pin: '@eafricatelecoms.co.za',
@@ -353,12 +353,6 @@ export default {
       resultsFetched_2: '',
       resultsFetched_3: '',
       resultsFetched: '', // Tis variable will store the results fetched
-      /* all: '',
-      all_email: '',
-      all_in: '',
-      all_out: '',
-      all_day: '',
-      space: '           ', */
       i: 0,
       all_nam: [],
       all_email: [],
@@ -399,13 +393,13 @@ export default {
       })
     }, */
     async uploadindivform () {
-      let allAreFilled = true /* check if all required fields are entered */
-      document.getElementById('formbus').querySelectorAll('[required]').forEach(function (i) {
+      // let allAreFilled = true /* check if all required fields are entered */
+      /* document.getElementById('formindiv').querySelectorAll('[required]').forEach(function (i) {
         if (!allAreFilled) return
         if (!i.value) allAreFilled = false
-      })
-      if (this.sumcheck === '2' && allAreFilled) {
-        await fetch(`/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.indivescallation}/${this.settle_2}/${this.set_term_2}/${this.indivstreetnumber}/${this.employeename}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbankname}/${this.user}`)
+      }) */
+      if (this.sumcheck === '2') { // && allAreFilled) {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.indivescallation}/${this.settle_2}/${this.set_term_2}/${this.indivstreetnumber}/${this.indivname}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbankname}/${this.user}`)
         alert('submitted')
       } else {
         alert('not submitted')
