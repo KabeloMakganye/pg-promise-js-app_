@@ -237,16 +237,17 @@
     <input class="forminput" type="tel" v-model= "indivcell" placeholder="Cell Number" required><br><br>
     <input class="forminput" type="tel" v-model= "indivtel" placeholder="Telephone" required><br><br>
     <!-- Continue from here -->
-    <input class="forminput" type="tel" placeholder="Fax" required><br><br>
-    <input class="forminput" type="tel" placeholder="Alternative Contact No" required><br><br>
-    <input class="forminput" type="text" placeholder="Postal address" required><br><br>
-    <input class="forminput" type="text" placeholder="Email address" required><br><br>
-    <input class="forminput" type="text" placeholder="Next of kin" required><br><br>
-    <input class="forminput" type="text" placeholder="Next of kin Contacts" required><br><br>
+    <input class="forminput" type="tel" v-model= "indivfax" placeholder="Fax" required><br><br>
+    <input class="forminput" type="tel"  v-model= "indivaltcontact" placeholder="Alternative Contact No" required><br><br>
+    <input class="forminput" type="text" v-model= "indivpostaddress" placeholder="Postal address" required><br><br>
+    <input class="forminput" type="text" v-model= "indivemail" placeholder="Email address" required><br><br>
+    <h4>Next of Kin Contact</h4>
+    <input class="forminput"  type="text" v-model= "indivnextofkinname" placeholder="Next of kin name" required><br><br>
+    <input class="forminput" type="text" v-model= "indivnextofkincontacts" placeholder="Next of kin Contacts" required><br><br>
     <h4>Banking Details</h4>
-    <input class="forminput" type="text" placeholder="Bank name" required oninvalid="this.setCustomValidity('Enter Client bank name')" oninput="this.setCustomValidity('')"><br><br>
-    <input class="forminput" type="text" placeholder="Account number" required oninvalid="this.setCustomValidity('Enter client account number')" oninput="this.setCustomValidity('')"><br><br>
-    <input class="forminput" type="text" placeholder="Branch Name" required oninvalid="this.setCustomValidity('Enter client branch name')" oninput="this.setCustomValidity('')"><br><br>
+    <input class="forminput" type="text" v-model= "indivbankname" placeholder="Bank name" required oninvalid="this.setCustomValidity('Enter Client bank name')" oninput="this.setCustomValidity('')"><br><br>
+    <input class="forminput" type="text" v-model= "indivacountnumber" placeholder="Account number" required oninvalid="this.setCustomValidity('Enter client account number')" oninput="this.setCustomValidity('')"><br><br>
+    <input class="forminput" type="text" v-model= "indivbranchname" placeholder="Branch Name" required oninvalid="this.setCustomValidity('Enter client branch name')" oninput="this.setCustomValidity('')"><br><br>
     <label>1 + 1 = </label><input class="forminput3" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
     <button type="submit" @click = "uploadindivform()">Submit</button>
 </div>
@@ -265,7 +266,7 @@ export default {
       indivescallation: '',
       settle_2: false,
       set_term_2: 'monthtomonth',
-      streetnumber: '',
+      indivstreetnumber: '',
       indivtown: '',
       indivcity: '',
       indivprovince: '',
@@ -277,8 +278,16 @@ export default {
       indivmarital: '',
       indivdesignation: '',
       indivcell: '',
-      indivtel: '',
-      // continue from here
+      indivtel: '', //
+      indivfax: '',
+      indivaltcontact: '',
+      indivpostaddress: '',
+      indivemail: '',
+      indivnextofkinname: '',
+      indivnextofkincontacts: '', //come bak her
+      indivbankname: '',
+      indivacountnumber: '',
+      indivbranchname: '',
 
       date_written: '',
       product_name: '',
@@ -396,7 +405,7 @@ export default {
         if (!i.value) allAreFilled = false
       })
       if (this.sumcheck === '2' && allAreFilled) {
-        await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_business_application/${date_written_}/${product_name_}/${cost_}/:contract_term_/:escallation_/:settlements_/:street_number_/:customer_name_/:customer_town_/:customer_city_/:province_/:employers_name_/:years_employed_/:work_telephone_no_/:work_fax_no_/:id_no_/:marital_status_/:designation_/:telephone_/:cell_number_/:fax_/:alternative_number_/:postal_address_/:email_address_/:next_of_kin_/:next_of_kin_contacts_/:bank_name_/:account_number_/:branch_name_/:agent_`)
+        await fetch(`/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.indivescallation}/${this.settle_2}/${this.set_term_2}/${this.indivstreetnumber}/${this.employeename}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbankname}/${this.user}`)
         alert('submitted')
       } else {
         alert('not submitted')
