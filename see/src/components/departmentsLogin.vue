@@ -73,7 +73,7 @@
 </div>
 </div>
 
-<!--<div class="formbus" id="formbus">
+<div class="formbus" id="formbus">
     <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
     <h4>Date</h4>
     <input class="forminput" type="date" v-model = "date_written" placeholder="Date" required>
@@ -152,7 +152,7 @@
     <textarea type= "text" class="forminput2" v-model= "traderef" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea><br><br>
     <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
     <button type="submit" @click = "uploadbusform()">Submit</button>
-</div> -->
+</div>
 
 <div class="formindiv" id="formindiv">
     <h1>INDIVIDUAL APPLICATION FORM</h1>
