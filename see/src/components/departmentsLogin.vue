@@ -395,12 +395,12 @@ export default {
     }, */
     async uploadindivform () {
       // let allAreFilled = true /* check if all required fields are entered */
-      /* document.getElementById('formindiv').querySelectorAll('[required]').forEach(function (i) {
+      document.getElementById('formindiv').querySelectorAll('[required]').forEach(function (i) {
         if (!allAreFilled) return
         if (!i.value) allAreFilled = false
-      }) */
+      })
       if (this.sumcheck2 === '2') { // && allAreFilled) {
-        await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.set_term_2}/${this.indivescallation}/${this.settle_2}/${this.indivstreetnumber}/${this.indivname}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbankname}/${this.user}`)
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.set_term_2}/${this.indivescallation}/${this.settle_2}/${this.indivstreetnumber}/${this.indivname}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbranchname}/${this.user}`)
         alert('submitted')
       } else {
         alert('not submitted')
