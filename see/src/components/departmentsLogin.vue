@@ -73,7 +73,7 @@
 </div>
 </div>
 
-<div class="formbus" id="formbus">
+<!--<div class="formbus" id="formbus">
     <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
     <h4>Date</h4>
     <input class="forminput" type="date" v-model = "date_written" placeholder="Date" required>
@@ -152,7 +152,7 @@
     <textarea type= "text" class="forminput2" v-model= "traderef" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea><br><br>
     <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
     <button type="submit" @click = "uploadbusform()">Submit</button>
-</div>
+</div> -->
 
 <div class="formindiv" id="formindiv">
     <h1>INDIVIDUAL APPLICATION FORM</h1>
@@ -248,7 +248,7 @@
     <input class="forminput" type="text" v-model= "indivbankname" placeholder="Bank name" required oninvalid="this.setCustomValidity('Enter Client bank name')" oninput="this.setCustomValidity('')"><br><br>
     <input class="forminput" type="text" v-model= "indivacountnumber" placeholder="Account number" required oninvalid="this.setCustomValidity('Enter client account number')" oninput="this.setCustomValidity('')"><br><br>
     <input class="forminput" type="text" v-model= "indivbranchname" placeholder="Branch Name" required oninvalid="this.setCustomValidity('Enter client branch name')" oninput="this.setCustomValidity('')"><br><br>
-    <label>1 + 1 = </label><input class="forminput3" v-model="sumcheck" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
+    <label>1 + 1 = </label><input class="forminput3" v-model="sumcheck2" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
     <button type="submit" @click = "uploadindivform()">Submit</button>
 </div>
      </form>
@@ -260,35 +260,36 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
-      indivDate: 'test',
-      indivProductName: 'test',
-      indivcost: 'test',
-      indivescallation: 'test',
+      sumcheck2: '',
+      indivDate: '',
+      indivProductName: '',
+      indivcost: '',
+      set_term_2: '24months',
+      indivescallation: '',
       settle_2: false,
-      indivname: 'test',
-      set_term_2: 'test',
-      indivstreetnumber: 'test',
-      indivtown: 'test',
-      indivcity: 'test',
-      indivprovince: 'test',
-      employeename: 'test',
-      indivyearemployee: 'test',
-      indivworktel: 'test',
-      indivworkfax: 'test',
-      individno: 'test',
-      indivmarital: 'test',
-      indivdesignation: 'test',
-      indivcell: 'test',
-      indivtel: 'test',
-      indivfax: 'test',
-      indivaltcontact: 'test',
-      indivpostaddress: 'test',
-      indivemail: 'test',
-      indivnextofkinname: 'test',
-      indivnextofkincontacts: 'test',
-      indivbankname: 'test',
-      indivacountnumber: 'test',
-      indivbranchname: 'test',
+      indivstreetnumber: '',
+      indivname: '',
+      indivtown: '',
+      indivcity: '',
+      indivprovince: '',
+      employeename: '',
+      indivyearemployee: '',
+      indivworktel: '',
+      indivworkfax: '',
+      individno: '',
+      indivmarital: '',
+      indivdesignation: '',
+      indivtel: '',
+      indivcell: '',
+      indivfax: '',
+      indivaltcontact: '',
+      indivpostaddress: '',
+      indivemail: '',
+      indivnextofkinname: '',
+      indivnextofkincontacts: '',
+      indivbankname: '',
+      indivacountnumber: '',
+      indivbranchname: '',
 
       date_written: '',
       product_name: '',
@@ -398,8 +399,8 @@ export default {
         if (!allAreFilled) return
         if (!i.value) allAreFilled = false
       }) */
-      if (this.sumcheck === '2') { // && allAreFilled) {
-        await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.indivescallation}/${this.settle_2}/${this.set_term_2}/${this.indivstreetnumber}/${this.indivname}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbankname}/${this.user}`)
+      if (this.sumcheck2 === '2') { // && allAreFilled) {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.set_term_2}/${this.indivescallation}/${this.settle_2}/${this.indivstreetnumber}/${this.indivname}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbankname}/${this.user}`)
         alert('submitted')
       } else {
         alert('not submitted')
