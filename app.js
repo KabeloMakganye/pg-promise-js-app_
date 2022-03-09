@@ -427,8 +427,8 @@ app.get("/fn_add_new_sales_indiv_application/:date_written_/:product_name_/:cost
          console.log(error);
      })
 })
-app.get('/fn_get_all_busines_forms/',(req,res)=> {
-    db.func("fn_get_all_busines_forms")
+app.get('/fn_get_all_busines_forms/:agent',(req,res)=> {
+    db.func("fn_get_all_busines_forms",req.params.agent)
      .then(rows => {
          console.log(rows);
          res.json(rows);
