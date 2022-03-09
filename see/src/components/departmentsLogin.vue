@@ -19,8 +19,8 @@
       <!-- <i class="fa fa-caret-down"></i> -->
     </button>
     <div class="dropdown-content" id="dropdown-content2">
-      <a href="javascript:void()" type="button" @click = "showbusfilled()" >BUSINESS SOLUTIONS FILLED FORMS</a>
-      <a href="javascript:void()" type="button" @click = "showindivfilled()" >INDIVIDUAL FILLED FORMS</a>
+      <a href="javascript:void()" type="button" @click = "showbusfilled(); getmysales()" >BUSINESS SOLUTIONS FILLED FORMS</a>
+      <a href="javascript:void()" type="button" @click = "showindivfilled(); getmysales()" >INDIVIDUAL FILLED FORMS</a>
     </div>
   </div>
 </div>
@@ -264,13 +264,15 @@
         <th>Refs</th>
         <th>Names</th>
         <th>Products</th>
+        <th>Date</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>01</td>
-          <td>South point</td>
-          <td>wifi</td>
+        <tr v-for="nt in salesnum" :key= "nt">
+          <td>{{salesref[nt-1]}}</td>
+          <td>{{salesname[nt-1]}}</td>
+          <td>{{salesproduct[nt-1]}}</td>
+          <td>{{salesdate[nt-1]}}</td>
         </tr>
       </tbody>
     </table>
@@ -312,6 +314,21 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      nt: '',
+      salesnum: 0,
+      salesref: [],
+      salesname: [],
+      salesproduct: [],
+      salesdate: [],
+      salesFetched: '',
+
+      nt2: '',
+      salesbusnum: 0,
+      salesbusref: [],
+      salesbusname: [],
+      salesbusproduct: [],
+      salessbusdate: [],
+      salesbusFetched: '',
 
       sumcheck2: '',
       indivDate: '',
@@ -446,6 +463,19 @@ export default {
         }
       })
     }, */
+    async getmysales () {
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_busines_forms/${this.user}`)
+        .then(response => response.json())
+        .then(results => (this.salesFetched = results))
+      let i = 0
+      this.salesnum = this.salesFetched.length
+      for (i = 0; i < this.salesnum; i++) {
+        this.salesref[i] = this.salesFetched[i].id_
+        this.salesname[i] = this.salesFetched[i].name_
+        this.salesproduct[i] = this.salesFetched[i].product_
+        this.salesdate[i] = this.salesFetched[i].date_.substring(0, 10)
+      }
+    },
     async uploadindivform () {
       let allAreFilled = true /* check if all required fields are entered */
       document.getElementById('formindiv').querySelectorAll('[required]').forEach(function (i) {
