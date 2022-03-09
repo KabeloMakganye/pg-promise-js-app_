@@ -427,7 +427,16 @@ app.get("/fn_add_new_sales_indiv_application/:date_written_/:product_name_/:cost
          console.log(error);
      })
 })
-
+app.get('/fn_get_all_busines_forms/',(req,res)=> {
+    db.func("fn_get_all_busines_forms")
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")

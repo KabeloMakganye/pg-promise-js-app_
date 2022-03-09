@@ -25,9 +25,9 @@
   </div>
 </div>
 </div>
-<div class="heading-div">
-    <h1>{{department}}</h1>
-    <h2 v-if="pass_right === 'true'">User: {{user}}</h2>
+<div class="heading-div" v-if="pass_right === 'true'">
+    <p class="summary-pa">Department: <span>{{department}}</span></p>
+    <p class="summary-pa">User: <span>{{user}}</span></p>
 </div>
 <div class="choose-department-div" v-if="department === 'Departments'">
     <label>Choose department</label>
@@ -62,6 +62,7 @@
       </select><br><br>
     </div>
 <div class="login-div" v-if="department !== 'Departments'">
+<h1 v-if="pass_right === 'false'">{{department}}</h1>
 <div v-if="pass_right === 'false'">
 <input v-if="pass_right === 'false'" type= "text" v-model="user" placeholder="User name" size = "25">
 <br>
@@ -251,6 +252,57 @@
     <label>1 + 1 = </label><input class="forminput3" v-model="sumcheck2" type="text" required oninvalid="this.setCustomValidity('What is the sum of 1 + 1')" oninput="this.setCustomValidity('')">
     <button type="submit" @click = "uploadindivform()">Submit</button>
 </div>
+<div class="major-container" id="major-container">
+<div class="business-form" id="business-form">
+  <div class="container">
+    <h1>
+      Business Solutions Clients
+    </h1>
+    <table class="table" border="1px">
+      <thead>
+        <tr>
+        <th>Refs</th>
+        <th>Names</th>
+        <th>Products</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>South point</td>
+          <td>wifi</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="indivitual-form" id="individual-form">
+  <div class="container">
+    <h1>
+      Individual Clients
+    </h1>
+    <table class="table" border="1px">
+      <thead>
+        <tr>
+        <th>Refs</th>
+        <th>Names</th>
+        <th>Products</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>South point</td>
+          <td>wifi</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+ <p class="summary-pa">Total sales:<span>0</span></p>
+    <p class="summary-pa">Total sales submited:<span>0</span></p>
+</div>
      </form>
   </div>
 </template>
@@ -260,6 +312,7 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+
       sumcheck2: '',
       indivDate: '',
       indivProductName: '',
@@ -394,12 +447,12 @@ export default {
       })
     }, */
     async uploadindivform () {
-      // let allAreFilled = true /* check if all required fields are entered */
+      let allAreFilled = true /* check if all required fields are entered */
       document.getElementById('formindiv').querySelectorAll('[required]').forEach(function (i) {
         if (!allAreFilled) return
         if (!i.value) allAreFilled = false
       })
-      if (this.sumcheck2 === '2') { // && allAreFilled) {
+      if (this.sumcheck2 === '2' && allAreFilled) {
         await fetch(`https://warm-springs-22910.herokuapp.com/fn_add_new_sales_indiv_application/${this.indivDate}/${this.indivProductName}/${this.indivcost}/${this.set_term_2}/${this.indivescallation}/${this.settle_2}/${this.indivstreetnumber}/${this.indivname}/${this.indivtown}/${this.indivcity}/${this.indivprovince}/${this.employeename}/${this.indivyearemployee}/${this.indivworktel}/${this.indivworkfax}/${this.individno}/${this.indivmarital}/${this.indivdesignation}/${this.indivtel}/${this.indivcell}/${this.indivfax}/${this.indivaltcontact}/${this.indivpostaddress}/${this.indivemail}/${this.indivnextofkinname}/${this.indivnextofkincontacts}/${this.indivbankname}/${this.indivacountnumber}/${this.indivbranchname}/${this.user}`)
         alert('submitted')
       } else {
@@ -429,11 +482,17 @@ export default {
       document.getElementById('formindiv').style.display = 'inline'
       document.getElementById('formbus').style.display = 'none'
       document.getElementById('dropdown-content').style.display = 'none'
+      document.getElementById('business-form').style.display = 'none'
+      document.getElementById('individual-form').style.display = 'none'
+      document.getElementById('major-container').style.display = 'none'
     },
     showbus () {
+      document.getElementById('major-container').style.display = 'none'
       document.getElementById('formbus').style.display = 'inline'
       document.getElementById('formindiv').style.display = 'none'
       document.getElementById('dropdown-content').style.display = 'none'
+      document.getElementById('business-form').style.display = 'none'
+      document.getElementById('individual-form').style.display = 'none'
     },
     showapplydropdown () {
       document.getElementById('formindiv').style.display = 'none'
@@ -445,14 +504,19 @@ export default {
       document.getElementById('formindiv').style.display = 'none'
       document.getElementById('dropdown-content2').style.display = 'inline'
     },
-    async showindivfilled () {
-      alert('individual filled form')
+    showindivfilled () {
+      document.getElementById('major-container').style.display = 'inline'
+      document.getElementById('individual-form').style.display = 'inline'
       document.getElementById('formindiv').style.display = 'none'
       document.getElementById('formbus').style.display = 'none'
       document.getElementById('dropdown-content2').style.display = 'none'
+      document.getElementById('business-form').style.display = 'none'
     },
-    async showbusfilled () {
-      alert('business filled form')
+    showbusfilled () {
+      document.getElementById('major-container').style.display = 'inline'
+      document.getElementById('business-form').style.display = 'inline'
+      document.getElementById('individual-form').style.display = 'none'
+      // alert('business filled form')
       document.getElementById('formindiv').style.display = 'none'
       document.getElementById('formbus').style.display = 'none'
       document.getElementById('dropdown-content2').style.display = 'none'
@@ -829,6 +893,21 @@ body {
   display: none;
   transition: 0.9s;
 }
+.business-form {
+  display: none;
+  transition: 0.9s;
+  max-width: 80%;
+}
+.indivitual-form {
+  display: none;
+  transition: 0.9s;
+  max-width: 80%;
+}
+.major-container {
+  display: none;
+  transition: 0.9s;
+  max-width: 80%;
+}
 .forminput {
     width: 80%;
     height: 30px;
@@ -852,5 +931,22 @@ input:focus, textarea:focus, select:focus {
 .forminput3 {
     width: 3%;
     height: 25px;
+}
+table {
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  border: 1px solid black;
+}
+td {
+  text-align: left;
+}
+.summary-pa {
+  text-align-last: left;
+  margin-left: 10%;
+}
+.summary-pa span {
+  color: red;
 }
 </style>
