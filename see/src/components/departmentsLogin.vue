@@ -20,7 +20,7 @@
     </button>
     <div class="dropdown-content" id="dropdown-content2">
       <a href="javascript:void()" type="button" @click = "showbusfilled(); getmysales()" >BUSINESS SOLUTIONS FILLED FORMS</a>
-      <a href="javascript:void()" type="button" @click = "showindivfilled(); getmysales()" >INDIVIDUAL FILLED FORMS</a>
+      <a href="javascript:void()" type="button" @click = "showindivfilled(); getmyindivsales()" >INDIVIDUAL FILLED FORMS</a>
     </div>
   </div>
 </div>
@@ -269,7 +269,7 @@
       </thead>
       <tbody>
         <tr v-for="nt in salesnum" :key= "nt">
-          <td>{{salesref[nt-1]}}</td>
+          <td><a href="#" class="table-a" @click="bussaledetails(salesref[nt-1])" title="Click for more details">{{salesref[nt-1]}}</a></td>
           <td>{{salesname[nt-1]}}</td>
           <td>{{salesproduct[nt-1]}}</td>
           <td>{{salesdate[nt-1]}}</td>
@@ -277,6 +277,8 @@
       </tbody>
     </table>
   </div>
+  <p class="summary-pa">Total sales:<span>{{salesnum}}</span></p>
+    <p class="summary-pa">Total sales submited:<span>0</span></p>
 </div>
 
 <div class="indivitual-form" id="individual-form">
@@ -290,20 +292,22 @@
         <th>Refs</th>
         <th>Names</th>
         <th>Products</th>
+        <th>Date</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>01</td>
-          <td>South point</td>
-          <td>wifi</td>
+        <tr v-for="nt2 in salesindivnum" :key= "nt2">
+          <td><span><a href="#" class="table-a" title="Click for more details">{{salesindivref[nt2-1]}}</a></span></td>
+          <td>{{salesindivname[nt2-1]}}</td>
+          <td>{{salesindivproduct[nt2-1]}}</td>
+          <td>{{salesindivdate[nt2-1]}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
- <p class="summary-pa">Total sales:<span>0</span></p>
+  <p class="summary-pa">Total sales:<span>{{salesindivnum}}</span></p>
     <p class="summary-pa">Total sales submited:<span>0</span></p>
+</div>
 </div>
      </form>
   </div>
@@ -323,12 +327,12 @@ export default {
       salesFetched: '',
 
       nt2: '',
-      salesbusnum: 0,
-      salesbusref: [],
-      salesbusname: [],
-      salesbusproduct: [],
-      salessbusdate: [],
-      salesbusFetched: '',
+      salesindivnum: 0,
+      salesindivref: [],
+      salesindivname: [],
+      salesindivproduct: [],
+      salesindivdate: [],
+      salesindivFetched: '',
 
       sumcheck2: '',
       indivDate: '',
@@ -463,6 +467,22 @@ export default {
         }
       })
     }, */
+    bussaledetails (i) {
+      alert(i)
+    },
+    async getmyindivsales () {
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_indiv_forms/${this.user}`)
+        .then(response => response.json())
+        .then(results => (this.salesindivFetched = results))
+      let i = 0
+      this.salesindivnum = this.salesindivFetched.length
+      for (i = 0; i < this.salesindivnum; i++) {
+        this.salesindivref[i] = this.salesindivFetched[i].id_
+        this.salesindivname[i] = this.salesindivFetched[i].name_
+        this.salesindivproduct[i] = this.salesindivFetched[i].product_
+        this.salesindivdate[i] = this.salesindivFetched[i].date_.substring(0, 10)
+      }
+    },
     async getmysales () {
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_busines_forms/${this.user}`)
         .then(response => response.json())
@@ -977,6 +997,6 @@ td {
   margin-left: 10%;
 }
 .summary-pa span {
-  color: red;
+   color: rgb(134,6,8)
 }
 </style>

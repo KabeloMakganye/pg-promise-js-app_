@@ -447,6 +447,16 @@ app.get('/fn_get_all_indiv_forms/:agent',(req,res)=> {
          console.log(error);
      })
 })
+app.get('/fn_get_selected_business_sale/:num',(req,res)=> {
+    db.func("fn_get_selected_business_sale",req.params.num)
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
