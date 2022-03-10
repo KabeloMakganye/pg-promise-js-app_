@@ -73,7 +73,6 @@
 </button><br><br>
 </div>
 </div>
-
 <div class="formbus" id="formbus">
     <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
     <h4>Date</h4>
@@ -154,7 +153,6 @@
     <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
     <button type="submit" @click = "uploadbusform()">Submit</button>
 </div>
-
 <div class="formindiv" id="formindiv">
     <h1>INDIVIDUAL APPLICATION FORM</h1>
     <h4>Date</h4>
@@ -280,7 +278,6 @@
   <p class="summary-pa">Total sales:<span>{{salesnum}}</span></p>
     <p class="summary-pa">Total sales submited:<span>0</span></p>
 </div>
-
 <div class="indivitual-form" id="individual-form">
   <div class="container">
     <h1>
@@ -309,6 +306,87 @@
     <p class="summary-pa">Total sales submited:<span>0</span></p>
 </div>
 </div>
+  <div class="businessview" id="businessview">
+    <button @click = "setedit()">Edit</button>
+    <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
+    <h4>Date</h4>
+    <input disabled class="forminput" id="forminput" type="date" v-model = "selecteddate_written" placeholder="Date" required>
+    <h3>Product</h3>
+    <input disabled class="forminput" id="forminput1" type="text" v-model = "selectedproduct_name" placeholder="Product Name" required>
+    <input class="forminput" id="forminput2" type="text" v-model = "selectedcost" placeholder="Cost" required>
+    <h4>Contract Term</h4>
+        <input type="radio" id="month1"  v-model="set_term" value="24months">
+        <label for="month1">24months</label><br><br>
+        <input type="radio" id="month2" v-model="set_term" value="36months">
+        <label for="month2">36months</label><br><br>
+        <input type="radio" id="month3" v-model="set_term" value="60months">
+        <label for="month3">60months</label><br><br>
+    <input class="forminput" type="text" v-model = "escalation" placeholder="Escallation 0%" required><br>
+    <h4>Settlements</h4>
+      <input type="radio" id="settle1" v-model="settle" value = true >
+      <label for="settle1">Yes</label><br><br>
+      <input type="radio" id="settle2" v-model="settle" value = false>
+      <label for="settle2">No</label><br><br>
+    <h4>Company Details</h4>
+    <input class="forminput" id="forminput2" type="text" v-model = "streetnumber" placeholder="Street Number" required><br><br>
+    <input class="forminput" id="forminput2" type="text" v-model = "names" placeholder="Name" required><br><br>
+    <input class="forminput" id="forminput2" type="text" v-model = "town" placeholder="Town" required><br><br>
+    <input class="forminput" id="forminput2" type="text" v-model = "city" placeholder="City" required><br><br>
+        <select class="forminput" v-model= "bussProvince" placeholder="Province" required>
+      <option value="" disabled selected hidden>Choose Province</option>
+      <option>
+        Gauteng
+      </option>
+      <option>
+        North West
+      </option>
+      <option>
+        Northern Cape
+      </option>
+      <option>
+        Western Cape
+      </option>
+      <option>
+        Eastern Cape
+      </option>
+      <option>
+        KwaZulu-Natal
+      </option>
+      <option>
+        Mpumalanga
+      </option>
+      <option>
+        Free State
+      </option>
+      <option>
+        Limpopo
+      </option>
+    </select><br><br>
+    <input class="forminput" type="text" v-model= "registeredcompanyname" placeholder="Registered Company Name" required><br><br>
+    <input class="forminput" type="text" v-model= "tradingas" placeholder="Trading As" required><br><br>
+    <input class="forminput" type="text" v-model= "yearstrading" placeholder="Years Trading" required><br><br>
+    <input class="forminput" type="text" v-model= "regnum" placeholder="Registration Number" required><br><br>
+    <input class="forminput" type="text" v-model= "vatnum" placeholder="Vat Number" required><br><br>
+    <input class="forminput" type="text" v-model= "turnover" placeholder="Turnover More than 2 Mill or Less" required><br><br>
+    <input class="forminput" type="text" v-model= "ownerid" placeholder="Owners ID Number" required><br><br>
+    <input class="forminput" type="text" v-model= "desisgnation" placeholder="Designation" required><br><br>
+    <input class="forminput" type="tel" v-model= "telephone" placeholder="Telephone" required><br><br>
+    <input class="forminput" type="tel" v-model= "cellnum" placeholder="Cell Number" required><br><br>
+    <input class="forminput" type="tel" v-model= "fax" placeholder="Fax" required><br><br>
+    <input class="forminput" type="text" v-model= "postaladdress" placeholder="Postal Address" required><br><br>
+    <input class="forminput" type="text" v-model= "eaddress" placeholder="Email Address" required><br><br>
+    <input class="forminput" type="text" v-model= "nextofkin" placeholder="Next of kin" required><br><br>
+    <input class="forminput" type="text" v-model= "landlorddetails" placeholder="Landlord Details" required><br><br>
+    <input class="forminput" type="text" v-model= "company" placeholder="Company" required><br><br>
+    <input class="forminput" type="text" v-model= "no" placeholder="No" required><br><br>
+    <h4>Banking Details</h4>
+    <input class="forminput" type="text" v-model= "bankname" placeholder="Bank name" required><br><br>
+    <input class="forminput" type="text" v-model= "accountnum" placeholder="Account number" required><br><br>
+    <input class="forminput" type="text" v-model= "branchname" placeholder="Branch Name" required><br><br>
+    <textarea type= "text" class="forminput2" v-model= "traderef" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea><br><br>
+    <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
+    <button type="submit" @click = "uploadbusform()">Submit</button>
+</div>
      </form>
   </div>
 </template>
@@ -318,6 +396,42 @@ import MD5 from '../../node_modules/crypto-js/md5'
 export default {
   data () {
     return {
+      selectedFetched: '',
+      selecteddate_written: '',
+      selectedproduct_name: '',
+      selectedcost: '',
+      selectedcontract_term: '',
+      selectedescallation: '',
+      selectedsettlements: '',
+      selectedcompany_street_number: '',
+      selectedcompany_name: '',
+      selectedcompany_town: '',
+      selectedcompany_city: '',
+      selectedprovince: '',
+      selectedregistered_company_name: '',
+      selectedtrading_as: '',
+      selectedyears_trading: '',
+      selectedregistration_number: '',
+      selectedvat_number: '',
+      selectedturnover: '',
+      selectedowners_id: '',
+      selecteddesignation: '',
+      selectedtelephone: '',
+      selectedcell_number: '',
+      selectedfax: '',
+      selectedpostal_address: '',
+      selectedemail_address: '',
+      selectednext_of_kin: '',
+      selectedlandlord_details: '',
+      selectedcompany: '',
+      selectedno: '',
+      selectedbank_name: '',
+      selectedaccount_number: '',
+      selectedbranch_name: '',
+      selectedtrade_references: '',
+      selectedis_done: '',
+      selectedagent: '',
+
       nt: '',
       salesnum: 0,
       salesref: [],
@@ -467,8 +581,56 @@ export default {
         }
       })
     }, */
-    bussaledetails (i) {
+    setedit () {
+      document.getElementById('forminput').disabled = false
+      document.getElementById('forminput1').disabled = false
+      document.getElementById('forminput2').disabled = false
+    },
+    async bussaledetails (i) {
       alert(i)
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_selected_business_sale/${i}`)
+        .then(response => response.json())
+        .then(results => (this.selectedFetched = results))
+      if (this.selectedFetched.length > 0) {
+        this.selecteddate_written = this.selectedFetched[0].date_written_.substring(0, 10)
+        this.selectedproduct_name = this.selectedFetched[0].product_name_
+        this.selectedcost = this.selectedFetched[0].cost_
+        this.selectedcontract_term = this.selectedFetched[0].contract_term_
+        this.selectedescallation = this.selectedFetched[0].escallation_
+        this.selectedsettlements = this.selectedFetched[0].settlements_
+        this.selectedcompany_street_number = this.selectedFetched[0].company_street_number_
+        this.selectedcompany_name = this.selectedFetched[0].company_name_
+        this.selectedcompany_town = this.selectedFetched[0].company_town_
+        this.selectedcompany_city = this.selectedFetched[0].company_city_
+        this.selectedprovince = this.selectedFetched[0].province_
+        this.selectedregistered_company_name = this.selectedFetched[0].registered_company_name_
+        this.selectedtrading_as = this.selectedFetched[0].trading_as_
+        this.selectedyears_trading = this.selectedFetched[0].years_trading_
+        this.selectedregistration_number = this.selectedFetched[0].registration_number_
+        this.selectedvat_number = this.selectedFetched[0].vat_number_
+        this.selectedturnover = this.selectedFetched[0].turnover_
+        this.selectedowners_id = this.selectedFetched[0].owners_id_
+        this.selecteddesignation = this.selectedFetched[0].designation_
+        this.selectedtelephone = this.selectedFetched[0].telephone_
+        this.selectedcell_number = this.selectedFetched[0].cell_number_
+        this.selectedfax = this.selectedFetched[0].fax_
+        this.selectedpostal_address = this.selectedFetched[0].postal_address_
+        this.selectedemail_address = this.selectedFetched[0].email_address_
+        this.selectednext_of_kin = this.selectedFetched[0].next_of_kin_
+        this.selectedlandlord_details = this.selectedFetched[0].landlord_details_
+        this.selectedcompany = this.selectedFetched[0].company_
+        this.selectedno = this.selectedFetched[0].no_
+        this.selectedbank_name = this.selectedFetched[0].bank_name_
+        this.selectedaccount_number = this.selectedFetched[0].account_number_
+        this.selectedbranch_name = this.selectedFetched[0].branch_name_
+        this.selectedtrade_references = this.selectedFetched[0].trade_references_
+        this.selectedis_done = this.selectedFetched[0].is_done_
+        this.selectedagent = this.selectedFetched[0].agent_
+      }
+      alert(this.selectedproduct_name)
+      console.log(this.selectedFetched[0])
+      document.getElementById('businessview').style.display = 'inline'
+      document.getElementById('business-form').style.display = 'none'
     },
     async getmyindivsales () {
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_indiv_forms/${this.user}`)
@@ -954,6 +1116,11 @@ body {
   max-width: 80%;
 }
 .major-container {
+  display: none;
+  transition: 0.9s;
+  max-width: 80%;
+}
+.businessview {
   display: none;
   transition: 0.9s;
   max-width: 80%;
