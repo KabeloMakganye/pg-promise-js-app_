@@ -443,8 +443,8 @@
       </td>
       </tr>
     </table>
-    <select disabled class="forminput" id="formbusinput11" v-model= "bussProvince" placeholder="Province" required>
-      <option value="" disabled selected hidden>{{selectedprovince}}</option>
+    <select disabled class="forminput" id="formbusinput11" v-model= "selectedprovince" placeholder="Province" required>
+      <option value="selectedprovince" disabled selected hidden>{{selectedprovince}}</option>
       <option>
         Gauteng
       </option>
@@ -718,7 +718,7 @@
     </table>
     <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
     </table><br><br>
-     <button class="submit-btn" type="button" @click = "uploadbusform()">Upload Changes</button><br><br>
+     <button class="submit-btn" type="button" @click = "updatebusform()">Upload Changes</button><br><br>
 </div>
      </form>
   </div>
@@ -731,6 +731,7 @@ export default {
   components: { activity },
   data () {
     return {
+      selectedbussale_id: '',
       selectedFetched: '',
       selecteddate_written: '',
       selectedproduct_name: '',
@@ -916,10 +917,24 @@ export default {
         }
       })
     }, */
+    async updatebusform () {
+      let allAreFilled = true /* check if all required fields are entered */
+      document.getElementById('businessview').querySelectorAll('[required]').forEach(function (i) {
+        if (!allAreFilled) return
+        if (!i.value) allAreFilled = false
+      })
+      if (this.sumcheck === '2' && allAreFilled) {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_update_business_form/${this.selectedbussale_id}/${this.selecteddate_written}/${this.selectedproduct_name}/${this.selectedcost}/${this.selectedcontract_term}/${this.selectedescallation}/${this.selectedsettlements}/${this.selectedcompany_street_number}/${this.selectedcompany_name}/${this.selectedcompany_town}/${this.selectedcompany_city}/${this.selectedprovince}/${this.selectedregistered_company_name}/${this.selectedtrading_as}/${this.selectedyears_trading}/${this.selectedregistration_number}/${this.selectedvat_number}/${this.selectedturnover}/${this.selectedowners_id}/${this.selecteddesignation}/${this.selectedtelephone}/${this.selectedcell_number}/${this.selectedfax}/${this.selectedpostal_address}/${this.selectedemail_address}/${this.selectednext_of_kin}/${this.selectedlandlord_details}/${this.selectedcompany}/${this.selectedno}/${this.selectedbank_name}/${this.selectedaccount_number}/${this.selectedbranch_name}/${this.selectedtrade_references}/${this.selectedagent}`)
+        alert(`Ref: ${this.selectedbussale_id} was updated`)
+      } else {
+        alert('not updated' + this.sumcheck + ' allarefilled:' + allAreFilled)
+      }
+    },
     setedit (i) {
       document.getElementById(i).disabled = false
     },
     async bussaledetails (i) {
+      this.selectedbussale_id = i
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_selected_business_sale/${i}`)
         .then(response => response.json())
         .then(results => (this.selectedFetched = results))
