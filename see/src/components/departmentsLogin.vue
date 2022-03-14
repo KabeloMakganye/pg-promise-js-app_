@@ -283,7 +283,7 @@
     <h1>
       Individual Clients
     </h1>
-    <table class="table" border="1px">
+    <table class="table" border="1px" rad>
       <thead>
         <tr>
         <th>Refs</th>
@@ -307,33 +307,144 @@
 </div>
 </div>
   <div class="businessview" id="businessview">
-    <button @click = "setedit()">Edit</button>
     <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
     <h4>Date</h4>
-    <input disabled class="forminput" id="forminput" type="date" v-model = "selecteddate_written" placeholder="Date" required>
-    <h3>Product</h3>
-    <input disabled class="forminput" id="forminput1" type="text" v-model = "selectedproduct_name" placeholder="Product Name" required>
-    <input class="forminput" id="forminput2" type="text" v-model = "selectedcost" placeholder="Cost" required>
-    <h4>Contract Term</h4>
-        <input type="radio" id="month1"  v-model="set_term" value="24months">
-        <label for="month1">24months</label><br><br>
-        <input type="radio" id="month2" v-model="set_term" value="36months">
-        <label for="month2">36months</label><br><br>
-        <input type="radio" id="month3" v-model="set_term" value="60months">
-        <label for="month3">60months</label><br><br>
-    <input class="forminput" type="text" v-model = "escalation" placeholder="Escallation 0%" required><br>
-    <h4>Settlements</h4>
-      <input type="radio" id="settle1" v-model="settle" value = true >
-      <label for="settle1">Yes</label><br><br>
-      <input type="radio" id="settle2" v-model="settle" value = false>
-      <label for="settle2">No</label><br><br>
-    <h4>Company Details</h4>
-    <input class="forminput" id="forminput2" type="text" v-model = "streetnumber" placeholder="Street Number" required><br><br>
-    <input class="forminput" id="forminput2" type="text" v-model = "names" placeholder="Name" required><br><br>
-    <input class="forminput" id="forminput2" type="text" v-model = "town" placeholder="Town" required><br><br>
-    <input class="forminput" id="forminput2" type="text" v-model = "city" placeholder="City" required><br><br>
-        <select class="forminput" v-model= "bussProvince" placeholder="Province" required>
-      <option value="" disabled selected hidden>Choose Province</option>
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Sales Date:</p>
+      </td>
+      </tr>
+    </table>
+      <input disabled class="forminput" id="formbusinput1" type="date" v-model = "selecteddate_written" placeholder="Date" required>
+    <button @click = "setedit('formbusinput1')">Edit</button><br><br>
+    </table><br><br>
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Product Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput2" type="text" v-model = "selectedproduct_name" placeholder="Product Name" required>
+    <button @click = "setedit('formbusinput2')">Edit</button><br><br>
+    </table><br><br>
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Product Cost:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput3" type="text" v-model = "selectedcost" placeholder="Cost" required>
+    <button @click = "setedit('formbusinput3')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Contract Term:</p>
+      </td>
+      </tr>
+    </table>
+    <select disabled class="forminput" id="formbusinput4" v-model= "selectedcontract_term" placeholder="selectedcontract_term" required>
+      <option value="" disabled selected hidden>{{selectedcontract_term}}</option>
+      <option>
+        24months
+      </option>
+      <option>
+        36months
+      </option>
+      <option>
+        60months
+      </option>
+    </select>
+     <button @click = "setedit('formbusinput4')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Escallation:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput5" type="text" v-model = "selectedescallation" placeholder="Escallation 0%" required>
+    <button @click = "setedit('formbusinput5')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Settlements:</p>
+      </td>
+      </tr>
+    </table>
+    <select disabled class="forminput" id="formbusinput6" v-model= "selectedsettlements" placeholder="selectedsettlements" required>
+      <option value="" disabled selected hidden>{{selectedsettlements}}</option>
+      <option value= true>
+        Yes
+      </option>
+      <option value= false>
+        No
+      </option>
+    </select>
+     <button @click = "setedit('formbusinput6')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Street Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput7" type="text" v-model = "selectedcompany_street_number" placeholder="Street Number" required>
+    <button @click = "setedit('formbusinput7')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput8" type="text" v-model = "selectedcompany_name" placeholder="Name" required>
+    <button @click = "setedit('formbusinput8')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Town:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput9" type="text" v-model = "selectedcompany_town" placeholder="Town" required>
+    <button @click = "setedit('formbusinput9')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company City:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput10" type="text" v-model = "selectedcompany_city" placeholder="City" required>
+    <button @click = "setedit('formbusinput10')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Province:</p>
+      </td>
+      </tr>
+    </table>
+    <select disabled class="forminput" id="formbusinput11" v-model= "bussProvince" placeholder="Province" required>
+      <option value="" disabled selected hidden>{{selectedprovince}}</option>
       <option>
         Gauteng
       </option>
@@ -361,31 +472,253 @@
       <option>
         Limpopo
       </option>
-    </select><br><br>
-    <input class="forminput" type="text" v-model= "registeredcompanyname" placeholder="Registered Company Name" required><br><br>
-    <input class="forminput" type="text" v-model= "tradingas" placeholder="Trading As" required><br><br>
-    <input class="forminput" type="text" v-model= "yearstrading" placeholder="Years Trading" required><br><br>
-    <input class="forminput" type="text" v-model= "regnum" placeholder="Registration Number" required><br><br>
-    <input class="forminput" type="text" v-model= "vatnum" placeholder="Vat Number" required><br><br>
-    <input class="forminput" type="text" v-model= "turnover" placeholder="Turnover More than 2 Mill or Less" required><br><br>
-    <input class="forminput" type="text" v-model= "ownerid" placeholder="Owners ID Number" required><br><br>
-    <input class="forminput" type="text" v-model= "desisgnation" placeholder="Designation" required><br><br>
-    <input class="forminput" type="tel" v-model= "telephone" placeholder="Telephone" required><br><br>
-    <input class="forminput" type="tel" v-model= "cellnum" placeholder="Cell Number" required><br><br>
-    <input class="forminput" type="tel" v-model= "fax" placeholder="Fax" required><br><br>
-    <input class="forminput" type="text" v-model= "postaladdress" placeholder="Postal Address" required><br><br>
-    <input class="forminput" type="text" v-model= "eaddress" placeholder="Email Address" required><br><br>
-    <input class="forminput" type="text" v-model= "nextofkin" placeholder="Next of kin" required><br><br>
-    <input class="forminput" type="text" v-model= "landlorddetails" placeholder="Landlord Details" required><br><br>
-    <input class="forminput" type="text" v-model= "company" placeholder="Company" required><br><br>
-    <input class="forminput" type="text" v-model= "no" placeholder="No" required><br><br>
+    </select>
+    <button @click = "setedit('formbusinput11')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput12" type="text" v-model= "selectedregistered_company_name" placeholder="Registered Company Name" required>
+    <button @click = "setedit('formbusinput12')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Trading Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput13" type="text" v-model= "selectedtrading_as" placeholder="Trading As" required>
+    <button @click = "setedit('formbusinput13')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Years Trading:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput14" type="text" v-model= "selectedyears_trading" placeholder="Years Trading" required>
+    <button @click = "setedit('formbusinput14')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Registration Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput15" type="text" v-model= "selectedregistration_number" placeholder="Registration Number" required>
+    <button @click = "setedit('formbusinput15')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">VAT Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput16" type="text" v-model= "selectedvat_number" placeholder="Vat Number" required>
+    <button @click = "setedit('formbusinput16')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Business Turnover:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput17" type="text" v-model= "selectedturnover" placeholder="Turnover More than 2 Mill or Less" required>
+    <button @click = "setedit('formbusinput17')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Owner's ID:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput18" type="text" v-model= "selectedowners_id" placeholder="Owners ID Number" required>
+    <button @click = "setedit('formbusinput18')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Designation:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput19" type="text" v-model= "selecteddesignation" placeholder="Designation" required>
+    <button @click = "setedit('formbusinput19')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Telephone:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput20" type="tel" v-model= "selectedtelephone" placeholder="Telephone" required>
+    <button @click = "setedit('formbusinput20')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Cell Phone:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput21" type="tel" v-model= "selectedcell_number" placeholder="Cell Number" required>
+    <button @click = "setedit('formbusinput21')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Fax Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput22" type="tel" v-model= "selectedfax" placeholder="Fax" required>
+    <button @click = "setedit('formbusinput22')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Postal Address:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput23" type="text" v-model= "selectedpostal_address" placeholder="Postal Address" required>
+    <button @click = "setedit('formbusinput23')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Email address:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput24" type="text" v-model= "selectedemail_address" placeholder="Email Address" required>
+    <button @click = "setedit('formbusinput24')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Next Of Kin:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput25"  type="text" v-model= "selectednext_of_kin" placeholder="Next of kin" required>
+    <button @click = "setedit('formbusinput25')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Landlord Details:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput26" type="text" v-model= "selectedlandlord_details" placeholder="Landlord Details" required>
+    <button @click = "setedit('formbusinput26')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">This Field need to be removed:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput27" type="text" v-model= "selectedcompany" placeholder="Company" required>
+    <button @click = "setedit('formbusinput27')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">This Field need to be removed:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput28" type="text" v-model= "selectedno" placeholder="No" required>
+    <button @click = "setedit('formbusinput28')">Edit</button><br><br>
+    </table><br><br>
+
     <h4>Banking Details</h4>
-    <input class="forminput" type="text" v-model= "bankname" placeholder="Bank name" required><br><br>
-    <input class="forminput" type="text" v-model= "accountnum" placeholder="Account number" required><br><br>
-    <input class="forminput" type="text" v-model= "branchname" placeholder="Branch Name" required><br><br>
-    <textarea type= "text" class="forminput2" v-model= "traderef" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Bank Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput29" type="text" v-model= "selectedbank_name" placeholder="Bank name" required>
+    <button @click = "setedit('formbusinput29')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Account Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput30" type="text" v-model= "selectedaccount_number" placeholder="Account number" required>
+    <button @click = "setedit('formbusinput30')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">This Field need to be removed:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput31" type="text" v-model= "selectedbranch_name" placeholder="Branch Name" required>
+    <button @click = "setedit('formbusinput31')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Trade References:</p>
+      </td>
+      </tr>
+    </table>
+    <textarea disabled type= "text" class="forminput2" id="formbusinput32" v-model= "selectedtrade_references" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea>
+    <button @click = "setedit('formbusinput32')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Verification:</p>
+      </td>
+      </tr>
+    </table>
     <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
-    <button type="submit" @click = "uploadbusform()">Submit</button>
+    </table><br><br>
+     <button class="submit-btn" type="button" @click = "uploadbusform()">Upload Changes</button><br><br>
 </div>
      </form>
   </div>
@@ -393,7 +726,9 @@
 <script>
 
 import MD5 from '../../node_modules/crypto-js/md5'
+import activity from './activity.vue'
 export default {
+  components: { activity },
   data () {
     return {
       selectedFetched: '',
@@ -511,7 +846,7 @@ export default {
       accountnum: '',
       branchname: '',
       traderef: '',
-      sumcheck: '',
+      sumcheck: '0',
       busiform: 0,
       department: 'Departments',
       email_reset_pin: '@eafricatelecoms.co.za',
@@ -581,13 +916,10 @@ export default {
         }
       })
     }, */
-    setedit () {
-      document.getElementById('forminput').disabled = false
-      document.getElementById('forminput1').disabled = false
-      document.getElementById('forminput2').disabled = false
+    setedit (i) {
+      document.getElementById(i).disabled = false
     },
     async bussaledetails (i) {
-      alert(i)
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_selected_business_sale/${i}`)
         .then(response => response.json())
         .then(results => (this.selectedFetched = results))
@@ -627,8 +959,6 @@ export default {
         this.selectedis_done = this.selectedFetched[0].is_done_
         this.selectedagent = this.selectedFetched[0].agent_
       }
-      alert(this.selectedproduct_name)
-      console.log(this.selectedFetched[0])
       document.getElementById('businessview').style.display = 'inline'
       document.getElementById('business-form').style.display = 'none'
     },
@@ -1149,15 +1479,35 @@ input:focus, textarea:focus, select:focus {
     width: 3%;
     height: 25px;
 }
-table {
+.table {
   text-align: center;
   margin-left: 10%;
   margin-right: 10%;
   width: 80%;
   border: 1px solid black;
 }
+.table3 {
+  transition: 0.9s;
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  border-radius:1%;
+  background-color: rgba(116, 110, 110, 0.274);
+  border: 0px solid black;
+}
+.table2 {
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  border: 0px solid black;
+}
 td {
   text-align: left;
+}
+td .td-first {
+  text-align: none;
 }
 .summary-pa {
   text-align-last: left;
@@ -1165,5 +1515,19 @@ td {
 }
 .summary-pa span {
    color: rgb(134,6,8)
+}
+.edit-pa {
+  color: rgb(134,6,8)
+}
+.submit-btn {
+  /*-color: rgba(0, 255, 0, 0.877);*/
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 </style>

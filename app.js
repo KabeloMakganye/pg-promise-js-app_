@@ -457,6 +457,52 @@ app.get('/fn_get_selected_business_sale/:num',(req,res)=> {
          console.log(error);
      })
 })
+
+app.get("/fn_update_business_form/:date_written_/:product_name_/:cost_/:contract_term_/:escallation_/:settlements_/:company_street_number_/:company_name_/:company_town_/:company_city_/:province_/:registered_company_name_/:trading_as_/:years_trading_/:registration_number_/:vat_number_/:turnover_/:owners_id_/:designation_/:telephone_/:cell_number_/:fax_/:postal_address_/:email_address_/:next_of_kin_/:landlord_details_/:company_/:no_/:bank_name_/:account_number_/:branch_name_/:trade_references_/:agent_",(req,res)=> {
+    db.func("fn_update_business_form",
+    [
+        req.params.date_written_,
+        req.params.product_name_,
+        req.params.cost_,
+        req.params.contract_term_,
+        req.params.escallation_,
+        req.params.settlements_,
+        req.params.company_street_number_,
+        req.params.company_name_,
+        req.params.company_town_,
+        req.params.company_city_,
+        req.params.province_,
+        req.params.registered_company_name_,
+        req.params.trading_as_,
+        req.params.years_trading_,
+        req.params.registration_number_,
+        req.params.vat_number_,
+        req.params.turnover_,
+        req.params.owners_id_,
+        req.params.designation_,
+        req.params.telephone_,
+        req.params.cell_number_,
+        req.params.fax_,
+        req.params.postal_address_,
+        req.params.email_address_,
+        req.params.next_of_kin_,
+        req.params.landlord_details_,
+        req.params.company_,
+        req.params.no_,
+        req.params.bank_name_,
+        req.params.account_number_,
+        req.params.branch_name_,
+        req.params.trade_references_,
+        req.params.agent_
+    ])
+     .then(rows => {
+         console.log(rows);
+         res.json(rows);
+     })
+     .catch(error => {
+         console.log(error);
+     })
+})
 /* http.createServer(function(request, response) {
     response.writeHead(200, {"Constent-Type": "test/plain"})
     response.end("kabelo TESTING\n")
