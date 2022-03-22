@@ -1,35 +1,7 @@
 <template>
   <div id="dep">
     <form>
-    <div v-if="pass_right === 'true' && department === 'Sales Department'" class="salesdep">
-    <div class="navbar">
-  <a href="https://eafricatelecoms.co.za/for-you" target="_blank">HOME SOLUTIONS</a>
-  <a href="https://eafricatelecoms.co.za/for-your-business" target="_blank">BUSINESS SOLUTIONS</a>
-  <div @mouseleave="hidedropdown()" class="dropdown">
-    <button  @mouseenter="showdropdown()" @click="showdropdown()" class="dropbtn" > APPLY NOW
-      <!-- <i class="fa fa-caret-down"></i> -->
-    </button>
-    <div class="dropdown-content" id="dropdown-content">
-      <a href="javascript:void()" type="button" @click = "showbus(); hide_businessview()" >BUSINESS SOLUTIONS APPLICATION FORM</a>
-      <a href="javascript:void()" type="button" @click = "showindiv(); hide_businessview()" >INDIVIDUAL APPLICATION FORM</a>
-    </div>
-  </div>
-  <div @mouseleave="hidedropdown2()" class="dropdown2">
-    <button @mouseenter="showdropdown2()" @click="showdropdown2(); hide_businessview()" class="dropbtn2" > FILLED FORMS
-      <!-- <i class="fa fa-caret-down"></i> -->
-    </button>
-    <div class="dropdown-content" id="dropdown-content2">
-      <a href="javascript:void()" type="button" @click = "showbusfilled(); getmysales(); hide_businessview()" >BUSINESS SOLUTIONS FILLED FORMS</a>
-      <a href="javascript:void()" type="button" @click = "showindivfilled(); getmyindivsales(); hide_businessview()" >INDIVIDUAL FILLED FORMS</a>
-    </div>
-  </div>
-</div>
-</div>
-<div class="heading-div" v-if="pass_right === 'true'">
-    <p class="summary-pa">Department: <span>{{department}}</span></p>
-    <p class="summary-pa">User: <span>{{user}}</span></p>
-</div>
-<div class="choose-department-div" v-if="department === 'Departments'">
+    <div class="choose-department-div" v-if="department === 'Departments'">
     <label>Choose department</label>
       <select v-model="department">
         <option>
@@ -61,6 +33,7 @@
         </option>
       </select><br><br>
     </div>
+
 <div class="login-div" v-if="department !== 'Departments'">
 <h1 v-if="pass_right === 'false'">{{department}}</h1>
 <div v-if="pass_right === 'false'">
@@ -73,7 +46,50 @@
 </button><br><br>
 </div>
 </div>
-<div class="formbus" id="formbus">
+
+  <div v-if="department === 'Sales Department'">
+    <!-- menu -->
+      <div v-if="pass_right === 'true' && department === 'Sales Department'" class="salesdep">
+        <div class="navbar">
+          <a href="https://eafricatelecoms.co.za/for-you" target="_blank">HOME SOLUTIONS</a>
+          <a href="https://eafricatelecoms.co.za/for-your-business" target="_blank">BUSINESS SOLUTIONS</a>
+          <div @mouseleave="hidedropdown()" class="dropdown">
+            <button  @mouseenter="showdropdown()" @click="showdropdown()" class="dropbtn" > APPLY NOW
+              <!-- <i class="fa fa-caret-down"></i> -->
+            </button>
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="javascript:void()" type="button" @click = "showbus(); hide_businessview()" >BUSINESS SOLUTIONS APPLICATION FORM</a>
+              <a href="javascript:void()" type="button" @click = "showindiv(); hide_businessview()" >INDIVIDUAL APPLICATION FORM</a>
+            </div>
+          </div>
+          <div @mouseleave="hidedropdown2()" class="dropdown2">
+            <button @mouseenter="showdropdown2()" @click="showdropdown2(); hide_businessview()" class="dropbtn2" > FILLED FORMS
+            <!-- <i class="fa fa-caret-down"></i> -->
+            </button>
+            <div class="dropdown-content" id="dropdown-content2">
+              <a href="javascript:void()" type="button" @click = "showbusfilled(); getmysales(); hide_businessview()" >BUSINESS SOLUTIONS FILLED FORMS</a>
+              <a href="javascript:void()" type="button" @click = "showindivfilled(); getmyindivsales(); hide_businessview()" >INDIVIDUAL FILLED FORMS</a>
+            </div>
+          </div>
+          <!-- <div @mouseleave="hidedropdown3()" class="dropdown3">
+            <button @mouseenter="showdropdown3()" @click="showdropdown3();" class="dropbtn3" >SUBMITTED
+
+            </button>
+            <div class="dropdown-content" id="dropdown-content3">
+              <a href="javascript:void()" type="button" @click = "showbusfilled(); getmysales(); hide_businessview()" >BUSINESS SOLUTIONS</a>
+              <a href="javascript:void()" type="button" @click = "showindivfilled(); getmyindivsales(); hide_businessview()" >INDIVIDUAL SOLUTIONS</a>
+            </div>
+          </div> -->
+        </div>
+    </div>
+
+    <!-- Heading with name details-->
+    <div class="heading-div" v-if="pass_right === 'true'">
+      <p class="summary-pa">Department: <span>{{department}}</span></p>
+      <p class="summary-pa">User: <span>{{user}}</span></p>
+    </div>
+
+  <div class="formbus" id="formbus">
     <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
     <h4>Date</h4>
     <input class="forminput" type="date" v-model = "date_written" placeholder="Date" required>
@@ -152,7 +168,7 @@
     <textarea type= "text" class="forminput2" v-model= "traderef" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea><br><br>
     <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
     <button type="submit" @click = "uploadbusform()">Submit</button>
-</div>
+  </div>
 <div class="formindiv" id="formindiv">
     <h1>INDIVIDUAL APPLICATION FORM</h1>
     <h4>Date</h4>
@@ -307,7 +323,7 @@
 </div>
 </div>
 <div class="businessview" id="businessview">
-    <h1>BUSINESS SOLUTIONS APPLICATION FORM</h1>
+    <h1>Edit Selected Business Sale</h1>
     <table class="table3">
     <table class="table2">
     <tr>
@@ -722,6 +738,18 @@
 <!-- individual application forms-->
 <div class="indivitualview" id="indivitualview">
     <h1>Edit Selected Individual Sale</h1>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Customer Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formindivinput8" type="text" v-model = "selectedindivcustomer_name" placeholder="Enter Customer Name" required>
+    <button @click = "setedit('formindivinput8')">Edit</button><br><br>
+    </table><br><br>
+
     <table class="table3">
     <table class="table2">
     <tr>
@@ -814,17 +842,6 @@
     </table>
     <input disabled class="forminput" id="formindivinput7" type="text" v-model = "selectedindivstreet_number" placeholder="Street Number" required>
     <button @click = "setedit('formindivinput7')">Edit</button><br><br>
-    </table><br><br>
-
-    <table class="table3">
-    <table class="table2">
-    <tr>
-      <td><p class="edit-pa">Customer Name:</p>
-      </td>
-      </tr>
-    </table>
-    <input disabled class="forminput" id="formindivinput8" type="text" v-model = "selectedindivcustomer_name" placeholder="Enter Customer Name" required>
-    <button @click = "setedit('formindivinput8')">Edit</button><br><br>
     </table><br><br>
 
     <table class="table3">
@@ -1098,18 +1115,99 @@
     </table>
     <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
     </table><br><br>
-     <button class="submit-btn" type="button" @click = "updatebusform()">Upload Changes</button><br><br>
+     <button class="submit-btn" type="button" @click = "updateindivform()">Upload Changes</button><br><br>
      <button type="button" @click="resetedit()">Test</button>
 </div>
+</div>
+  <div v-if="department === 'Quality Assurer Department' && pass_right === 'true'"> <!-- here we deal with calling the QA component-->
+    <!-- Menu -->
+    <div class="navbar">
+    <div @mouseleave="hidedropdown()" class="dropdown">
+    <button  @mouseenter="showdropdown()" @click="showdropdown()" class="dropbtn" >BUSINESS SALES
+      <!-- <i class="fa fa-caret-down"></i> -->
+    </button>
+    <div class="dropdown-content" id="dropdown-content">
+      <a href="javascript:void()" type="button" @click = "showverifiedbus(); hide_businessview()" >Verified Sales</a>
+      <a href="javascript:void()" type="button" @click = "showunverifiedbus(); getmysales(); hide_businessview()" >Unverified Sales</a>
+    </div>
+  </div>
+  <div @mouseleave="hidedropdown2()" class="dropdown2">
+    <button @mouseenter="showdropdown2()" @click="showdropdown2(); hide_businessview()" class="dropbtn2" >INDIVIDUAL SALES
+    </button>
+      <!-- <i class="fa fa-caret-down"></i> -->
+    <div class="dropdown-content" id="dropdown-content2">
+      <a href="javascript:void()" type="button" @click = "showbusfilled();; hide_businessview()" >Verified Sales</a>
+      <a href="javascript:void()" type="button" @click = "showindivfilled(); getmyindivsales(); hide_businessview()" >Unverified Sales</a>
+    </div>
+  </div>
+  <a href="https://eafricatelecoms.co.za/for-you" target="_blank">HOME SOLUTIONS</a>
+  <a href="https://eafricatelecoms.co.za/for-your-business" target="_blank">BUSINESS SOLUTIONS</a>
+    </div>
+    <!-- Heading with name details-->
+    <div class="heading-div" v-if="pass_right === 'true'">
+      <p class="summary-pa">Department: <span>{{department}}</span></p>
+      <p class="summary-pa">User: <span>{{user}}</span></p>
+    </div>
+
+    <!-- Details of all Agents -->
+
+    <div class="business-unverified-div" id="business-unverified-div">
+      <h2>Unverified Business Application forms</h2>
+      <div class="business-sales-list" id="business-sales-list">
+        <table class="table" border="1px">
+          <thead>
+            <tr>
+                <th>Refs</th>
+                <th>Names</th>
+                <th>Products</th>
+                <th>Dates</th>
+                <th>Agents</th>
+                <th>Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr v-for="nt in salesnum" :key= "nt">
+                  <td><a href="#" class="table-a" @click="bussaledetails(salesref[nt-1])" title="Click for more details">{{salesref[nt-1]}}</a></td>
+                  <td>{{salesname[nt-1]}}</td>
+                  <td>{{salesproduct[nt-1]}}</td>
+                  <td>{{salesdate[nt-1]}}</td>
+                  <td>{{salesagent[nt-1]}}</td>
+                  <td>
+                    <select name="" id="">
+                      <option disabled selected hidden value="">Choose Comment</option>
+                      <option value="">Phonetic alphabets</option>
+                      <option value="">Rules of etiquette</option>
+                      <option value="">Proper telephone language</option>
+                      <option value="">Identity</option>
+                      <option value="">Customer name</option>
+                      <option value="">Benefits and features</option>
+                      <option value="">Purpose of call</option>
+                      <option value="">Calls recorded</option>
+                      <option value="">Improving communication</option>
+                      <option value="">Explain all the fees</option>
+                      <option value="">Confirmation</option>
+                      <option value="">Connection fee</option>
+                      <option value="">Consolidation</option>
+                      <option value="">Professionalism</option>
+                    </select>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+  <!-- <qa/> -->
      </form>
   </div>
 </template>
 <script>
 
 import MD5 from '../../node_modules/crypto-js/md5'
-import activity from './activity.vue'
+import qaVue from './qa.vue'
+
 export default {
-  components: { activity },
+  components: { 'qa': qaVue }, // not used
   data () {
     return {
 
@@ -1190,6 +1288,7 @@ export default {
       salesname: [],
       salesproduct: [],
       salesdate: [],
+      salesagent: [],
       salesFetched: '',
 
       nt2: '',
@@ -1335,20 +1434,39 @@ export default {
     }, */
 
     //  THIS FUNCTION GET SELECTED INDIVIDUAL SALE FROM DATABASE AND DISPLAY ON DISABLED INPUT BOXES
+
+    showunverifiedbus () {
+      document.getElementById('business-unverified-div').style.display = 'inline'
+    },
+    async updateindivform () {
+      for (let index = 1; index <= 29; index++) {
+        document.getElementById(`formindivinput${index}`).disabled = true
+      }
+      let allAreFilled = true /* check if all required fields are entered */
+      document.getElementById('indivitualview').querySelectorAll('[required]').forEach(function (i) {
+        if (!allAreFilled) return
+        if (!i.value) allAreFilled = false
+      })
+      if (this.sumcheck === '2' && allAreFilled) {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_update_indiv_form/${this.selectedindivsale_id}/${this.selectedindivdate_written}/${this.selectedindivproduct_name}/${this.selectedindivcost}/${this.selectedindivcontract_term}/${this.selectedindivescallation}/${this.selectedindivsettlements}/${this.selectedindivstreet_number}/${this.selectedindivcustomer_name}/${this.selectedindivcustomer_town}/${this.selectedindivcustomer_city}/${this.selectedindivprovince}/${this.selectedindivemployers_name}/${this.selectedindivyears_employed}/${this.selectedindivwork_telephone_no}/${this.selectedindivwork_fax_no}/${this.selectedindivid_no}/${this.selectedindivmarital_status}/${this.selectedindivdesignation}/${this.selectedindivtelephone}/${this.selectedindivcell_number}/${this.selectedindivfax}/${this.selectedindivalternative_number}/${this.selectedindivpostal_address}/${this.selectedindivemail_address}/${this.selectedindivnext_of_kin}/${this.selectedindivnext_of_kin_contacts}/${this.selectedindivbank_name}/${this.selectedindivaccount_number}/${this.selectedindivbranch_name}`)
+        alert(`Ref: ${this.selectedindivsale_id} was updated`)
+      } else {
+        alert('not updated' + this.sumcheck + ' allarefilled:' + allAreFilled)
+      }
+    },
     async indivsaledetails (i) {
       this.selectedindivsale_id = i
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_selected_indiv_sales/${i}`)
         .then(response => response.json())
         .then(results => (this.selectedindivFetched = results))
       if (this.selectedindivFetched.length > 0) {
-        alert(this.selectedindivFetched.length)
         this.selectedindivdate_written = this.selectedindivFetched[0].date_written_.substring(0, 10)
         this.selectedindivproduct_name = this.selectedindivFetched[0].product_name_
         this.selectedindivcost = this.selectedindivFetched[0].cost_
         this.selectedindivcontract_term = this.selectedindivFetched[0].contract_term_
         this.selectedindivescallation = this.selectedindivFetched[0].escallation_
         this.selectedindivsettlements = this.selectedindivFetched[0].settlements_
-        this.selectedindivstreet_number = this.selectedindivFetched[0].streetnumber_
+        this.selectedindivstreet_number = this.selectedindivFetched[0].street_number_
         this.selectedindivcustomer_name = this.selectedindivFetched[0].customer_name_
         this.selectedindivcustomer_town = this.selectedindivFetched[0].customer_town_
         this.selectedindivcustomer_city = this.selectedindivFetched[0].customer_city_
@@ -1373,7 +1491,6 @@ export default {
         this.selectedindivbranch_name = this.selectedindivFetched[0].branch_name_
         this.selectedindivagent = this.selectedindivFetched[0].agent_
       }
-      alert(i + ' ' + this.selectedindivdate_written)
       document.getElementById('businessview').style.display = 'none'
       document.getElementById('business-form').style.display = 'none'
       document.getElementById('individual-form').style.display = 'none'
@@ -1397,7 +1514,7 @@ export default {
     },
     resetedit () {
       for (let i = 1; i <= 29; i++) {
-        document.getElementById(`formindivinput${i}`).disabled = true
+        document.getElementById(`formindivinput${i}`).disabled = false
       }
     },
     setedit (i) {
@@ -1448,29 +1565,43 @@ export default {
       document.getElementById('business-form').style.display = 'none'
     },
     async getmyindivsales () {
-      await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_indiv_forms/${this.user}`)
-        .then(response => response.json())
-        .then(results => (this.salesindivFetched = results))
+      if (this.department === 'Quality Assurer Department') {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_indiv_forms/all`)
+          .then(response => response.json())
+          .then(results => (this.salesindivFetched = results))
+      } else {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_indiv_forms/${this.user}`)
+          .then(response => response.json())
+          .then(results => (this.salesindivFetched = results))
+      }
       let i = 0
       this.salesindivnum = this.salesindivFetched.length
       for (i = 0; i < this.salesindivnum; i++) {
-        this.salesindivref[i] = this.salesindivFetched[i].id_
+        this.salesindivdate[i] = this.salesindivFetched[i].date_.substring(0, 10)
+        this.salesindivref[i] = this.salesindivdate[i].replace(/-/g, '') + '-' + this.salesindivFetched[i].id_
         this.salesindivname[i] = this.salesindivFetched[i].name_
         this.salesindivproduct[i] = this.salesindivFetched[i].product_
-        this.salesindivdate[i] = this.salesindivFetched[i].date_.substring(0, 10)
       }
     },
     async getmysales () {
-      await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_busines_forms/${this.user}`)
-        .then(response => response.json())
-        .then(results => (this.salesFetched = results))
+      if (this.department === 'Quality Assurer Department') {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_busines_forms/all`)
+          .then(response => response.json())
+          .then(results => (this.salesFetched = results))
+      } else {
+        await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_busines_forms/${this.user}`)
+          .then(response => response.json())
+          .then(results => (this.salesFetched = results))
+      }
       let i = 0
       this.salesnum = this.salesFetched.length
       for (i = 0; i < this.salesnum; i++) {
-        this.salesref[i] = this.salesFetched[i].id_
+        this.salesdate[i] = this.salesFetched[i].date_.substring(0, 10)
+        this.salesref[i] = this.salesdate[i]
+        this.salesref[i] = this.salesref[i].replace(/-/g, '') + '-' + this.salesFetched[i].id_
         this.salesname[i] = this.salesFetched[i].name_
         this.salesproduct[i] = this.salesFetched[i].product_
-        this.salesdate[i] = this.salesFetched[i].date_.substring(0, 10)
+        this.salesagent[i] = this.salesFetched[i].agent_
       }
     },
     async uploadindivform () {
@@ -1502,6 +1633,9 @@ export default {
     hidedropdown2 () {
       document.getElementById('dropdown-content2').style.display = 'none'
     },
+    showdropdown3 () {
+      document.getElementById('dropdown-content3').style.display = 'inline'
+    },
     showdropdown2 () {
       document.getElementById('dropdown-content2').style.display = 'inline'
     },
@@ -1512,6 +1646,7 @@ export default {
       document.getElementById('dropdown-content').style.display = 'inline'
     },
     hide_businessview () {
+      document.getElementById('indivitualview').style.display = 'none'
       document.getElementById('businessview').style.display = 'none'
     },
     showindiv () {
@@ -1882,6 +2017,18 @@ body {
   background-color: rgb(133, 133, 133);
   font-weight: bold;
 }
+.dropdown3 .dropbtn3 {
+  float: left;
+  text-decoration: none;
+  font-size: 16px;
+  color: #000000;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: rgb(133, 133, 133);
+  font-weight: bold;
+}
 
 .navbar a:hover, .dropdown:hover .dropbtn {
   color: rgb(165,6,8);
@@ -2026,5 +2173,8 @@ td .td-first {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+.business-unverified-div {
+  display: none;
 }
 </style>

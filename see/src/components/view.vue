@@ -76,7 +76,7 @@
     <button type = "button" v-if="pass_right === 'true'" @click= "test()">
     Add new employee
     </button>
-    <input v-if="newuser === 'true'" type ="text" v-model="newEmployee" placeholder="Enter employee name">
+    <input v-if="newuser === 'true'" type ="text" v-model="newEmployee"  placeholder="Enter employee name">
     <input v-if="newuser === 'true'" type ='email' v-model="newEmail" placeholder="Enter employee email">
     <input v-if="newuser === 'true'" type ="checkbox" id="is_superior" name="is_superior" value="yes" @click = 'issuperior_emp ()'>
     <label v-if="newuser === 'true'">Superior user</label>
@@ -121,13 +121,15 @@
 </table><br>
 </label1>
 </div>
-<div v-if="pass_right === 'true'">
+<form>
+<div class="changepin-div" id="changepin-div" v-if="pass_right === 'true'">
   <button v-if="newp === 'false'" type = "button" @click= "newpin()" >Change password</button>
-  <input v-if="newp === 'true'" type = "password" v-model="cPass" placeholder="Enter password">
-  <input v-if="newp === 'true'" type = "password" v-model="cPass_con" placeholder="Confirm password">
-  <button v-if="newp === 'true'" type= "button" @click = "adnewpin()">Update password</button>
+  <input id="pin1" v-if="newp === 'true'" type = "password" v-model="cPass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Enter password">
+  <input v-if="newp === 'true'" type = "password" v-model="cPass_con" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Confirm password">
+  <button v-if="newp === 'true'" type= "submit" @click = "adnewpin()">Update password</button>
   &#128736;
 </div><br><br>
+    </form>
 <div v-if="is_manager === 'true'">
   <button v-if="newp1 === 'false'" type = "button" @click= "newpin1()" >Reset password</button>
   <input v-if="newp1 === 'true'" type = "email" v-model="email_reset_pin" placeholder="Enter Email" required>
@@ -244,15 +246,29 @@ export default {
       this.newp1 = 'false'
       this.email_reset_pin = '@eafricatelecoms.co.za'
     },
+    // this function change the password of user who i loged in.
+    // the function is called when the update password button is pressed
+    // it will validate if the required password pattern is entered
+    // if not it will send the user to reenter password again
     async adnewpin () {
-      if (this.cPass === this.cPass_con) {
+      let allAreFilled = true /* check if all required fields are entered */
+      document.getElementById('changepin-div').querySelectorAll('[required]').forEach(function (i) {
+        if (!allAreFilled) return
+        if (!i.value) allAreFilled = false
+      })
+      alert(document.getElementById('pin1').pattern)
+      // Before changing password we confirm if all input box with required attribute are entered
+      // and also check if the pattern spicified is also entered
+      if (this.cPass === this.cPass_con && allAreFilled === true && this.cPass.match(/[a-z]/g) && this.cPass.match(/[A-Z]/g) && this.cPass.match(/[0-9]/g) && this.cPass.length >= 8) {
         await fetch(`https://warm-springs-22910.herokuapp.com/fn_change_password/${MD5(this.cPass_con).toString()}/${this.email}`)
         this.newp = 'false'
         alert('Password changed')
         this.cpass = ''
         this.cPass_con = ''
       } else {
-        alert('Passwords did not match')
+        if (this.cPass.match(/[a-z]/g) && this.cPass.match(/[A-Z]/g) && this.cPass.match(/[0-9]/g) && this.cPass.length >= 8) {
+          alert('Passwords did not match')
+        }
       }
     },
     newpin1 () {

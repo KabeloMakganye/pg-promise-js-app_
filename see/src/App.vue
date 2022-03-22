@@ -1,5 +1,6 @@
 <template>
 <body>
+  <div @click="closeNav()" class="blur" id="blur"></div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        <div class="navbarup">
          <div class="navin">
@@ -29,7 +30,9 @@
 </div>
 </form>
     <router-view/>
+    <div class="foots">
     <app-footer/>
+    </div>
   </div>
 </body>
 </template>
@@ -39,18 +42,30 @@ import foot from './components/foot.vue'
 export default {
   components: { 'app-footer': foot },
   name: 'App',
+  /* created () { // using resize event
+    window.addEventListener('resize', this.myEventHandler)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.myEventHandler)
+  }, */
   methods: {
+    /* myEventHandler (e) {
+      alert('hello')
+    }, */
     openNav () {
       for (let index = 0; index < 2; index++) {
         document.getElementById('mySidebar').style.width = '250px'
         // document.getElementById('main').style.marginLeft = '250px'
         document.getElementById('btn').style.visibility = 'hidden'
+        document.getElementById('mySidebar').style.height = '100%'
+        document.getElementById('blur').style.width = '100%'
       }
     },
     closeNav () {
       document.getElementById('mySidebar').style.width = '0'
       // document.getElementById('main').style.marginLeft = '0'
       document.getElementById('btn').style.visibility = 'visible'
+      document.getElementById('blur').style.width = '0'
     }
   },
   head: {
@@ -91,10 +106,10 @@ img {
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 4;
   top: 0;
   left: 0;
-  background-color: rgb(169,16,19);
+  background: rgb(169,16,19);
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -264,5 +279,20 @@ a {
 }
 .navin3 h4 {
   color: rgb(201, 160, 160);
+}
+.foots {
+  background: #f2f2f2;
+}
+.blur {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top:0 ;
+  left: 0;
+  overflow-x: visible;
+  z-index: 3;
+  transition: .8s;
 }
 </style>

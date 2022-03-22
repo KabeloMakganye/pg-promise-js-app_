@@ -9,11 +9,17 @@ import activity from '@/components/activity'
 import status from '@/components/status'
 import departmentsLogin from '@/components/departmentsLogin'
 import foot from '@/components/foot'
+import qa from '@/components/qa'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/qa',
+      name: 'qa',
+      component: qa
+    },
     {
       path: '/login',
       name: 'login',
