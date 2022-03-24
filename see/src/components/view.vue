@@ -256,7 +256,6 @@ export default {
         if (!allAreFilled) return
         if (!i.value) allAreFilled = false
       })
-      alert(document.getElementById('pin1').pattern)
       // Before changing password we confirm if all input box with required attribute are entered
       // and also check if the pattern spicified is also entered
       if (this.cPass === this.cPass_con && allAreFilled === true && this.cPass.match(/[a-z]/g) && this.cPass.match(/[A-Z]/g) && this.cPass.match(/[0-9]/g) && this.cPass.length >= 8) {

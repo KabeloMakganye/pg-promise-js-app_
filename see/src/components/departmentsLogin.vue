@@ -46,11 +46,10 @@
 </button><br><br>
 </div>
 </div>
-
   <div v-if="department === 'Sales Department'">
     <!-- menu -->
       <div v-if="pass_right === 'true' && department === 'Sales Department'" class="salesdep">
-        <div class="navbar">
+        <div class="navbar" id="navbar">
           <a href="https://eafricatelecoms.co.za/for-you" target="_blank">HOME SOLUTIONS</a>
           <a href="https://eafricatelecoms.co.za/for-your-business" target="_blank">BUSINESS SOLUTIONS</a>
           <div @mouseleave="hidedropdown()" class="dropdown">
@@ -283,7 +282,7 @@
       </thead>
       <tbody>
         <tr v-for="nt in salesnum" :key= "nt">
-          <td><a href="#" class="table-a" @click="bussaledetails(salesref[nt-1])" title="Click for more details">{{salesref[nt-1]}}</a></td>
+          <td><a href="#" class="table-a" @click="bussaledetails(salesid[nt-1])" title="Click for more details">{{salesref[nt-1]}}</a></td>
           <td>{{salesname[nt-1]}}</td>
           <td>{{salesproduct[nt-1]}}</td>
           <td>{{salesdate[nt-1]}}</td>
@@ -310,7 +309,7 @@
       </thead>
       <tbody>
         <tr v-for="nt2 in salesindivnum" :key= "nt2">
-          <td><span><a href="#" @click="indivsaledetails(salesindivref[nt2-1])" class="table-a" title="Click for more details">{{salesindivref[nt2-1]}}</a></span></td>
+          <td><span><a href="#" @click="indivsaledetails(salesindivid[nt2-1])" class="table-a" title="Click for more details">{{salesindivref[nt2-1]}}</a></span></td>
           <td>{{salesindivname[nt2-1]}}</td>
           <td>{{salesindivproduct[nt2-1]}}</td>
           <td>{{salesindivdate[nt2-1]}}</td>
@@ -1119,9 +1118,9 @@
      <button type="button" @click="resetedit()">Test</button>
 </div>
 </div>
-  <div v-if="department === 'Quality Assurer Department' && pass_right === 'true'"> <!-- here we deal with calling the QA component-->
+  <div id="qa-div" v-if="department === 'Quality Assurer Department' && pass_right === 'true'"> <!-- here we deal with calling the QA component-->
     <!-- Menu -->
-    <div class="navbar">
+    <div class="navbar" id="navbar">
     <div @mouseleave="hidedropdown()" class="dropdown">
     <button  @mouseenter="showdropdown()" @click="showdropdown()" class="dropbtn" >BUSINESS SALES
       <!-- <i class="fa fa-caret-down"></i> -->
@@ -1148,7 +1147,6 @@
       <p class="summary-pa">Department: <span>{{department}}</span></p>
       <p class="summary-pa">User: <span>{{user}}</span></p>
     </div>
-
     <!-- Details of all Agents -->
 
     <div class="business-unverified-div" id="business-unverified-div">
@@ -1167,7 +1165,7 @@
           </thead>
           <tbody>
               <tr v-for="nt in salesnum" :key= "nt">
-                  <td><a href="#" class="table-a" @click="bussaledetails(salesref[nt-1])" title="Click for more details">{{salesref[nt-1]}}</a></td>
+                  <td><a href="#" class="table-a" @click="busqadetails(salesid[nt-1])" title="Click for more details">{{salesref[nt-1]}}</a></td>
                   <td>{{salesname[nt-1]}}</td>
                   <td>{{salesproduct[nt-1]}}</td>
                   <td>{{salesdate[nt-1]}}</td>
@@ -1196,15 +1194,444 @@
         </table>
       </div>
     </div>
+
+    <!-- clicked sale details, for confirmation -->
+    <div class="clicked-sale-details-div" id="clicked-sale-details-div">
+          <h1>Edit Selected Business Sale</h1>
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Sales Date:</p>
+      </td>
+      </tr>
+    </table>
+      <input disabled class="forminput" id="formbusinput1" type="date" v-model = "selecteddate_written" placeholder="Date" required>
+    <button @click = "setedit('formbusinput1')">Edit</button><br><br>
+    </table><br><br>
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Product Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput2" type="text" v-model = "selectedproduct_name" placeholder="Product Name" required>
+    <button @click = "setedit('formbusinput2')">Edit</button><br><br>
+    </table><br><br>
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Product Cost:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput3" type="text" v-model = "selectedcost" placeholder="Cost" required>
+    <button @click = "setedit('formbusinput3')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Contract Term:</p>
+      </td>
+      </tr>
+    </table>
+    <select disabled class="forminput" id="formbusinput4" v-model= "selectedcontract_term" placeholder="selectedcontract_term" required>
+      <option value="" disabled selected hidden>{{selectedcontract_term}}</option>
+      <option>
+        24months
+      </option>
+      <option>
+        36months
+      </option>
+      <option>
+        60months
+      </option>
+    </select>
+     <button @click = "setedit('formbusinput4')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Escallation:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput5" type="text" v-model = "selectedescallation" placeholder="Escallation 0%" required>
+    <button @click = "setedit('formbusinput5')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Settlements:</p>
+      </td>
+      </tr>
+    </table>
+    <select disabled class="forminput" id="formbusinput6" v-model= "selectedsettlements" placeholder="selectedsettlements" required>
+      <option value="" disabled selected hidden>{{selectedsettlements}}</option>
+      <option value= true>
+        Yes
+      </option>
+      <option value= false>
+        No
+      </option>
+    </select>
+     <button @click = "setedit('formbusinput6')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Street Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput7" type="text" v-model = "selectedcompany_street_number" placeholder="Street Number" required>
+    <button @click = "setedit('formbusinput7')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput8" type="text" v-model = "selectedcompany_name" placeholder="Name" required>
+    <button @click = "setedit('formbusinput8')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Town:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput9" type="text" v-model = "selectedcompany_town" placeholder="Town" required>
+    <button @click = "setedit('formbusinput9')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company City:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput10" type="text" v-model = "selectedcompany_city" placeholder="City" required>
+    <button @click = "setedit('formbusinput10')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Province:</p>
+      </td>
+      </tr>
+    </table>
+    <select disabled class="forminput" id="formbusinput11" v-model= "selectedprovince" placeholder="Province" required>
+      <option value="selectedprovince" disabled selected hidden>{{selectedprovince}}</option>
+      <option>
+        Gauteng
+      </option>
+      <option>
+        North West
+      </option>
+      <option>
+        Northern Cape
+      </option>
+      <option>
+        Western Cape
+      </option>
+      <option>
+        Eastern Cape
+      </option>
+      <option>
+        KwaZulu-Natal
+      </option>
+      <option>
+        Mpumalanga
+      </option>
+      <option>
+        Free State
+      </option>
+      <option>
+        Limpopo
+      </option>
+    </select>
+    <button @click = "setedit('formbusinput11')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Company Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput12" type="text" v-model= "selectedregistered_company_name" placeholder="Registered Company Name" required>
+    <button @click = "setedit('formbusinput12')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Trading Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput13" type="text" v-model= "selectedtrading_as" placeholder="Trading As" required>
+    <button @click = "setedit('formbusinput13')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Years Trading:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput14" type="text" v-model= "selectedyears_trading" placeholder="Years Trading" required>
+    <button @click = "setedit('formbusinput14')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Registration Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput15" type="text" v-model= "selectedregistration_number" placeholder="Registration Number" required>
+    <button @click = "setedit('formbusinput15')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">VAT Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput16" type="text" v-model= "selectedvat_number" placeholder="Vat Number" required>
+    <button @click = "setedit('formbusinput16')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Business Turnover:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput17" type="text" v-model= "selectedturnover" placeholder="Turnover More than 2 Mill or Less" required>
+    <button @click = "setedit('formbusinput17')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Owner's ID:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput18" type="text" v-model= "selectedowners_id" placeholder="Owners ID Number" required>
+    <button @click = "setedit('formbusinput18')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Designation:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput19" type="text" v-model= "selecteddesignation" placeholder="Designation" required>
+    <button @click = "setedit('formbusinput19')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Telephone:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput20" type="tel" v-model= "selectedtelephone" placeholder="Telephone" required>
+    <button @click = "setedit('formbusinput20')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Cell Phone:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput21" type="tel" v-model= "selectedcell_number" placeholder="Cell Number" required>
+    <button @click = "setedit('formbusinput21')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Fax Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput22" type="tel" v-model= "selectedfax" placeholder="Fax" required>
+    <button @click = "setedit('formbusinput22')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Postal Address:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput23" type="text" v-model= "selectedpostal_address" placeholder="Postal Address" required>
+    <button @click = "setedit('formbusinput23')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Email address:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput24" type="text" v-model= "selectedemail_address" placeholder="Email Address" required>
+    <button @click = "setedit('formbusinput24')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Next Of Kin:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput25"  type="text" v-model= "selectednext_of_kin" placeholder="Next of kin" required>
+    <button @click = "setedit('formbusinput25')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Landlord Details:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput26" type="text" v-model= "selectedlandlord_details" placeholder="Landlord Details" required>
+    <button @click = "setedit('formbusinput26')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">This Field need to be removed:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput27" type="text" v-model= "selectedcompany" placeholder="Company" required>
+    <button @click = "setedit('formbusinput27')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">This Field need to be removed:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput28" type="text" v-model= "selectedno" placeholder="No" required>
+    <button @click = "setedit('formbusinput28')">Edit</button><br><br>
+    </table><br><br>
+
+    <h4>Banking Details</h4>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Bank Name:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput29" type="text" v-model= "selectedbank_name" placeholder="Bank name" required>
+    <button @click = "setedit('formbusinput29')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Account Number:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput30" type="text" v-model= "selectedaccount_number" placeholder="Account number" required>
+    <button @click = "setedit('formbusinput30')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">This Field need to be removed:</p>
+      </td>
+      </tr>
+    </table>
+    <input disabled class="forminput" id="formbusinput31" type="text" v-model= "selectedbranch_name" placeholder="Branch Name" required>
+    <button @click = "setedit('formbusinput31')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Trade References:</p>
+      </td>
+      </tr>
+    </table>
+    <textarea disabled type= "text" class="forminput2" id="formbusinput32" v-model= "selectedtrade_references" placeholder="3 Trade Reference(3 companies or suppliers you working with)" required></textarea>
+    <button @click = "setedit('formbusinput32')">Edit</button><br><br>
+    </table><br><br>
+
+    <table class="table3">
+    <table class="table2">
+    <tr>
+      <td><p class="edit-pa">Verification:</p>
+      </td>
+      </tr>
+    </table>
+    <label>1 + 1 = </label><input class="forminput3" type="text" v-model= "sumcheck" required>
+    </table><br><br>
+     <button class="submit-btn" type="button" @click = "updatebusform()">Upload Changes</button><br><br>
     </div>
-  <!-- <qa/> -->
+    </div>
+        <div class="general-div" id="general-div">
+      <!-- <qa/> -->
+          <div class="grid-item">
+      <div class="grid-container">
+        <div class="grid-item4">
+          <h2>Internet Solutions</h2>
+          <p>We are passionate about enabling your business through technology. From getting connected, to building an online presence and staying protected our services are there for every step of your journey towards success. Let us be the spark to your potential to deliver a world-class service to your customers, leveraging technology and the value that E-africa Telecoms can add.</p>
+          <a href="https://eafricatelecoms.co.za/internet-solutions">LEARN MORE</a>
+        </div>
+        <div class="grid-item">
+          <img src="https://eafricatelecoms.co.za/images/2020/05/29/internet-solutions-01.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    </div>
      </form>
   </div>
 </template>
 <script>
 
 import MD5 from '../../node_modules/crypto-js/md5'
-import qaVue from './qa.vue'
+import qaVue from './HelloWorld.vue'
 
 export default {
   components: { 'qa': qaVue }, // not used
@@ -1284,6 +1711,7 @@ export default {
 
       nt: '',
       salesnum: 0,
+      salesid: [],
       salesref: [],
       salesname: [],
       salesproduct: [],
@@ -1293,6 +1721,7 @@ export default {
 
       nt2: '',
       salesindivnum: 0,
+      salesindivid: [],
       salesindivref: [],
       salesindivname: [],
       salesindivproduct: [],
@@ -1380,8 +1809,8 @@ export default {
       newEmail: '',
       date_: 'n',
       newuser: 'false',
-      user: '',
-      pass: '',
+      user: 'Kabelo',
+      pass: 'Tebogompete#3',
       cpass: '',
       cPass1: '0000',
       n: '',
@@ -1434,8 +1863,16 @@ export default {
     }, */
 
     //  THIS FUNCTION GET SELECTED INDIVIDUAL SALE FROM DATABASE AND DISPLAY ON DISABLED INPUT BOXES
-
+    showverifiedbus () {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
+      document.getElementById('business-unverified-div').style.display = 'none'
+      document.getElementById('clicked-sale-details-div').style.width = '0'
+      document.getElementById('clicked-sale-details-div').style.height = '0'
+    },
     showunverifiedbus () {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       document.getElementById('business-unverified-div').style.display = 'inline'
     },
     async updateindivform () {
@@ -1455,6 +1892,8 @@ export default {
       }
     },
     async indivsaledetails (i) {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       this.selectedindivsale_id = i
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_selected_indiv_sales/${i}`)
         .then(response => response.json())
@@ -1520,7 +1959,60 @@ export default {
     setedit (i) {
       document.getElementById(i).disabled = false
     },
+    // QA sales details
+    async busqadetails (i) {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
+      this.selectedbussale_id = i
+      await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_selected_business_sale/${i}`)
+        .then(response => response.json())
+        .then(results => (this.selectedFetched = results))
+      if (this.selectedFetched.length > 0) {
+        this.selecteddate_written = this.selectedFetched[0].date_written_.substring(0, 10)
+        this.selectedproduct_name = this.selectedFetched[0].product_name_
+        this.selectedcost = this.selectedFetched[0].cost_
+        this.selectedcontract_term = this.selectedFetched[0].contract_term_
+        this.selectedescallation = this.selectedFetched[0].escallation_
+        this.selectedsettlements = this.selectedFetched[0].settlements_
+        this.selectedcompany_street_number = this.selectedFetched[0].company_street_number_
+        this.selectedcompany_name = this.selectedFetched[0].company_name_
+        this.selectedcompany_town = this.selectedFetched[0].company_town_
+        this.selectedcompany_city = this.selectedFetched[0].company_city_
+        this.selectedprovince = this.selectedFetched[0].province_
+        this.selectedregistered_company_name = this.selectedFetched[0].registered_company_name_
+        this.selectedtrading_as = this.selectedFetched[0].trading_as_
+        this.selectedyears_trading = this.selectedFetched[0].years_trading_
+        this.selectedregistration_number = this.selectedFetched[0].registration_number_
+        this.selectedvat_number = this.selectedFetched[0].vat_number_
+        this.selectedturnover = this.selectedFetched[0].turnover_
+        this.selectedowners_id = this.selectedFetched[0].owners_id_
+        this.selecteddesignation = this.selectedFetched[0].designation_
+        this.selectedtelephone = this.selectedFetched[0].telephone_
+        this.selectedcell_number = this.selectedFetched[0].cell_number_
+        this.selectedfax = this.selectedFetched[0].fax_
+        this.selectedpostal_address = this.selectedFetched[0].postal_address_
+        this.selectedemail_address = this.selectedFetched[0].email_address_
+        this.selectednext_of_kin = this.selectedFetched[0].next_of_kin_
+        this.selectedlandlord_details = this.selectedFetched[0].landlord_details_
+        this.selectedcompany = this.selectedFetched[0].company_
+        this.selectedno = this.selectedFetched[0].no_
+        this.selectedbank_name = this.selectedFetched[0].bank_name_
+        this.selectedaccount_number = this.selectedFetched[0].account_number_
+        this.selectedbranch_name = this.selectedFetched[0].branch_name_
+        this.selectedtrade_references = this.selectedFetched[0].trade_references_
+        this.selectedis_done = this.selectedFetched[0].is_done_
+        this.selectedagent = this.selectedFetched[0].agent_
+      }
+      // come and update here
+      // document.getElementById('clicked-sale-details-div').style.display = 'inline'
+      document.getElementById('business-unverified-div').style.display = 'none'
+      document.getElementById('clicked-sale-details-div').style.width = '100%'
+      document.getElementById('clicked-sale-details-div').style.height = '100%'
+    },
+    // sales details
     async bussaledetails (i) {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       this.selectedbussale_id = i
       await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_selected_business_sale/${i}`)
         .then(response => response.json())
@@ -1565,6 +2057,8 @@ export default {
       document.getElementById('business-form').style.display = 'none'
     },
     async getmyindivsales () {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       if (this.department === 'Quality Assurer Department') {
         await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_indiv_forms/all`)
           .then(response => response.json())
@@ -1579,11 +2073,14 @@ export default {
       for (i = 0; i < this.salesindivnum; i++) {
         this.salesindivdate[i] = this.salesindivFetched[i].date_.substring(0, 10)
         this.salesindivref[i] = this.salesindivdate[i].replace(/-/g, '') + '-' + this.salesindivFetched[i].id_
+        this.salesindivid[i] = this.salesindivFetched[i].id_
         this.salesindivname[i] = this.salesindivFetched[i].name_
         this.salesindivproduct[i] = this.salesindivFetched[i].product_
       }
     },
     async getmysales () {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       if (this.department === 'Quality Assurer Department') {
         await fetch(`https://warm-springs-22910.herokuapp.com/fn_get_all_busines_forms/all`)
           .then(response => response.json())
@@ -1599,12 +2096,15 @@ export default {
         this.salesdate[i] = this.salesFetched[i].date_.substring(0, 10)
         this.salesref[i] = this.salesdate[i]
         this.salesref[i] = this.salesref[i].replace(/-/g, '') + '-' + this.salesFetched[i].id_
+        this.salesid[i] = this.salesFetched[i].id_
         this.salesname[i] = this.salesFetched[i].name_
         this.salesproduct[i] = this.salesFetched[i].product_
         this.salesagent[i] = this.salesFetched[i].agent_
       }
     },
     async uploadindivform () {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       let allAreFilled = true /* check if all required fields are entered */
       document.getElementById('formindiv').querySelectorAll('[required]').forEach(function (i) {
         if (!allAreFilled) return
@@ -1676,6 +2176,8 @@ export default {
       document.getElementById('dropdown-content2').style.display = 'inline'
     },
     showindivfilled () {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       document.getElementById('major-container').style.display = 'inline'
       document.getElementById('individual-form').style.display = 'inline'
       document.getElementById('formindiv').style.display = 'none'
@@ -1684,6 +2186,8 @@ export default {
       document.getElementById('business-form').style.display = 'none'
     },
     showbusfilled () {
+      document.getElementById('general-div').style.height = '0'
+      document.getElementById('general-div').style.width = '0'
       document.getElementById('major-container').style.display = 'inline'
       document.getElementById('business-form').style.display = 'inline'
       document.getElementById('individual-form').style.display = 'none'
@@ -1835,6 +2339,8 @@ export default {
       // console.log(this.newuser)
     },
     async checkpassword (i) {
+      document.getElementById('general-div').style.height = '100%'
+      document.getElementById('general-div').style.width = '100%'
       // console.log('Password: ' + MD5('Tebogompete#3').toString())
       this.x++
       await fetch(`https://warm-springs-22910.herokuapp.com/getall_workers`)
@@ -1845,6 +2351,8 @@ export default {
         if (this.user === this.resultsFetched_2[this.i].name_) {
           if (this.cpass === this.resultsFetched_2[this.i].password_ && i === 1) {
             this.pass_right = 'true'
+            document.getElementById('qa').style.height = '100%'
+            document.getElementById('qa').style.width = '100%'
             // console.log('      pass right     ')
             this.email = this.resultsFetched_2[this.i].email_
             if (this.resultsFetched_2[this.i].manager_) {
@@ -1961,8 +2469,14 @@ img {
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
-
+#qa {
+  width: 0;
+  transition: 2s;
+  height: 0;
+  overflow-x: hidden;
+}
 .navbar {
+
   overflow: hidden;
   background-color: rgb(133, 133, 133);
 }
@@ -2176,5 +2690,96 @@ td .td-first {
 }
 .business-unverified-div {
   display: none;
+  max-width: 80%;
+}
+.clicked-sale-details-div {
+  /*display: none; */
+  width: 0;
+  transition: 2s;
+  height: 0;
+  overflow-x: hidden;
+}
+.general-div {
+  width: 0;
+  transition: 2s;
+  height: 0;
+  overflow-x: hidden;
+}
+.grid-container {
+  margin: 0;
+  display: -ms-grid;
+  display: grid;
+  background-color: rgb(10,20,40);
+  padding: 0px;
+  width: 100%;
+}
+
+.grid-item {
+  margin: 0;
+  background-color: rgb(10,20,40);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+}
+.grid-item4 {
+  margin: 0;
+  background-color: rgb(4,7,15);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+}
+.grid-item4 a{
+  margin: 0;
+  color: rgb(134,6,8);
+  background-color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item4 a:hover{
+  margin: 0;
+  color: rgb(216, 97, 99);
+  background-color: rgb(122, 120, 120);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 0;
+}
+.grid-item4 h2 {
+  margin: 0;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(4,7,15);
+  border-radius: 10%;
+}
+.grid-item4 p {
+  margin: 0;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+  border: 0px solid rgb(255, 255, 255);
+  border-radius: 10%;
+}
+
+.grid-item img {
+    margin: 0;
+  background-color: rgb(10,20,40);
+  padding: 0px;
+  place-items: center;
+  width: 100%;
+  object-fit: cover;
+  -o-object-fit: cover;
+}
+.grid-inner {
+  transition: margin-left .5s;
+  padding: 16px;
+  display: flex;
+  place-content: space-between;
 }
 </style>
