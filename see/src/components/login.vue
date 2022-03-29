@@ -1,3 +1,4 @@
+<!-- This Component is used to clock in employees -->
 <template>
   <div id="page-div">
     <form>
@@ -31,7 +32,7 @@ export default {
     }
   },
   methods: {
-    async clockin (i) { /* NEED TO COME BACK AND CHECK IF ANYONE CLOCK IN ON SAME DAY BEFORE CLOCKING IN AGAIN */
+    async clockin (i) { // this fuction will clock in employee, give that they are already registered on database
       let allAreFilled = true /* check if all required fields are entered */
       document.getElementById('log-div').querySelectorAll('[required]').forEach(function (i) {
         if (!allAreFilled) return

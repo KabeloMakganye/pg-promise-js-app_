@@ -1,3 +1,4 @@
+<!-- This Component is used to Clock out Employees -->
 <template>
   <div id="page-div">
     <form>

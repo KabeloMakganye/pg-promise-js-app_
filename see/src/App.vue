@@ -22,7 +22,8 @@
     <a href="https://clock-system-6a6f8.web.app/#/departmentsLogin" @click = "closeNav()">Departments&#128736;&#9888;</a>
     <a href="https://clock-system-6a6f8.web.app/#/status" @click = "closeNav()">Work status&#128736;&#9888;</a>
     <a href="https://clock-system-6a6f8.web.app/#/view" @click = "closeNav()">Account settings</a>
-    <a href="https://clock-system-6a6f8.web.app/#/activity" @click = "closeNav()">Task&#128736;&#9888;</a>
+    <!-- <a href="https://clock-system-6a6f8.web.app/#/activity" @click = "closeNav()">Task&#128736;&#9888;</a> -->
+    <!-- this is removed since Activities intergrated in Departments functions -->
   </div>
   <div id="main">
   <button id="btn" class="openbtn" @click = "openNav()" @mouseenter = "openNav" ontouchstart = "openNav"><span>☰ Menu</span></button>
@@ -36,7 +37,6 @@
   </div>
 </body>
 </template>
-
 <script>
 import foot from './components/foot.vue'
 export default {
